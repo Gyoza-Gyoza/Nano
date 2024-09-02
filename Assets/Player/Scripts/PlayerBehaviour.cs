@@ -9,10 +9,14 @@ public class PlayerBehaviour : MonoBehaviour
         jumpHeight;
 
     [SerializeField]
-    private int maxJumps; 
+    private int maxJumps;
 
-    private int jumpCounter = 0; 
+    [SerializeField]
+    private LayerMask groundMask;
 
+    private int jumpCounter = 0;
+
+    private Collider2D col; 
     private Rigidbody2D rb;
 
     public static PlayerBehaviour player; 
@@ -27,6 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
             Destroy(this);
         }
 
+        col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>(); 
     }
 
@@ -34,11 +39,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.LeftArrow))
         {
-            rb.AddForce(new Vector2(-movementSpeed, 0f)); 
+            rb.velocity = new Vector2(-movementSpeed, 0f); 
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            rb.AddForce(new Vector2(movementSpeed, 0f));
+            rb.velocity = new Vector2(movementSpeed, 0f);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -50,9 +55,10 @@ public class PlayerBehaviour : MonoBehaviour
             rb.AddForce(new Vector2(0f, jumpHeight));
             jumpCounter++; 
         }
-        //if(Physics2D.BoxCast(transform.position, transform.localScale * 0.5f, Vector2.down))
-        //{
-
-        //}
+        if (Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y - col.bounds.extents.y * 0.5f), 
+            transform.localScale * 0.5f, 0f, Vector2.down, 0.01f, groundMask))
+        {
+            jumpCounter = 0;
+        }  
     }
 }
