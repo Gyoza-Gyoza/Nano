@@ -39,11 +39,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.LeftArrow))
         {
-            rb.velocity = new Vector2(-movementSpeed, 0f); 
+            rb.velocity = new Vector2(-movementSpeed, rb.velocity.y); 
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            rb.velocity = new Vector2(movementSpeed, 0f);
+            rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -59,6 +59,6 @@ public class PlayerBehaviour : MonoBehaviour
             transform.localScale * 0.5f, 0f, Vector2.down, 0.01f, groundMask))
         {
             jumpCounter = 0;
-        }  
+        }
     }
 }
