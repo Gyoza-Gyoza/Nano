@@ -19,6 +19,9 @@ public class BlockScript : MonoBehaviour, IBlock
     }
 
     [SerializeField]
+    private float timeToChange; 
+
+    [SerializeField]
     private Color activeColor,
         inactiveColor, 
         startColor; 
@@ -46,7 +49,7 @@ public class BlockScript : MonoBehaviour, IBlock
             foreach (BlockScript hit in neighbours)
             {
                 Debug.Log("Checking neighbours");
-                if(hit != null) hit.StartCoroutine(hit.ChangeBlockState(BlockState.Active));
+                if(hit != null) hit.StartCoroutine(hit.ChangeBlockState(BlockState.Active, new WaitForSeconds(timeToChange)));
             }
         }
     }
@@ -60,7 +63,7 @@ public class BlockScript : MonoBehaviour, IBlock
             foreach (BlockScript hit in neighbours)
             {
                 Debug.Log("Checking neighbours");
-                if (hit != null) hit.StartCoroutine(hit.ChangeBlockState(BlockState.Inactive));
+                if (hit != null) hit.StartCoroutine(hit.ChangeBlockState(BlockState.Inactive, new WaitForSeconds(timeToChange)));
             }
         }
     }
@@ -88,23 +91,22 @@ public class BlockScript : MonoBehaviour, IBlock
             }
         }
     }
-    public IEnumerator ChangeBlockState(BlockState newState)
+    public IEnumerator ChangeBlockState(BlockState newState, WaitForSeconds timeToWait)
     {
-        Debug.Log(CurrentState.ToString());
-        if (CurrentState == BlockState.Inactive) //Check if the state is inactive
-        {
-            //Activate neighbours
-            foreach (BlockScript hit in neighbours)
-            {
-                Debug.Log("Entered loop");
-                if (hit != null) //Check if something is hit
-                {
-                    CurrentState = newState;
-                    Debug.Log($"{gameObject.name} activated");
+        Debug.Log($"Current state is {CurrentState.ToString()} \n State to change is {newState}");
+        if (currentState == newState || currentState == BlockState.Start) yield break;
 
-                    yield return new WaitForSeconds(0.1f);
-                    hit.StartCoroutine(hit.ChangeBlockState(newState));
-                }
+        //Activate neighbours
+        foreach (BlockScript hit in neighbours)
+        {
+            Debug.Log("Entered loop");
+            if (hit != null) //Check if something is hit
+            {
+                CurrentState = newState;
+                Debug.Log($"{gameObject.name} activated");
+
+                yield return timeToWait;
+                hit.StartCoroutine(hit.ChangeBlockState(newState, timeToWait));
             }
         }
     }

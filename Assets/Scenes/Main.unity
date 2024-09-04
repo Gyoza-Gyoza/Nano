@@ -681,6 +681,10 @@ PrefabInstance:
       propertyPath: currentState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1898436081833546309, guid: 249571274f1b66d40946eb799bab575e, type: 3}
+      propertyPath: timeToChange
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 4376640899473207271, guid: 249571274f1b66d40946eb799bab575e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15
