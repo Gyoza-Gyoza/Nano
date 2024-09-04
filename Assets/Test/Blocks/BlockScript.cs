@@ -13,13 +13,15 @@ public class BlockScript : MonoBehaviour, IBlock
         { return currentState; }
         set
         {
+            currentState = value;
             UpdateBlockState();
         }
     }
 
     [SerializeField]
     private Color activeColor,
-        inactiveColor; 
+        inactiveColor, 
+        startColor; 
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D col; 
@@ -36,48 +38,73 @@ public class BlockScript : MonoBehaviour, IBlock
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (currentState != BlockState.Start) return;
+
         if(collision.gameObject.tag == "Player")
         {
-            StartCoroutine(ChangeBlockState(BlockState.Active));
+            Debug.Log("Starting current");
+            foreach (BlockScript hit in neighbours)
+            {
+                Debug.Log("Checking neighbours");
+                if(hit != null) hit.StartCoroutine(hit.ChangeBlockState(BlockState.Active));
+            }
         }
     }
-    private void InitializeNeighbours()
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        List<RaycastHit2D> hits = new List<RaycastHit2D>()
+        if (currentState != BlockState.Start) return;
+
+        if (collision.gameObject.tag == "Player")
         {
-            Physics2D.Raycast(transform.position, Vector2.left, col.bounds.extents.x + 0.1f, 7),
-            Physics2D.Raycast(transform.position, Vector2.right, col.bounds.extents.x + 0.1f, 7),
-            Physics2D.Raycast(transform.position, Vector2.up, col.bounds.extents.y + 0.1f, 7),
-            Physics2D.Raycast(transform.position, Vector2.down, col.bounds.extents.y + 0.1f, 7)
+            Debug.Log("Starting current");
+            foreach (BlockScript hit in neighbours)
+            {
+                Debug.Log("Checking neighbours");
+                if (hit != null) hit.StartCoroutine(hit.ChangeBlockState(BlockState.Inactive));
+            }
+        }
+    }
+    private void InitializeNeighbours() //Used to initialize the neighbouring blocks for each block
+    {
+        List<RaycastHit2D[]> hits = new List<RaycastHit2D[]>() //Contains everything that are beside each block
+        {
+            Physics2D.RaycastAll(transform.position, Vector2.left, col.bounds.extents.x + 0.1f),
+            Physics2D.RaycastAll(transform.position, Vector2.right, col.bounds.extents.x + 0.1f),
+            Physics2D.RaycastAll(transform.position, Vector2.up, col.bounds.extents.y + 0.1f),
+            Physics2D.RaycastAll(transform.position, Vector2.down, col.bounds.extents.y + 0.1f)
         };
 
-        foreach (RaycastHit2D hit in hits)
+        foreach (RaycastHit2D[] hitArray in hits) //Check each array that contains all hits 
         {
-            IBlock iBlock = hit.collider.gameObject.GetComponent<IBlock>();
-            if (iBlock != null)
+            foreach(RaycastHit2D hit in hitArray) //Check each hit in each array 
             {
-                Debug.Log("iblock found");
-                //neighbours.Add(hit.collider.GetComponent<BlockScript>());
+                if (hit.collider.gameObject == gameObject) continue;
+                IBlock iBlock = hit.collider.gameObject.GetComponent<IBlock>(); //Check for iBlock interface 
+                if (iBlock != null) 
+                {
+                    Debug.Log($"Shooting ray from {gameObject.name}, iblock {hit.collider.gameObject.name} found");
+                    neighbours.Add(hit.collider.GetComponent<BlockScript>()); //Add it to neighbour list 
+                }
             }
         }
     }
     public IEnumerator ChangeBlockState(BlockState newState)
     {
-        //Loop through the hits
-        foreach(BlockScript hit in neighbours)
+        Debug.Log(CurrentState.ToString());
+        if (CurrentState == BlockState.Inactive) //Check if the state is inactive
         {
-            if (hit == null) //Check if something is hit
+            //Activate neighbours
+            foreach (BlockScript hit in neighbours)
             {
-                yield break;
-            }
+                Debug.Log("Entered loop");
+                if (hit != null) //Check if something is hit
+                {
+                    CurrentState = newState;
+                    Debug.Log($"{gameObject.name} activated");
 
-            if (hit.CurrentState == BlockState.Inactive) //Check if the state is inactive
-            {
-                CurrentState = newState;
-                Debug.Log($"{gameObject.name} hit");
-
-                yield return new WaitForSeconds(0.2f);
-                hit.StartCoroutine(ChangeBlockState(newState));
+                    yield return new WaitForSeconds(0.1f);
+                    hit.StartCoroutine(hit.ChangeBlockState(newState));
+                }
             }
         }
     }
@@ -88,13 +115,19 @@ public class BlockScript : MonoBehaviour, IBlock
             case BlockState.Active:
                 spriteRenderer.color = activeColor;
                 //col.enabled = true;
-                gameObject.layer = 6; 
+                //gameObject.layer = 6; 
                 break;
 
             case BlockState.Inactive:
                 spriteRenderer.color = inactiveColor;
                 //col.enabled = false;
-                gameObject.layer = 0; 
+                //gameObject.layer = 0; 
+                break;
+            
+            case BlockState.Start:
+                spriteRenderer.color = startColor;
+                //col.enabled = false;
+                //gameObject.layer = 0; 
                 break;
         }
     }

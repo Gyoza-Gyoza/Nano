@@ -146,4 +146,4 @@ MonoBehaviour:
   currentState: 0
   activeColor: {r: 1, g: 0.89411765, b: 0.30588236, a: 1}
   inactiveColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
-  neighbours: []
+  startColor: {r: 1, g: 0.89411765, b: 0.30588236, a: 1}
