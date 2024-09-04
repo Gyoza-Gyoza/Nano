@@ -116,13 +116,13 @@ public class BlockScript : MonoBehaviour, IBlock
         {
             case BlockState.Active:
                 spriteRenderer.color = activeColor;
-                //col.enabled = true;
+                col.isTrigger = false;
                 //gameObject.layer = 6; 
                 break;
 
             case BlockState.Inactive:
                 spriteRenderer.color = inactiveColor;
-                //col.enabled = false;
+                col.isTrigger = true;
                 //gameObject.layer = 0; 
                 break;
             

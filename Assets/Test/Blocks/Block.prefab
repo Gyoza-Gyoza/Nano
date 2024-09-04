@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  timeToChange: 0
   activeColor: {r: 1, g: 0.89411765, b: 0.30588236, a: 1}
-  inactiveColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
+  inactiveColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 0.39215687}
   startColor: {r: 1, g: 0.89411765, b: 0.30588236, a: 1}
