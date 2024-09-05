@@ -14,12 +14,23 @@ public class ActivateOnHit : MonoBehaviour
     [SerializeField]
     private float timeToChange = 0.05f;
 
-    public bool playerOnTiles = false, 
-        bridgeActive = false;
+    public int bridgeCount = 0;
 
+    public bool playerOnTiles = false, 
+        bridgeActive = false, 
+        playerOnBridge = false;
+
+    private void Start()
+    {
+        foreach(ActivateBlock block in tilesToActivate)
+        {
+            block.mainBlock = this;
+        }
+    }
     private void Update()
     {
-        if(bridgeActive && !playerOnTiles)
+        Debug.Log(bridgeCount);
+        if (bridgeActive && !playerOnTiles && bridgeCount == 0)
         {
             bridgeActive = false;
             StartCoroutine(DeactivateTiles());
@@ -29,10 +40,12 @@ public class ActivateOnHit : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         playerOnTiles = true;
+        bridgeCount++;
         StartCoroutine(ActivateTiles());
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
+        bridgeCount--;
         playerOnTiles = false;
     }
     private IEnumerator ActivateTiles()

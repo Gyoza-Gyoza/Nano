@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ActivateBlock : MonoBehaviour
 {
+    public ActivateOnHit mainBlock;
+
     private SpriteRenderer spriteRenderer;
 
     public bool playerOnTiles = false;
@@ -30,9 +32,11 @@ public class ActivateBlock : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         playerOnTiles = true;
+        mainBlock.bridgeCount++;
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         playerOnTiles = false;
+        mainBlock.bridgeCount--;
     }
 }
