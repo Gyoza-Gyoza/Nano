@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class BlockScript : MonoBehaviour, IBlock
+public class BlockStartScript : MonoBehaviour, IBlock
 {
     [SerializeField]
     protected BlockState currentState;
@@ -32,6 +31,9 @@ public class BlockScript : MonoBehaviour, IBlock
 
     protected List<BlockScript> neighbours = new List<BlockScript>();
 
+    [SerializeField]
+    private List<BlockScript> allNeighbours = new List<BlockScript>();
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,7 +41,8 @@ public class BlockScript : MonoBehaviour, IBlock
 
         InitializeNeighbours();
         UpdateBlockState();
-        Debug.Log($"{gameObject.name}'s BlockScript called");
+
+        Debug.Log($"{gameObject.name}'s BlockStartScript called");
     }
     protected void InitializeNeighbours() //Used to initialize the neighbouring blocks for each block
     {
@@ -53,11 +56,11 @@ public class BlockScript : MonoBehaviour, IBlock
 
         foreach (RaycastHit2D[] hitArray in hits) //Check each array that contains all hits 
         {
-            foreach(RaycastHit2D hit in hitArray) //Check each hit in each array 
+            foreach (RaycastHit2D hit in hitArray) //Check each hit in each array 
             {
                 if (hit.collider.gameObject == gameObject) continue;
                 IBlock iBlock = hit.collider.gameObject.GetComponent<IBlock>(); //Check for iBlock interface 
-                if (iBlock != null) 
+                if (iBlock != null)
                 {
                     Debug.Log($"Shooting ray from {gameObject.name}, iblock {hit.collider.gameObject.name} found");
                     neighbours.Add(hit.collider.GetComponent<BlockScript>()); //Add it to neighbour list 
@@ -67,12 +70,58 @@ public class BlockScript : MonoBehaviour, IBlock
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player") playerInContact = true;
+        if (currentState != BlockState.Start) return;
+
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Starting current");
+            foreach (BlockScript hit in neighbours)
+            {
+                Debug.Log("Checking neighbours");
+                if (hit != null) hit.StartCoroutine(hit.ChangeBlockState(BlockState.Active, new WaitForSeconds(timeToChange)));
+            }
+        }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player") playerInContact = false;
+        if (currentState != BlockState.Start) return;
+
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Starting current");
+            foreach (BlockScript hit in neighbours)
+            {
+                Debug.Log("Checking neighbours");
+                if (hit != null) hit.StartCoroutine(hit.ChangeBlockState(BlockState.Inactive, new WaitForSeconds(timeToChange)));
+            }
+        }
     }
+
+    public void UpdateBlockState()
+    {
+        switch (currentState)
+        {
+            case BlockState.Active:
+                spriteRenderer.color = activeColor;
+                col.isTrigger = false;
+                //gameObject.layer = 6; 
+                break;
+
+            case BlockState.Inactive:
+                spriteRenderer.color = inactiveColor;
+                col.isTrigger = true;
+                //gameObject.layer = 0; 
+                break;
+
+            case BlockState.Start:
+                spriteRenderer.color = startColor;
+                //col.enabled = false;
+                //gameObject.layer = 0; 
+                break;
+        }
+    }
+
+
     public IEnumerator ChangeBlockState(BlockState newState, WaitForSeconds timeToWait)
     {
         Debug.Log($"Current state is {CurrentState} \n State to change is {newState}");
@@ -90,29 +139,6 @@ public class BlockScript : MonoBehaviour, IBlock
                 yield return timeToWait;
                 hit.StartCoroutine(hit.ChangeBlockState(newState, timeToWait));
             }
-        }
-    }
-    public void UpdateBlockState()
-    {
-        switch (currentState)
-        {
-            case BlockState.Active:
-                spriteRenderer.color = activeColor;
-                col.isTrigger = false;
-                //gameObject.layer = 6; 
-                break;
-
-            case BlockState.Inactive:
-                spriteRenderer.color = inactiveColor;
-                col.isTrigger = true;
-                //gameObject.layer = 0; 
-                break;
-            
-            case BlockState.Start:
-                spriteRenderer.color = startColor;
-                //col.enabled = false;
-                //gameObject.layer = 0; 
-                break;
         }
     }
 }
