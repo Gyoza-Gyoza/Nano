@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IBlock 
+public interface IBlockLegacy 
 {
     public void UpdateBlockState();
-    public IEnumerator ChangeBlockState(BlockState newState, WaitForSeconds timeToWait);
+    public IEnumerator ChangeBlockState(BlockStateLegacy newState, WaitForSeconds timeToWait);
 }
 
-public enum BlockState
+public enum BlockStateLegacy
 {
     Inactive,
     Active, 
