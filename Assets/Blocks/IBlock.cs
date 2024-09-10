@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IBlock
 {
-    public void Activate(HashSet<BlockBehaviour> passedBlocks);
-    public void Deactivate(HashSet<BlockBehaviour> passedBlocks);
+    public IEnumerator Activate(HashSet<BlockBehaviour> passedBlocks, WaitForSeconds timeBetweenActivations);
+    public IEnumerator Deactivate(HashSet<BlockBehaviour> passedBlocks, WaitForSeconds timeBetweenDeactivations);
 }
 
 public enum BlockState

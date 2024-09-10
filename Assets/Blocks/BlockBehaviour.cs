@@ -89,37 +89,45 @@ public class BlockBehaviour : MonoBehaviour, IBlock
             block.GetConnections(powerBlock, connectionList); //Continues to the next block 
     }
 
-    public void Activate(HashSet<BlockBehaviour> passedBlocks)
+    public IEnumerator Activate(HashSet<BlockBehaviour> passedBlocks, WaitForSeconds timeBetweenActivations)
     {
-        if(passedBlocks.Contains(this)) return;
+        if(passedBlocks.Contains(this)) yield break; //If this object has been passed before, breaks out of recursion
 
         Debug.Log($"{gameObject.name} activated");
 
         //Turning on stuff here
-        if(currentState != BlockState.Power) spriteRenderer.color = activeColor; 
-        col.isTrigger = false;
+        yield return timeBetweenActivations;
+        if (currentState != BlockState.Power)
+        {
+            spriteRenderer.color = activeColor;
+            col.enabled = true;
+        }
 
         //Recursions handled here 
         passedBlocks.Add(this);
 
         foreach (BlockBehaviour block in neighbours)
-            block.Activate(passedBlocks); 
+            block.StartCoroutine(block.Activate(passedBlocks, timeBetweenActivations)); 
     }
 
-    public void Deactivate(HashSet<BlockBehaviour> passedBlocks)
+    public IEnumerator Deactivate(HashSet<BlockBehaviour> passedBlocks, WaitForSeconds timeBetweenDeactivations)
     {
-        if (passedBlocks.Contains(this)) return;
+        if (passedBlocks.Contains(this)) yield break; //If this object has been passed before, breaks out of recursion
 
         Debug.Log($"{gameObject.name} deactivated");
 
         //Turning off stuff here 
-        if (currentState != BlockState.Power) spriteRenderer.color = inactiveColor;
-        col.isTrigger = true;
+        yield return timeBetweenDeactivations;
+        if (currentState != BlockState.Power)
+        {
+            spriteRenderer.color = inactiveColor;
+            col.enabled = false;
+        }
 
         //Recursions handled here 
         passedBlocks.Add(this);
 
         foreach (BlockBehaviour block in neighbours)
-            block.Deactivate(passedBlocks);
+            block.StartCoroutine(block.Deactivate(passedBlocks, timeBetweenDeactivations));
     }
 }

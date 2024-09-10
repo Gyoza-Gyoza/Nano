@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PowerBlockBehaviour : BlockBehaviour
 {
+    [SerializeField]
+    private float timeBetweenChanges = 0.05f; 
+
     private Dictionary<BlockBehaviour, bool> connectionList = new Dictionary<BlockBehaviour, bool>(); //Contains a list of all connected blocks and a bool to check if blocks are being touched by the player 
 
     private void Start()
@@ -29,17 +32,12 @@ public class PowerBlockBehaviour : BlockBehaviour
         {
             PlayerOnBlock(this, true);
 
-            Activate(new HashSet<BlockBehaviour>());
+            StartCoroutine(Activate(new HashSet<BlockBehaviour>(), new WaitForSeconds(timeBetweenChanges)));
         }
     }
-    //protected override void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Player") SetBool(this, false);
-    //}
 
     public void PlayerOnBlock(BlockBehaviour block, bool state)
     {
-        Debug.Log($"Setting {block.gameObject.name} to {state}");
         connectionList[block] = state;
 
         CheckContacts();
@@ -50,10 +48,8 @@ public class PowerBlockBehaviour : BlockBehaviour
 
         foreach (KeyValuePair<BlockBehaviour, bool> keyValuePair in connectionList) //Checks all the bools to see if there are any blocks that are being touched by the player 
         {
-            Debug.Log($"Checking {keyValuePair.Key.gameObject.name}");
             if (keyValuePair.Value)
             {
-                Debug.Log($"{keyValuePair.Key.gameObject.name} found");
                 allFalse = false;
                 break; //If its true, exit loop 
             }
@@ -61,8 +57,7 @@ public class PowerBlockBehaviour : BlockBehaviour
 
         if (allFalse)
         {
-            Debug.Log("Deactivating time");
-            Deactivate(new HashSet<BlockBehaviour>());
+            StartCoroutine(Deactivate(new HashSet<BlockBehaviour>(), new WaitForSeconds(timeBetweenChanges)));
         }
     }
 }
