@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class PowerBlockBehaviour : BlockBehaviour
 {
+    private bool drainingPlayer = false; 
+
     [SerializeField]
     private float timeBetweenChanges = 0.05f; 
 
-    private Dictionary<BlockBehaviour, bool> connectionList = new Dictionary<BlockBehaviour, bool>(); //Contains a list of all connected blocks and a bool to check if blocks are being touched by the player 
+    private Dictionary<BlockBehaviour, bool> connectionList = new Dictionary<BlockBehaviour, bool>(); //Contains a list of all connected blocks and a bool to check if blocks are being touched by the player
 
     private void Start()
     {
@@ -26,6 +28,15 @@ public class PowerBlockBehaviour : BlockBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if(drainingPlayer)
+        {
+            //Dylan
+            PlayerBehaviour.player.DrainBattery();
+        }
+    }
+
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -33,7 +44,12 @@ public class PowerBlockBehaviour : BlockBehaviour
             PlayerOnBlock(this, true);
 
             StartCoroutine(Activate(new HashSet<BlockBehaviour>(), new WaitForSeconds(timeBetweenChanges)));
+            drainingPlayer = true;
         }
+    }
+    protected override void OnCollisionExit2D(Collision2D collision)
+    {
+        drainingPlayer = false;
     }
 
     public void PlayerOnBlock(BlockBehaviour block, bool state)
