@@ -22,7 +22,7 @@ public class BlockBehaviour : MonoBehaviour
 
     //Keeps a list of neighbouring blocks 
     [SerializeField] //Remove after testing
-    protected List<BlockBehaviour> neighbours = new List<BlockBehaviour>();
+    protected HashSet<BlockBehaviour> neighbours = new HashSet<BlockBehaviour>();
 
     protected BoxCollider2D col;
 
@@ -30,8 +30,6 @@ public class BlockBehaviour : MonoBehaviour
 
     protected bool playerCollided = false,
         bridgeActivated = false;
-
-    public bool passed = false;
 
     private PowerBlockBehaviour powerBlock;
 
@@ -73,6 +71,8 @@ public class BlockBehaviour : MonoBehaviour
             {
                 if (hit.collider.gameObject == gameObject) continue; //If ray hits the current gameobject, ignore it 
 
+                if (neighbours.Contains(this)) return; //If neighbour list contains the current block, exit function
+
                 if (hit.collider.gameObject.GetComponent<BlockBehaviour>() != null)
                 {
                     Debug.Log($"Shooting ray from {gameObject.name}, iblock {hit.collider.gameObject.name} found");
@@ -93,7 +93,7 @@ public class BlockBehaviour : MonoBehaviour
             block.GetConnections(powerBlock, connectionList); //Continues to the next block 
     }
 
-    public IEnumerator Activate(HashSet<BlockBehaviour> passedBlocks, WaitForSeconds timeBetweenActivations)
+    public virtual IEnumerator Activate(HashSet<BlockBehaviour> passedBlocks, WaitForSeconds timeBetweenActivations)
     {
         if(passedBlocks.Contains(this)) yield break; //If this object has been passed before, breaks out of recursion
 
@@ -114,7 +114,7 @@ public class BlockBehaviour : MonoBehaviour
             block.StartCoroutine(block.Activate(passedBlocks, timeBetweenActivations)); 
     }
 
-    public IEnumerator Deactivate(HashSet<BlockBehaviour> passedBlocks, WaitForSeconds timeBetweenDeactivations)
+    public virtual IEnumerator Deactivate(HashSet<BlockBehaviour> passedBlocks, WaitForSeconds timeBetweenDeactivations)
     {
         if (passedBlocks.Contains(this)) yield break; //If this object has been passed before, breaks out of recursion
 

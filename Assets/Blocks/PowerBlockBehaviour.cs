@@ -49,7 +49,11 @@ public class PowerBlockBehaviour : BlockBehaviour
     }
     protected override void OnCollisionExit2D(Collision2D collision)
     {
-        drainingPlayer = false;
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerOnBlock(this, false);
+            drainingPlayer = false;
+        }
     }
 
     public void PlayerOnBlock(BlockBehaviour block, bool state)

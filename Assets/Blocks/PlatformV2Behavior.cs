@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlatformBehaviour : MonoBehaviour
+public class PlatformV2Behavior : MonoBehaviour
 {
     [SerializeField]
     private Transform[] positions = new Transform[2];
 
     [SerializeField]
-    private float liftDuration;
+    private float liftSpeed;
 
-    private int currentPos = 0; 
+    private int currentPos = 0;
 
-    public void StartMove()
+    private void Update()
     {
-        StartCoroutine(Move());
+        
     }
-    private IEnumerator Move()
+
+    private void Move()
     {
         float timer = 0;
 
@@ -25,12 +25,11 @@ public class PlatformBehaviour : MonoBehaviour
 
         Debug.Log($"currentPos is {currentPos} \n endPos is {endPos}");
 
-        while (timer < liftDuration)
+        if (timer < liftDuration)
         {
             timer += Time.deltaTime;
-            float t = timer / liftDuration; 
+            float t = timer / liftDuration;
             gameObject.transform.position = Vector3.Lerp(positions[currentPos].position, positions[endPos].position, t);
-            yield return null;
         }
 
         currentPos = endPos;

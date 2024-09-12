@@ -101,6 +101,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         currentBattery -= batteryDrainRate * Time.fixedDeltaTime; //Drain battery overtime
         currentBattery = Mathf.Clamp(currentBattery, 0f, maxBattery); //Ensures the battery doesnt exceed the maxBattery and 0.
+
         batteryBar.UpdateBattery(); //Update battery bar
 
         //If player battery reaches 0 then call death function
