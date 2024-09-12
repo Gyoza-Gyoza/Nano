@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockBehaviour : MonoBehaviour, IBlock
+public class BlockBehaviour : MonoBehaviour
 {
     [SerializeField]
     protected Color activeColor,
@@ -43,6 +43,11 @@ public class BlockBehaviour : MonoBehaviour, IBlock
         InitializeNeighbours(); //Initialize the neighbouring blocks for each block
     }
 
+    private void Start()
+    {
+        if (this is not PowerBlockBehaviour) col.enabled = false;
+    }
+
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player") powerBlock.PlayerOnBlock(this, true);
@@ -56,10 +61,10 @@ public class BlockBehaviour : MonoBehaviour, IBlock
     {
         List<RaycastHit2D[]> hits = new List<RaycastHit2D[]>() //Contains everything that are beside each block
         {
-            Physics2D.RaycastAll(transform.position, Vector2.left, col.bounds.extents.x + 0.1f),
-            Physics2D.RaycastAll(transform.position, Vector2.right, col.bounds.extents.x + 0.1f),
-            Physics2D.RaycastAll(transform.position, Vector2.up, col.bounds.extents.y + 0.1f),
-            Physics2D.RaycastAll(transform.position, Vector2.down, col.bounds.extents.y + 0.1f)
+            Physics2D.BoxCastAll(transform.position, transform.localScale, 0f, Vector2.left, col.bounds.extents.x + 0.1f),
+            Physics2D.BoxCastAll(transform.position, transform.localScale, 0f, Vector2.right, col.bounds.extents.x + 0.1f),
+            Physics2D.BoxCastAll(transform.position, transform.localScale, 0f, Vector2.up, col.bounds.extents.y + 0.1f),
+            Physics2D.BoxCastAll(transform.position, transform.localScale, 0f, Vector2.down, col.bounds.extents.y + 0.1f)
         };
 
         foreach (RaycastHit2D[] hitArray in hits) //Check each array that contains all hits 
@@ -68,8 +73,7 @@ public class BlockBehaviour : MonoBehaviour, IBlock
             {
                 if (hit.collider.gameObject == gameObject) continue; //If ray hits the current gameobject, ignore it 
 
-                IBlock iBlock = hit.collider.gameObject.GetComponent<IBlock>(); //Check for iBlock interface 
-                if (iBlock != null)
+                if (hit.collider.gameObject.GetComponent<BlockBehaviour>() != null)
                 {
                     Debug.Log($"Shooting ray from {gameObject.name}, iblock {hit.collider.gameObject.name} found");
                     neighbours.Add(hit.collider.GetComponent<BlockBehaviour>()); //Add it to neighbour list 
@@ -130,4 +134,10 @@ public class BlockBehaviour : MonoBehaviour, IBlock
         foreach (BlockBehaviour block in neighbours)
             block.StartCoroutine(block.Deactivate(passedBlocks, timeBetweenDeactivations));
     }
+}
+public enum BlockState
+{
+    Inactive,
+    Active,
+    Power
 }
