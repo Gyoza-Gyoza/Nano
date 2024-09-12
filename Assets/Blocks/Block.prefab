@@ -93,7 +93,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750697360599627182}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -146,4 +146,3 @@ MonoBehaviour:
   activeColor: {r: 1, g: 0.89411765, b: 0.30588236, a: 1}
   inactiveColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.39215687}
   currentState: 0
-  neighbours: []
