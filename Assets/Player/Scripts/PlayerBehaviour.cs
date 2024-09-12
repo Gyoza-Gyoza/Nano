@@ -13,9 +13,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     //Dylan
     [SerializeField]
-    private float maxBattery = 100f,
+    public float maxBattery = 100f,
     currentBattery = 100f,
     batteryDrainRate = 1f;
+
+    public BatteryBar batteryBar;
 
     [SerializeField]
     private LayerMask groundMask;
@@ -31,7 +33,10 @@ public class PlayerBehaviour : MonoBehaviour
         if(player == null)
         {
             player = this;
-            currentBattery = 50; //Dylan
+
+            //Dylan
+            currentBattery = maxBattery;
+            batteryBar.SetMaxBattery();
         }
         else if (player != this)
         {
@@ -68,7 +73,7 @@ public class PlayerBehaviour : MonoBehaviour
         //Dylan
         if (Input.GetKeyDown(KeyCode.H))
         {
-            ChargeBattery();
+            ChargeBatteryTool();
         }
 
         if (Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y - col.bounds.extents.y * 0.5f), 
@@ -83,14 +88,14 @@ public class PlayerBehaviour : MonoBehaviour
     {
         currentBattery -= batteryDrainRate * Time.fixedDeltaTime; //Drain battery overtime
         currentBattery = Mathf.Clamp(currentBattery, 0f, maxBattery); //Ensures the battery doesnt exceed the maxBattery and 0.
-        Debug.Log(currentBattery);
+        batteryBar.UpdateBattery(); //Update battery bar
     }
     
     //Dylan
-    public void ChargeBattery()
+    public void ChargeBatteryTool()
     {
         currentBattery += 10; //Add 10 everytime this function is called
         currentBattery = Mathf.Clamp(currentBattery, 0f, maxBattery); //Ensures the battery doesnt exceed the maxBattery and 0.
-        Debug.Log("Player Battery:" + currentBattery);
+        batteryBar.UpdateBattery(); //Update battery bar
     }
 }
