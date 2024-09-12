@@ -29,7 +29,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private int jumpCounter = 0;
 
-    private Collider2D col; 
+    private BoxCollider2D col; 
     private Rigidbody2D rb;
 
     public static PlayerBehaviour player; 
@@ -51,7 +51,7 @@ public class PlayerBehaviour : MonoBehaviour
             Destroy(this);
         }
 
-        col = GetComponent<Collider2D>();
+        col = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>(); 
     }
 
