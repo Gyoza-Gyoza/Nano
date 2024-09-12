@@ -12,10 +12,17 @@ public class PlayerBehaviour : MonoBehaviour
     private int maxJumps;
 
     //Dylan
+
     [SerializeField]
-    private float maxBattery = 100f,
+    public float maxBattery = 100f,
     currentBattery = 100f,
     batteryDrainRate = 1f;
+
+    public BatteryBar batteryBar;
+
+    public Vector2 checkpointPos;
+
+    //--------------------------
 
     [SerializeField]
     private LayerMask groundMask;
@@ -31,7 +38,13 @@ public class PlayerBehaviour : MonoBehaviour
         if(player == null)
         {
             player = this;
-            currentBattery = 50; //Dylan
+
+            //Dylan
+            checkpointPos = transform.position;
+
+            //Dylan
+            currentBattery = maxBattery;
+            batteryBar.SetMaxBattery();
         }
         else if (player != this)
         {
@@ -64,9 +77,16 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         //Dylan
+        //Cheat Tool to charge battery
         if (Input.GetKeyDown(KeyCode.H))
         {
-            ChargeBattery();
+            ChargeBatteryTool();
+        }
+
+        //Cheat Tool to respawn at the last checkpoint
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            PlayerDeath();
         }
 
         if (Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y - col.bounds.extents.y * 0.5f), 
@@ -81,12 +101,38 @@ public class PlayerBehaviour : MonoBehaviour
     {
         currentBattery -= batteryDrainRate * Time.fixedDeltaTime; //Drain battery overtime
         currentBattery = Mathf.Clamp(currentBattery, 0f, maxBattery); //Ensures the battery doesnt exceed the maxBattery and 0.
+
+        batteryBar.UpdateBattery(); //Update battery bar
+
+        //If player battery reaches 0 then call death function
+        if(player.currentBattery == 0)
+        {
+            PlayerDeath();
+        }
     }
     
     //Dylan
-    public void ChargeBattery()
+    public void ChargeBatteryTool()
     {
         currentBattery += 10; //Add 10 everytime this function is called
         currentBattery = Mathf.Clamp(currentBattery, 0f, maxBattery); //Ensures the battery doesnt exceed the maxBattery and 0.
+        batteryBar.UpdateBattery(); //Update battery bar
+    }
+
+    public void PlayerDeath()
+    {
+        StartCoroutine(PlayerRespawn(0.1f));
+    }
+    
+    public IEnumerator PlayerRespawn(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        transform.position = checkpointPos;
+        currentBattery = maxBattery/2; //Set player battery back to 50% of max battery
+    }
+
+    public void UpdateCheckPoint(Vector2 pos)
+    {
+        checkpointPos = pos;
     }
 }
