@@ -17,21 +17,21 @@ public class PlatformV2Behavior : MonoBehaviour
         
     }
 
-    private void Move()
-    {
-        float timer = 0;
+    //private void Move()
+    //{
+    //    float timer = 0;
 
-        int endPos = currentPos == positions.Length - 1 ? 0 : currentPos + 1;
+    //    int endPos = currentPos == positions.Length - 1 ? 0 : currentPos + 1;
 
-        Debug.Log($"currentPos is {currentPos} \n endPos is {endPos}");
+    //    Debug.Log($"currentPos is {currentPos} \n endPos is {endPos}");
 
-        if (timer < liftDuration)
-        {
-            timer += Time.deltaTime;
-            float t = timer / liftDuration;
-            gameObject.transform.position = Vector3.Lerp(positions[currentPos].position, positions[endPos].position, t);
-        }
+    //    if (timer < liftDuration)
+    //    {
+    //        timer += Time.deltaTime;
+    //        float t = timer / liftDuration;
+    //        gameObject.transform.position = Vector3.Lerp(positions[currentPos].position, positions[endPos].position, t);
+    //    }
 
-        currentPos = endPos;
-    }
+    //    currentPos = endPos;
+    //}
 }
