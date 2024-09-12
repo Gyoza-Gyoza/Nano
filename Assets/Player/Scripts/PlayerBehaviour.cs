@@ -40,8 +40,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>(); 
-
-        Debug.Log("Player Start Battery:" + currentBattery);
     }
 
     private void Update()
@@ -83,7 +81,6 @@ public class PlayerBehaviour : MonoBehaviour
     {
         currentBattery -= batteryDrainRate * Time.fixedDeltaTime; //Drain battery overtime
         currentBattery = Mathf.Clamp(currentBattery, 0f, maxBattery); //Ensures the battery doesnt exceed the maxBattery and 0.
-        Debug.Log(currentBattery);
     }
     
     //Dylan
@@ -91,6 +88,5 @@ public class PlayerBehaviour : MonoBehaviour
     {
         currentBattery += 10; //Add 10 everytime this function is called
         currentBattery = Mathf.Clamp(currentBattery, 0f, maxBattery); //Ensures the battery doesnt exceed the maxBattery and 0.
-        Debug.Log("Player Battery:" + currentBattery);
     }
 }
