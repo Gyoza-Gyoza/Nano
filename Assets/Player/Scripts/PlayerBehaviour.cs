@@ -127,8 +127,10 @@ public class PlayerBehaviour : MonoBehaviour
     public IEnumerator PlayerRespawn(float duration)
     {
         yield return new WaitForSeconds(duration);
-        transform.position = checkpointPos;
+        transform.position = checkpointPos;   
+
         currentBattery = maxBattery/2; //Set player battery back to 50% of max battery
+        batteryBar.UpdateBattery(); //Update battery bar
     }
 
     public void UpdateCheckPoint(Vector2 pos)
