@@ -4,48 +4,36 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private float movementSpeed,
-        jumpHeight;
+    //[SerializeField] private float movementSpeed, jumpHeight;
+    //[SerializeField] private int maxJumps;
+    //[SerializeField] private LayerMask groundMask;
+    //private int jumpCounter = 0;
 
-    [SerializeField]
-    private int maxJumps;
+    [SerializeField] private InputController input = null;
 
-    //Dylan
-
-    [SerializeField]
-    public float maxBattery = 100f,
-    currentBattery = 100f,
-    batteryDrainRate = 1f;
+    [SerializeField] public float maxBattery = 100f;
+    [SerializeField] public float currentBattery = 100f;
+    [SerializeField] public float batteryDrainRate = 1f;
 
     public BatteryBar batteryBar;
-
-    public Vector2 checkpointPos;
-
-    //--------------------------
-
-    [SerializeField]
-    private LayerMask groundMask;
-
-    private int jumpCounter = 0;
+    public Vector2 respawnPos;
 
     private BoxCollider2D col; 
     private Rigidbody2D rb;
 
     public static PlayerBehaviour player; 
+
     private void Start()
     {
         if(player == null)
         {
             player = this;
 
-            //Dylan
-            checkpointPos = transform.position;
-
-            //Dylan
+            respawnPos = transform.position;
             currentBattery = maxBattery;
             batteryBar.SetMaxBattery();
         }
+
         else if (player != this)
         {
             Destroy(this);
@@ -57,6 +45,17 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (input.RetrieveHealInput())
+        {
+            ChargeBatteryTool();
+        }
+        
+        if (input.RetrieveRespawnInput())
+        {
+            PlayerDeath();
+        }
+
+        /*
         if(Input.GetKey(KeyCode.LeftArrow))
         {
             rb.velocity = new Vector2(-movementSpeed, rb.velocity.y); 
@@ -76,27 +75,13 @@ public class PlayerBehaviour : MonoBehaviour
             jumpCounter++; 
         }
 
-        //Dylan
-        //Cheat Tool to charge battery
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            ChargeBatteryTool();
-        }
-
-        //Cheat Tool to respawn at the last checkpoint
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            PlayerDeath();
-        }
-
-        if (Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y - col.bounds.extents.y * 0.5f), 
-            transform.localScale * 0.5f, 0f, Vector2.down, 0.01f, groundMask))
+        if (Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y - col.bounds.extents.y * 0.5f), transform.localScale * 0.5f, 0f, Vector2.down, 0.01f, groundMask))
         {
             jumpCounter = 0;
         }
+        */
     }
 
-    //Dylan
     public void DrainBattery()
     {
         currentBattery -= batteryDrainRate * Time.fixedDeltaTime; //Drain battery overtime
@@ -111,12 +96,11 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
     
-    //Dylan
     public void ChargeBatteryTool()
     {
         currentBattery += 10; //Add 10 everytime this function is called
         currentBattery = Mathf.Clamp(currentBattery, 0f, maxBattery); //Ensures the battery doesnt exceed the maxBattery and 0.
-        batteryBar.UpdateBattery(); //Update battery bar
+        batteryBar.UpdateBattery();
     }
 
     public void PlayerDeath()
@@ -127,14 +111,14 @@ public class PlayerBehaviour : MonoBehaviour
     public IEnumerator PlayerRespawn(float duration)
     {
         yield return new WaitForSeconds(duration);
-        transform.position = checkpointPos;   
+        transform.position = respawnPos;   
 
-        currentBattery = maxBattery/2; //Set player battery back to 50% of max battery
-        batteryBar.UpdateBattery(); //Update battery bar
+        currentBattery = maxBattery;
+        batteryBar.UpdateBattery();
     }
 
-    public void UpdateCheckPoint(Vector2 pos)
+    public void UpdateRespawnPoint(Vector2 pos)
     {
-        checkpointPos = pos;
+        respawnPos = pos;
     }
 }
