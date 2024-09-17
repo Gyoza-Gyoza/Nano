@@ -21,7 +21,6 @@ public class BlockBehaviour : MonoBehaviour
     }
 
     //Keeps a list of neighbouring blocks 
-    [SerializeField] //Remove after testing
     protected HashSet<BlockBehaviour> neighbours = new HashSet<BlockBehaviour>();
 
     protected BoxCollider2D col;
