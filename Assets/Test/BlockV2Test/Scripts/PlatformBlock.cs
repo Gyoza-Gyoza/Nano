@@ -12,7 +12,7 @@ public class PlatformBlock : Block
 
     private int currentPos = 0;
 
-    public void Activate()
+    public override void Activate()
     {
         StartCoroutine(Move());
     }
