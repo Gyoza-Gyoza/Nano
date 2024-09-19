@@ -62,16 +62,6 @@ public class PowerBlock : Block
             }
         }
     }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            foreach(Block block in neighbours)
-            {
-                Debug.Log(block.name);
-            }
-        }
-    }
     public override void Activate()
     {
         foreach(Block block in neighbours)
