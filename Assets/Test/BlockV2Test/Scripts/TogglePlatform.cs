@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class TogglePlatform : PlatformBlock
 {
+    protected int currentPos = 0;
     public override void Activate()
     {
         StartCoroutine(Move());

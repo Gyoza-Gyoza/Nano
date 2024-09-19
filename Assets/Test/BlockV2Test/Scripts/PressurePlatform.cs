@@ -6,9 +6,10 @@ public class PressurePlatform : PlatformBlock
 {
     private BoxCollider2D col;
 
-    private bool isMoving = false;
+    private bool ascending = false;
 
-    private float pos; 
+    [Range(0f, 1f)]
+    public float currentPos; 
 
     private void Start()
     {
@@ -16,39 +17,47 @@ public class PressurePlatform : PlatformBlock
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") isMoving = true;
+        if (collision.gameObject.tag == "Player") ascending = true;
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") isMoving = false;
+        if (collision.gameObject.tag == "Player") ascending = false;
     }
     private void Update()
     {
-        if (isMoving) Move();
-        else Return();
-
-        Debug.Log(pos);
+        Move();
     }
-    public void Activate()
+    public override void Activate()
     {
         //No behaviour for activate 
     }
     private void Move()
     {
-        Debug.Log("Moving");
-        if(pos < 1f) pos += Time.deltaTime * speed;
-        if(Vector3.Distance(transform.position, positions[1].position) >= 0.05f)
-        {
-            gameObject.transform.position = Vector3.Lerp(transform.position, positions[1].position, pos/1f);
-        }
+        Debug.Log(currentPos);
+        float timeChange = ascending ? Time.deltaTime * speed : -Time.deltaTime * speed;
+        currentPos = Mathf.Clamp(currentPos + timeChange, 0f, 1f);
+
+        if (Vector3.Distance(transform.position, positions[1].position) <= 0.05f && ascending) 
+            transform.position = positions[1].position;
+
+        else if (Vector3.Distance(transform.position, positions[0].position) <= 0.05f && !ascending)
+            transform.position = positions[0].position;
+
+        else 
+            transform.position = Vector3.Lerp(positions[0].position, positions[1].position, currentPos);
     }
     private void Return()
     {
-        Debug.Log("Returning");
-        if (pos > 0f) pos -= Time.deltaTime * speed;
-        if (Vector3.Distance(transform.position, positions[0].position) >= 0.05f)
+        Debug.Log(currentPos);
+        currentPos = Mathf.Clamp(currentPos - Time.deltaTime * speed, 0f, 1f);
+
+        if (Vector3.Distance(transform.position, positions[0].position) <= 0.05f)
         {
-            gameObject.transform.position = Vector3.Lerp(transform.position, positions[0].position, pos/1f);
+            transform.position = positions[0].position;
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(positions[0].position, positions[1].position, currentPos);
         }
     }
 }
