@@ -12,7 +12,7 @@ public class BridgingBlock : Block
     //Keeps a list of neighbouring blocks 
     protected HashSet<Block> neighbours = new HashSet<Block>();
 
-    protected Dictionary<Block, bool> connections;
+    protected Dictionary<BridgingBlock, bool> connections;
 
     protected BoxCollider2D col;
 
@@ -22,6 +22,8 @@ public class BridgingBlock : Block
         bridgeActivated = false;
 
     private BridgingBlock managerBlock;
+
+    private WaitForSeconds delay;
 
     [SerializeField]
     private float frequency; 
@@ -38,7 +40,20 @@ public class BridgingBlock : Block
     {
         if (this is BridgingBlock) col.enabled = false;
 
-        if(managerBlock == this) InitializeConnections(managerBlock, connections);
+        if (managerBlock == this) InitializeConnections(managerBlock, connections);
+
+        delay = new WaitForSeconds(frequency);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (managerBlock != this) return;
+            foreach (KeyValuePair<BridgingBlock, bool> kvp in connections)
+            {
+                Debug.Log(kvp.Key.name);
+            }
+        }
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -74,24 +89,27 @@ public class BridgingBlock : Block
                 {
                     if (check is PowerBlock) //Assigns this block as the managerBlock if it is the first block in the chain
                     {
+                        Debug.Log($"Powerblock found beside me, i'm {name}");
                         managerBlock = this;
 
-                        connections = new Dictionary<Block, bool>(); 
+                        connections = new Dictionary<BridgingBlock, bool>(); 
                     }
                     if(check is BridgingBlock)
                     {
-                        Debug.Log($"Shooting ray from {gameObject.name}, block {hit.collider.gameObject.name} found");
+                        //Debug.Log($"Shooting ray from {gameObject.name}, block {hit.collider.gameObject.name} found");
                         neighbours.Add(check); //Add it to neighbour list 
                     }
                 }
             }
         }
     }
-    public void InitializeConnections(BridgingBlock managerBlock, Dictionary<Block, bool> connectionList)
-    {
+    public void InitializeConnections(BridgingBlock managerBlock, Dictionary<BridgingBlock, bool> connectionList)
+    {        
         if (connectionList.ContainsKey(this)) return; //If dictionary contains the current block, exit function
 
         connectionList.Add(this, false);
+        this.managerBlock = managerBlock;
+
 
         foreach (BridgingBlock block in neighbours)
             block.InitializeConnections(managerBlock, connectionList); //Continues to the next block 
@@ -99,16 +117,16 @@ public class BridgingBlock : Block
     protected void PlayerOnBlock(BridgingBlock block, bool state)
     {
         connections[block] = state;
+
+        CheckContacts();
     }
     public override void Activate()
     {
-        StartCoroutine(ActivateBlock(new HashSet<BridgingBlock>(), new WaitForSeconds(frequency))); 
+        StartCoroutine(ActivateBlock(new HashSet<BridgingBlock>(), delay)); 
     }
     public IEnumerator ActivateBlock(HashSet<BridgingBlock> passedBlocks, WaitForSeconds timeBetweenActivations)
     {
         if (passedBlocks.Contains(this)) yield break; //If this object has been passed before, breaks out of recursion
-
-        Debug.Log($"{gameObject.name} activated");
 
         //Turning on stuff here
         yield return timeBetweenActivations;
@@ -122,12 +140,13 @@ public class BridgingBlock : Block
         foreach (BridgingBlock block in neighbours)
             block.StartCoroutine(block.ActivateBlock(passedBlocks, timeBetweenActivations));
     }
-
+    public override void Deactivate()
+    {
+        StartCoroutine(Deactivate(new HashSet<BridgingBlock>(), delay));
+    }
     public IEnumerator Deactivate(HashSet<BridgingBlock> passedBlocks, WaitForSeconds timeBetweenDeactivations)
     {
         if (passedBlocks.Contains(this)) yield break; //If this object has been passed before, breaks out of recursion
-
-        Debug.Log($"{gameObject.name} deactivated");
 
         //Turning off stuff here 
         yield return timeBetweenDeactivations;
@@ -140,5 +159,23 @@ public class BridgingBlock : Block
 
         foreach (BridgingBlock block in neighbours)
             block.StartCoroutine(block.Deactivate(passedBlocks, timeBetweenDeactivations));
+    }
+    private void CheckContacts()
+    {
+        bool allFalse = true;
+
+        foreach (KeyValuePair<BridgingBlock, bool> keyValuePair in connections) //Checks all the bools to see if there are any blocks that are being touched by the player 
+        {
+            if (keyValuePair.Value)
+            {
+                allFalse = false;
+                break; //If its true, exit loop 
+            }
+        }
+
+        if (allFalse)
+        {
+            Deactivate();
+        }
     }
 }

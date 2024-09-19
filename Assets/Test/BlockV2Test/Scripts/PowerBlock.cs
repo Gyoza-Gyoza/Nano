@@ -49,21 +49,23 @@ public class PowerBlock : Block
     {
         if(collision.gameObject.tag == "Player")
         {
-            foreach(Block activatableBlocks in neighbours)
-            {
-                activatableBlocks.Activate();
-            }
+            Activate();
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.tag == "Player")
+        {
+            foreach (Block activatableBlocks in neighbours)
+            {
+                Deactivate();
+            }
+        }
     }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Checking");
             foreach(Block block in neighbours)
             {
                 Debug.Log(block.name);
@@ -86,6 +88,30 @@ public class PowerBlock : Block
 
                 case MissileBlock missileBlock:
                     missileBlock.Activate();
+                    break;
+
+                default:
+                    Debug.Log("No behaviour available, please create one");
+                    break;
+            }
+        }
+    }
+    public override void Deactivate()
+    {
+        foreach (Block block in neighbours)
+        {
+            switch (block)
+            {
+                case PlatformBlock platformBlock:
+                    platformBlock.Deactivate();
+                    break;
+
+                case BridgingBlock bridgingBlock:
+                    Debug.Log("Found a bridgingBlock, doing nothing");
+                    break;
+
+                case MissileBlock missileBlock:
+                    missileBlock.Deactivate();
                     break;
 
                 default:

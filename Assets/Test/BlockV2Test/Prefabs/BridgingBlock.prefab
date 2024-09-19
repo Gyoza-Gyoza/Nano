@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeColor: {r: 1, g: 0.9763254, b: 0.4198113, a: 1}
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.42745098}
+  frequency: 0.05
 --- !u!61 &8322606678560583399
 BoxCollider2D:
   m_ObjectHideFlags: 0
