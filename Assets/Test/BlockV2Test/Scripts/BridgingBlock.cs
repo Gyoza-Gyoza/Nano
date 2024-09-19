@@ -142,7 +142,7 @@ public class BridgingBlock : Block
     }
     public override void Deactivate()
     {
-        StartCoroutine(Deactivate(new HashSet<BridgingBlock>(), delay));
+        Debug.Log("Can't deactivate through this function");
     }
     public IEnumerator Deactivate(HashSet<BridgingBlock> passedBlocks, WaitForSeconds timeBetweenDeactivations)
     {
@@ -175,7 +175,7 @@ public class BridgingBlock : Block
 
         if (allFalse)
         {
-            Deactivate();
+            StartCoroutine(Deactivate(new HashSet<BridgingBlock>(), delay));
         }
     }
 }
