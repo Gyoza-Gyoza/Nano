@@ -56,10 +56,7 @@ public class PowerBlock : Block
     {
         if (collision.gameObject.tag == "Player")
         {
-            foreach (Block activatableBlocks in neighbours)
-            {
-                Deactivate();
-            }
+            Deactivate();
         }
     }
     public override void Activate()

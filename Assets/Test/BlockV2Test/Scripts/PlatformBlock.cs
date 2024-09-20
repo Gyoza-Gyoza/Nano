@@ -9,10 +9,4 @@ public class PlatformBlock : Block
 
     [SerializeField]
     protected float speed;
-
-
-    public virtual void Activate()
-    {
-
-    }
 }
