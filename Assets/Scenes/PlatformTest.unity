@@ -634,8 +634,8 @@ Transform:
   m_GameObject: {fileID: 482766453}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.02, y: 0, z: 0}
-  m_LocalScale: {x: 12, y: 1, z: 1}
+  m_LocalPosition: {x: -15, y: 0, z: 0}
+  m_LocalScale: {x: 17, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2415,9 +2415,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positions:
-  - {fileID: 0}
-  - {fileID: 0}
-  speed: 0
+  - {fileID: 860755254}
+  - {fileID: 624030537}
+  speed: 1
   currentPos: 0
 --- !u!212 &8146920281867578182
 SpriteRenderer:
@@ -2485,7 +2485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5351001856920109483, guid: 1ade511286b31444d9032e890fe661a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27.5
+      value: -28
       objectReference: {fileID: 0}
     - target: {fileID: 5351001856920109483, guid: 1ade511286b31444d9032e890fe661a1, type: 3}
       propertyPath: m_LocalPosition.y
