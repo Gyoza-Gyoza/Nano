@@ -5,36 +5,12 @@ using UnityEngine;
 
 public class BridgingBlock : ChainingBlock
 {
-    [SerializeField]
-    protected Color activeColor,
-        inactiveColor;
-
-    //Keeps a list of neighbouring blocks 
-    protected HashSet<Block> neighbours = new HashSet<Block>();
+    protected BridgingBlock managerBlock;
 
     protected Dictionary<BridgingBlock, bool> connections;
 
-    protected BoxCollider2D col;
-
-    protected SpriteRenderer spriteRenderer;
-
     protected bool playerCollided = false,
         bridgeActivated = false;
-
-    private BridgingBlock managerBlock;
-
-    private WaitForSeconds delay;
-
-    [SerializeField]
-    private float frequency; 
-
-    private void Awake()
-    {
-        col = GetComponent<BoxCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        InitializeNeighbours(); //Initialize the neighbouring blocks for each block
-    }
 
     private void Start()
     {
@@ -42,30 +18,17 @@ public class BridgingBlock : ChainingBlock
 
         if (managerBlock == this) InitializeConnections(managerBlock, connections);
 
-        delay = new WaitForSeconds(frequency);
+        delay = new WaitForSeconds(chainTime);
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (managerBlock != this) return;
-            foreach (KeyValuePair<BridgingBlock, bool> kvp in connections)
-            {
-                Debug.Log(kvp.Key.name);
-            }
-        }
-    }
-
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player") managerBlock.PlayerOnBlock(this, true);
     }
-    protected virtual void OnCollisionExit2D(Collision2D collision)
+    protected void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player") managerBlock.PlayerOnBlock(this, false);
     }
-
-    protected void InitializeNeighbours() //Used to initialize the neighbouring blocks for each block
+    protected override void InitializeNeighbours() //Used to initialize the neighbouring blocks for each block
     {
         List<RaycastHit2D[]> hits = new List<RaycastHit2D[]>() //Contains everything that are beside each block
         {
@@ -92,9 +55,9 @@ public class BridgingBlock : ChainingBlock
                         Debug.Log($"Powerblock found beside me, i'm {name}");
                         managerBlock = this;
 
-                        connections = new Dictionary<BridgingBlock, bool>(); 
+                        connections = new Dictionary<BridgingBlock, bool>();
                     }
-                    if(check is BridgingBlock)
+                    if (check is ChainingBlock)
                     {
                         //Debug.Log($"Shooting ray from {gameObject.name}, block {hit.collider.gameObject.name} found");
                         neighbours.Add(check); //Add it to neighbour list 
@@ -103,8 +66,9 @@ public class BridgingBlock : ChainingBlock
             }
         }
     }
+
     public void InitializeConnections(BridgingBlock managerBlock, Dictionary<BridgingBlock, bool> connectionList)
-    {        
+    {
         if (connectionList.ContainsKey(this)) return; //If dictionary contains the current block, exit function
 
         connectionList.Add(this, false);
@@ -119,46 +83,6 @@ public class BridgingBlock : ChainingBlock
         connections[block] = state;
 
         CheckContacts();
-    }
-    public override void Activate()
-    {
-        StartCoroutine(ActivateBlock(new HashSet<BridgingBlock>(), delay)); 
-    }
-    public IEnumerator ActivateBlock(HashSet<BridgingBlock> passedBlocks, WaitForSeconds timeBetweenActivations)
-    {
-        if (passedBlocks.Contains(this)) yield break; //If this object has been passed before, breaks out of recursion
-
-        //Turning on stuff here
-        yield return timeBetweenActivations;
-
-        spriteRenderer.color = activeColor;
-        col.enabled = true;
-
-        //Recursions handled here 
-        passedBlocks.Add(this);
-
-        foreach (BridgingBlock block in neighbours)
-            block.StartCoroutine(block.ActivateBlock(passedBlocks, timeBetweenActivations));
-    }
-    public override void Deactivate()
-    {
-        Debug.Log("Can't deactivate through this function");
-    }
-    public IEnumerator Deactivate(HashSet<BridgingBlock> passedBlocks, WaitForSeconds timeBetweenDeactivations)
-    {
-        if (passedBlocks.Contains(this)) yield break; //If this object has been passed before, breaks out of recursion
-
-        //Turning off stuff here 
-        yield return timeBetweenDeactivations;
-
-        spriteRenderer.color = inactiveColor;
-        col.enabled = false;
-
-        //Recursions handled here 
-        passedBlocks.Add(this);
-
-        foreach (BridgingBlock block in neighbours)
-            block.StartCoroutine(block.Deactivate(passedBlocks, timeBetweenDeactivations));
     }
     private void CheckContacts()
     {
@@ -175,7 +99,17 @@ public class BridgingBlock : ChainingBlock
 
         if (allFalse)
         {
-            StartCoroutine(Deactivate(new HashSet<BridgingBlock>(), delay));
+            StartCoroutine(Deactivate(new HashSet<ChainingBlock>(), delay));
         }
+    }
+    protected override void TurnOn()
+    {
+        spriteRenderer.color = activeColor;
+        col.enabled = true;
+    }
+    protected override void TurnOff()
+    {
+        spriteRenderer.color = inactiveColor;
+        col.enabled = false;
     }
 }

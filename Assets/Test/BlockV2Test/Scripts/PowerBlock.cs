@@ -64,24 +64,6 @@ public class PowerBlock : Block
         foreach(Block block in neighbours)
         {
             block.Activate();
-            //switch (block)
-            //{
-            //    case PlatformBlock platformBlock:
-            //        platformBlock.Activate();
-            //        break;
-
-            //    case BridgingBlock bridgingBlock:
-            //        bridgingBlock.Activate();
-            //        break;
-
-            //    case MissileBlock missileBlock:
-            //        missileBlock.Activate();
-            //        break;
-
-            //    default:
-            //        Debug.Log("No behaviour available, please create one");
-            //        break;
-            //}
         }
     }
     public override void Deactivate()
@@ -89,24 +71,6 @@ public class PowerBlock : Block
         foreach (Block block in neighbours)
         {
             block.Deactivate();
-            //switch (block)
-            //{
-            //    case PlatformBlock platformBlock:
-            //        platformBlock.Deactivate();
-            //        break;
-
-            //    case BridgingBlock bridgingBlock:
-            //        Debug.Log("Found a bridgingBlock, doing nothing");
-            //        break;
-
-            //    case MissileBlock missileBlock:
-            //        missileBlock.Deactivate();
-            //        break;
-
-            //    default:
-            //        Debug.Log("No behaviour available, please create one");
-            //        break;
-            //}
         }
     }
 }
