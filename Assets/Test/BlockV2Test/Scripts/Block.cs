@@ -20,7 +20,7 @@ public class Block : MonoBehaviour
 
     [SerializeField]
     protected float chainTime;
-
+    [SerializeField]
     private bool isCharged = false;
 
     public bool IsCharged
@@ -41,9 +41,13 @@ public class Block : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         InitializeNeighbours(); //Initialize the neighbouring blocks for each block
-        Debug.Log($"My name is {name} I have {neighbours.Count} neighbours");
-    }
 
+        string debug = $"My name is {name} I have {neighbours.Count} neighbours\n";
+
+        foreach (Block b in neighbours) debug += $"{b.name}\n"; 
+
+        Debug.Log(debug);
+    }
     protected virtual void InitializeNeighbours() //Used to initialize the neighbouring blocks for each block
     {
         List<RaycastHit2D[]> hits = new List<RaycastHit2D[]>() //Contains everything that are beside each block
@@ -64,14 +68,7 @@ public class Block : MonoBehaviour
 
                 Block check = hit.collider.gameObject.GetComponent<Block>();
 
-                if (check != null)
-                {
-                    if (check is ChainingBlock)
-                    {
-                        //Debug.Log($"Shooting ray from {gameObject.name}, block {hit.collider.gameObject.name} found");
-                        neighbours.Add(check); //Add it to neighbour list 
-                    }
-                }
+                if (check != null) neighbours.Add(check); //Add it to neighbour list 
             }
         }
     }

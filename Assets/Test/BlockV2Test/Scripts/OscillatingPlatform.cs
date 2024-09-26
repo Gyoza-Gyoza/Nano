@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class OscillatingPlatform : PlatformBlock
 {
-    private BoxCollider2D col;
-
     private bool ascending = false, 
         playerOnBlock = false;
 
@@ -26,7 +24,6 @@ public class OscillatingPlatform : PlatformBlock
     }
     private void Move()
     {
-        Debug.Log("Move entered");
         float timeChange = ascending ? Time.deltaTime * speed : -Time.deltaTime * speed;
         currentPos = Mathf.Clamp(currentPos + timeChange, 0f, 1f);
 
