@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Ground
   - Blocks
-  - 
+  - Background
   - 
   - 
   - 
@@ -40,4 +40,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Layer-0
+    uniqueID: 688026017
+    locked: 0
+  - name: Layer-1
+    uniqueID: 2710369979
+    locked: 0
+  - name: Layer-2
+    uniqueID: 2842812453
+    locked: 0
+  - name: Layer-3
+    uniqueID: 3865544147
+    locked: 0
+  - name: Layer-4
+    uniqueID: 415152539
+    locked: 0
+  - name: Layer-5
+    uniqueID: 1881439715
+    locked: 0
+  - name: Layer-6
+    uniqueID: 979091915
     locked: 0
