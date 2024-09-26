@@ -11,6 +11,17 @@ public class BridgingBlock : ChainingBlock
 
     protected bool playerCollided = false,
         bridgeActivated = false;
+    public override bool IsCharged
+    {
+        get { return isCharged; }
+        set
+        {
+            isCharged = value;
+
+            if (IsCharged) Activate();
+            else StartCoroutine(DeactivateBlock());
+        }
+    }
 
     private void Start()
     {
@@ -59,7 +70,6 @@ public class BridgingBlock : ChainingBlock
                     }
                     if (check is Block)
                     {
-                        //Debug.Log($"Shooting ray from {gameObject.name}, block {hit.collider.gameObject.name} found");
                         neighbours.Add(check); //Add it to neighbour list 
                     }
                 }
@@ -75,8 +85,14 @@ public class BridgingBlock : ChainingBlock
         this.managerBlock = managerBlock;
 
 
-        foreach (BridgingBlock block in neighbours)
-            block.InitializeConnections(managerBlock, connectionList); //Continues to the next block 
+        foreach (Block block in neighbours)
+        {
+            if (block is BridgingBlock)
+            {
+                BridgingBlock bridgingBlock = block as BridgingBlock;
+                bridgingBlock.InitializeConnections(managerBlock, connectionList); //Continues to the next block 
+            }
+        }
     }
     protected void PlayerOnBlock(BridgingBlock block, bool state)
     {
@@ -86,12 +102,15 @@ public class BridgingBlock : ChainingBlock
     }
     private void CheckContacts()
     {
+        if (managerBlock != this) return;
+        
         bool allFalse = true;
 
         foreach (KeyValuePair<BridgingBlock, bool> keyValuePair in connections) //Checks all the bools to see if there are any blocks that are being touched by the player 
         {
             if (keyValuePair.Value)
             {
+                Debug.Log("True found");
                 allFalse = false;
                 break; //If its true, exit loop 
             }

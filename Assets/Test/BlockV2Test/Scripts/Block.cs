@@ -16,14 +16,11 @@ public class Block : MonoBehaviour
 
     protected SpriteRenderer spriteRenderer;
 
-    protected WaitForSeconds delay;
 
     [SerializeField]
-    protected float chainTime;
-    [SerializeField]
-    private bool isCharged = false;
+    protected bool isCharged = false;
 
-    public bool IsCharged
+    public virtual bool IsCharged
     {
         get { return isCharged; }
         set
@@ -79,8 +76,6 @@ public class Block : MonoBehaviour
 
         IsCharged = true;
 
-        Debug.Log("Im charged");
-        IsCharged = true;
         foreach (Block block in neighbours)
             block.Charge();
     }
@@ -91,7 +86,6 @@ public class Block : MonoBehaviour
 
         IsCharged = false; 
 
-        Debug.Log("Im discharged");
         foreach (Block block in neighbours)
             block.Discharge();
     }

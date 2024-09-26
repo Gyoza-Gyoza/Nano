@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class ChainingBlock : Block
 {
+    [SerializeField]
+    protected float chainTime;
+
+    protected WaitForSeconds delay;
     public override IEnumerator ActivateBlock()
     {
         yield return delay;
