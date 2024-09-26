@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PressurePlatform : PlatformBlock
 {
-    private BoxCollider2D col;
-
     private bool ascending = false;
 
     [Range(0f, 1f)]

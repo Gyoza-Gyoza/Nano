@@ -57,7 +57,7 @@ public class BridgingBlock : ChainingBlock
 
                         connections = new Dictionary<BridgingBlock, bool>();
                     }
-                    if (check is ChainingBlock)
+                    if (check is Block)
                     {
                         //Debug.Log($"Shooting ray from {gameObject.name}, block {hit.collider.gameObject.name} found");
                         neighbours.Add(check); //Add it to neighbour list 
@@ -99,7 +99,7 @@ public class BridgingBlock : ChainingBlock
 
         if (allFalse)
         {
-            StartCoroutine(Deactivate(new HashSet<ChainingBlock>(), delay));
+            Discharge();
         }
     }
     protected override void TurnOn()
