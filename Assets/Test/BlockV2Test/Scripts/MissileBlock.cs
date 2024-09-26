@@ -21,7 +21,7 @@ public class MissileBlock : ChainingBlock
     }
     public override void Deactivate()
     {
-        StartCoroutine(Deactivate(new HashSet<ChainingBlock>(), delay));
+        Discharge();
     }
     protected override void TurnOn()
     {

@@ -2599,6 +2599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781f4ce673fa16b40b449b0c742ded54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeColor: {r: 0, g: 0, b: 0, a: 0}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 0}
+  chainTime: 0
   positions:
   - {fileID: 0}
   - {fileID: 0}

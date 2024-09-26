@@ -63,14 +63,14 @@ public class PowerBlock : Block
     {
         foreach(Block block in neighbours)
         {
-            block.Activate();
+            block.Charge();
         }
     }
     public override void Deactivate()
     {
         foreach (Block block in neighbours)
         {
-            block.Deactivate();
+            block.Discharge();
         }
     }
 }

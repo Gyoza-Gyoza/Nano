@@ -99,7 +99,7 @@ public class BridgingBlock : ChainingBlock
 
         if (allFalse)
         {
-            StartCoroutine(Deactivate(new HashSet<ChainingBlock>(), delay));
+            Discharge();
         }
     }
     protected override void TurnOn()
