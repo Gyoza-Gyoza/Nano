@@ -14,7 +14,7 @@ public class PressurePlatform : PlatformBlock
         if (collision.gameObject.tag == "Player")
         {
             isDraining = true;
-            ascending = true;
+            IsCharged = true;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -22,29 +22,33 @@ public class PressurePlatform : PlatformBlock
         if (collision.gameObject.tag == "Player")
         {
             isDraining = false;
-            ascending = false;
+            IsCharged = false;
         }
     }
     private void Update()
     {
         Move();
     }
-    public override void Activate()
-    {
-        //No behaviour for activate 
-    }
     private void Move()
     {
         float timeChange = ascending ? Time.deltaTime * speed : -Time.deltaTime * speed;
         currentPos = Mathf.Clamp(currentPos + timeChange, 0f, 1f);
 
-        if (Vector3.Distance(transform.position, positions[1].position) <= 0.05f && ascending) 
+        if (Vector3.Distance(transform.position, positions[1].position) <= 0.05f && ascending)
             transform.position = positions[1].position;
 
         else if (Vector3.Distance(transform.position, positions[0].position) <= 0.05f && !ascending)
             transform.position = positions[0].position;
 
-        else 
+        else
             transform.position = Vector3.Lerp(positions[0].position, positions[1].position, currentPos);
+    }
+    public override void Activate()
+    {
+        ascending = true;
+    }
+    public override void Deactivate()
+    {
+        ascending = false;
     }
 }
