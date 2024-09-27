@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class BridgingBlock : ChainingBlock
 {
-    protected BridgingBlock managerBlock;
-
-    protected Dictionary<BridgingBlock, bool> connections;
+    protected PowerBlock managerBlock;
 
     protected bool playerCollided = false,
         bridgeActivated = false;
@@ -18,7 +16,7 @@ public class BridgingBlock : ChainingBlock
         {
             isCharged = value;
 
-            if (IsCharged) Activate();
+            if (IsCharged) StartCoroutine(ActivateBlock());
             else StartCoroutine(DeactivateBlock());
         }
     }
@@ -26,8 +24,6 @@ public class BridgingBlock : ChainingBlock
     private void Start()
     {
         if (this is BridgingBlock) col.enabled = false;
-
-        if (managerBlock == this) InitializeConnections(managerBlock, connections);
 
         delay = new WaitForSeconds(chainTime);
     }
@@ -39,45 +35,8 @@ public class BridgingBlock : ChainingBlock
     {
         if (collision.gameObject.tag == "Player") managerBlock.PlayerOnBlock(this, false);
     }
-    protected override void InitializeNeighbours() //Used to initialize the neighbouring blocks for each block
-    {
-        List<RaycastHit2D[]> hits = new List<RaycastHit2D[]>() //Contains everything that are beside each block
-        {
-            Physics2D.BoxCastAll(transform.position, transform.localScale * 0.9f, 0f, Vector2.right, col.bounds.extents.x + 0.1f),
-            Physics2D.BoxCastAll(transform.position, transform.localScale * 0.9f, 0f, Vector2.left, col.bounds.extents.x + 0.1f),
-            Physics2D.BoxCastAll(transform.position, transform.localScale * 0.9f, 0f, Vector2.up, col.bounds.extents.y + 0.1f),
-            Physics2D.BoxCastAll(transform.position, transform.localScale * 0.9f, 0f, Vector2.down, col.bounds.extents.y + 0.1f)
-        };
 
-        foreach (RaycastHit2D[] hitArray in hits) //Check each array that contains all hits 
-        {
-            foreach (RaycastHit2D hit in hitArray) //Check each hit in each array 
-            {
-                if (hit.collider.gameObject == gameObject) continue; //If ray hits the current gameobject, ignore it 
-
-                if (neighbours.Contains(this)) return; //If neighbour list contains the current block, exit function
-
-                Block check = hit.collider.gameObject.GetComponent<Block>();
-
-                if (check != null)
-                {
-                    if (check is PowerBlock) //Assigns this block as the managerBlock if it is the first block in the chain
-                    {
-                        Debug.Log($"Powerblock found beside {name}");
-                        managerBlock = this;
-
-                        connections = new Dictionary<BridgingBlock, bool>();
-                    }
-                    if (check is Block)
-                    {
-                        neighbours.Add(check); //Add it to neighbour list 
-                    }
-                }
-            }
-        }
-    }
-
-    public void InitializeConnections(BridgingBlock managerBlock, Dictionary<BridgingBlock, bool> connectionList)
+    public void InitializeConnections(PowerBlock managerBlock, Dictionary<Block, bool> connectionList)
     {
         if (connectionList.ContainsKey(this)) return; //If dictionary contains the current block, exit function
 
@@ -92,33 +51,6 @@ public class BridgingBlock : ChainingBlock
                 BridgingBlock bridgingBlock = block as BridgingBlock;
                 bridgingBlock.InitializeConnections(managerBlock, connectionList); //Continues to the next block 
             }
-        }
-    }
-    protected void PlayerOnBlock(BridgingBlock block, bool state)
-    {
-        connections[block] = state;
-
-        CheckContacts();
-    }
-    private void CheckContacts()
-    {
-        if (managerBlock != this) return;
-        
-        bool allFalse = true;
-
-        foreach (KeyValuePair<BridgingBlock, bool> keyValuePair in connections) //Checks all the bools to see if there are any blocks that are being touched by the player 
-        {
-            if (keyValuePair.Value)
-            {
-                Debug.Log("True found");
-                allFalse = false;
-                break; //If its true, exit loop 
-            }
-        }
-
-        if (allFalse)
-        {
-            Discharge();
         }
     }
     protected override void TurnOn()

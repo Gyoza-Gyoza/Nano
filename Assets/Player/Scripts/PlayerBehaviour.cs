@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    //[SerializeField] private float movementSpeed, jumpHeight;
-    //[SerializeField] private int maxJumps;
-    //[SerializeField] private LayerMask groundMask;
-    //private int jumpCounter = 0;
-
     [SerializeField] private InputController input = null;
 
     [SerializeField] public float maxBattery = 100f;
@@ -54,32 +49,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             PlayerDeath();
         }
-
-        /*
-        if(Input.GetKey(KeyCode.LeftArrow))
-        {
-            rb.velocity = new Vector2(-movementSpeed, rb.velocity.y); 
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if(jumpCounter >= maxJumps)
-            {
-                return;
-            }
-
-            rb.AddForce(new Vector2(0f, jumpHeight));
-            jumpCounter++; 
-        }
-
-        if (Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y - col.bounds.extents.y * 0.5f), transform.localScale * 0.5f, 0f, Vector2.down, 0.01f, groundMask))
-        {
-            jumpCounter = 0;
-        }
-        */
     }
 
     public void DrainBattery()

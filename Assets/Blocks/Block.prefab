@@ -147,4 +147,4 @@ MonoBehaviour:
   inactiveColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.39215687}
   isCharged: 0
   isDraining: 0
-  chainTime: 0
+  chainTime: 0.05

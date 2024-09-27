@@ -39,11 +39,11 @@ public class Block : MonoBehaviour
 
         InitializeNeighbours(); //Initialize the neighbouring blocks for each block
 
-        string debug = $"My name is {name} I have {neighbours.Count} neighbours\n";
+        //string debug = $"My name is {name} I have {neighbours.Count} neighbours\n";
 
-        foreach (Block b in neighbours) debug += $"{b.name}\n"; 
+        //foreach (Block b in neighbours) debug += $"{b.name}\n"; 
 
-        Debug.Log(debug);
+        //Debug.Log(debug);
     }
     protected virtual void InitializeNeighbours() //Used to initialize the neighbouring blocks for each block
     {
