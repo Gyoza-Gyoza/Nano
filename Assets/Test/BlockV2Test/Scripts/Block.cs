@@ -16,9 +16,9 @@ public class Block : MonoBehaviour
 
     protected SpriteRenderer spriteRenderer;
 
-
     [SerializeField]
-    protected bool isCharged = false;
+    protected bool isCharged = false, 
+        isDraining = false;
 
     public virtual bool IsCharged
     {
@@ -69,7 +69,20 @@ public class Block : MonoBehaviour
             }
         }
     }
+    private void FixedUpdate()
+    {
+        if (isDraining) PlayerBehaviour.player.DrainBattery();
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player") isDraining = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player") isDraining = false;
+    }
     public void Charge()
     {
         if (IsCharged) return;

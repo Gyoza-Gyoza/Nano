@@ -11,11 +11,19 @@ public class PressurePlatform : PlatformBlock
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") ascending = true;
+        if (collision.gameObject.tag == "Player")
+        {
+            isDraining = true;
+            ascending = true;
+        }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") ascending = false;
+        if (collision.gameObject.tag == "Player")
+        {
+            isDraining = false;
+            ascending = false;
+        }
     }
     private void Update()
     {

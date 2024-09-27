@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4822059109767824541}
   - component: {fileID: 1226833458571456844}
   - component: {fileID: 6915601733730146554}
-  - component: {fileID: 2408866740200757699}
+  - component: {fileID: -8630902280411632696}
   m_Layer: 6
   m_Name: Block
   m_TagString: Untagged
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2408866740200757699
+--- !u!114 &-8630902280411632696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,9 +140,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 750697360599627182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be0c7f74895487d4181c789fe841c905, type: 3}
+  m_Script: {fileID: 11500000, guid: d03390f08d7af4b45b65b054e9ecbaa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activeColor: {r: 1, g: 0.89411765, b: 0.30588236, a: 1}
   inactiveColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.39215687}
-  currentState: 0
+  isCharged: 0
+  isDraining: 0
+  chainTime: 0

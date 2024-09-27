@@ -63,7 +63,7 @@ public class BridgingBlock : ChainingBlock
                 {
                     if (check is PowerBlock) //Assigns this block as the managerBlock if it is the first block in the chain
                     {
-                        Debug.Log($"Powerblock found beside me, i'm {name}");
+                        Debug.Log($"Powerblock found beside {name}");
                         managerBlock = this;
 
                         connections = new Dictionary<BridgingBlock, bool>();

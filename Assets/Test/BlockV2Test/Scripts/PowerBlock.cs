@@ -8,6 +8,7 @@ public class PowerBlock : Block
     {
         if(collision.gameObject.tag == "Player")
         {
+            isDraining = true;
             Activate();
         }
     }
@@ -15,6 +16,7 @@ public class PowerBlock : Block
     {
         if (collision.gameObject.tag == "Player")
         {
+            isDraining = false;
             Deactivate();
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4822059109767824541}
   - component: {fileID: 1226833458571456844}
   - component: {fileID: 6915601733730146554}
-  - component: {fileID: 3616659461979489313}
+  - component: {fileID: 7082566462126069199}
   m_Layer: 6
   m_Name: PowerBlock
   m_TagString: Untagged
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3616659461979489313
+--- !u!114 &7082566462126069199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,10 +140,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 750697360599627182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e8cf49778600a14b8c922915653d5a0, type: 3}
+  m_Script: {fileID: 11500000, guid: a5b3dbac351161b49b14054976222e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activeColor: {r: 0, g: 0, b: 0, a: 0}
   inactiveColor: {r: 0, g: 0, b: 0, a: 0}
-  currentState: 0
-  timeBetweenChanges: 0.01
