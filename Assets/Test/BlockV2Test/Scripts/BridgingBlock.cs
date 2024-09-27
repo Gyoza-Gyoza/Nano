@@ -55,12 +55,14 @@ public class BridgingBlock : ChainingBlock
     }
     protected override void TurnOn()
     {
-        spriteRenderer.color = activeColor;
+        spriteRenderer.material = activeMaterial;
+        spriteRenderer.sprite = activeSprite;
         col.enabled = true;
     }
     protected override void TurnOff()
     {
-        spriteRenderer.color = inactiveColor;
+        spriteRenderer.material = inactiveMaterial;
+        spriteRenderer.sprite = inactiveSprite;
         col.enabled = false;
     }
 }
