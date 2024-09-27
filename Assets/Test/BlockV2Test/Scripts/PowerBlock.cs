@@ -29,6 +29,7 @@ public class PowerBlock : Block
     {
         foreach (Block block in neighbours)
         {
+            if (block is BridgingBlock) continue;
             block.Discharge();
         }
     }

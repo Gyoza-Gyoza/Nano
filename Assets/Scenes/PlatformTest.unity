@@ -599,8 +599,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   inactiveColor: {r: 0.6415094, g: 0.40850836, b: 0.40850836, a: 1}
-  chainTime: 0
   isCharged: 0
+  chainTime: 0
   missile: {fileID: 3486847703807999279, guid: adce2632cdaadba4686cd91a518d756e, type: 3}
   shootFrequency: 0.5
   missileSpeed: 0.1
@@ -2001,8 +2001,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   inactiveColor: {r: 0.6415094, g: 0.40850836, b: 0.40850836, a: 1}
-  chainTime: 0
   isCharged: 0
+  chainTime: 0
   missile: {fileID: 3486847703807999279, guid: adce2632cdaadba4686cd91a518d756e, type: 3}
   shootFrequency: 0.5
   missileSpeed: 0.1
@@ -2212,8 +2212,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   inactiveColor: {r: 0.6415094, g: 0.40850836, b: 0.40850836, a: 1}
-  chainTime: 0
   isCharged: 0
+  chainTime: 0
   missile: {fileID: 3486847703807999279, guid: adce2632cdaadba4686cd91a518d756e, type: 3}
   shootFrequency: 0.5
   missileSpeed: 0.1
