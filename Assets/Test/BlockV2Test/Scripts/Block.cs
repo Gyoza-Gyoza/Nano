@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    [SerializeField]
-    protected Color activeColor,
-        inactiveColor;
+    [SerializeField] protected Color activeColor, inactiveColor;
+    [SerializeField] protected Sprite activeSprite,inactiveSprite;
+
+    [SerializeField] protected Material activeMaterial, inactiveMaterial;
 
     //Keeps a list of neighbouring blocks 
     protected HashSet<Block> neighbours = new HashSet<Block>();

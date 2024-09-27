@@ -24,12 +24,14 @@ public class ChainingBlock : Block
 
     protected virtual void TurnOn() //Turning on functionalities here
     {
-        spriteRenderer.color = activeColor;
+        spriteRenderer.material = activeMaterial;
+        spriteRenderer.sprite = activeSprite;
         col.enabled = true;
     }
     protected virtual void TurnOff() //Turning off functionalities here
     {
-        spriteRenderer.color = inactiveColor;
+        spriteRenderer.material = inactiveMaterial;
+        spriteRenderer.sprite = inactiveSprite;
         col.enabled = false;
     }
 }
