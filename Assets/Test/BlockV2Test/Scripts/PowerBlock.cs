@@ -20,21 +20,10 @@ public class PowerBlock : Block
             }
         }    
     }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            foreach (KeyValuePair<Block, bool> kvp in Connections)
-            {
-                Debug.Log($"{kvp.Key.name}");
-            }
-        }
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            isDraining = true;
             PlayerOnBlock(this, true);
             Activate();
         }
@@ -43,7 +32,6 @@ public class PowerBlock : Block
     {
         if (collision.gameObject.tag == "Player")
         {
-            isDraining = false;
             PlayerOnBlock(this, false);
             Deactivate();
         }

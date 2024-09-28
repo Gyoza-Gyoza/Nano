@@ -21,6 +21,8 @@ public class Block : MonoBehaviour
     protected bool isCharged = false, 
         isDraining = false;
 
+    public static bool drained = false;
+
     public virtual bool IsCharged
     {
         get { return isCharged; }
@@ -70,19 +72,14 @@ public class Block : MonoBehaviour
             }
         }
     }
-    private void FixedUpdate()
-    {
-        if (isDraining) PlayerBehaviour.player.DrainBattery();
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") isDraining = true;
+        if(collision.gameObject.tag == "Player") Charge();
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") isDraining = false;
+        if (collision.gameObject.tag == "Player") Discharge();
     }
     public void Charge()
     {

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class Sunlight : MonoBehaviour
@@ -24,6 +23,7 @@ public class Sunlight : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             chargingPlayer = true;
+            PlayerBehaviour.player.healingVFX.Play();
         }
     }
 
@@ -32,6 +32,7 @@ public class Sunlight : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             chargingPlayer = false;
+            PlayerBehaviour.player.healingVFX.Stop();
         }
     }
 

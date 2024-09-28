@@ -10,6 +10,11 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] public float currentBattery = 100f;
     [SerializeField] public float batteryDrainRate = 1f;
 
+    [SerializeField]
+    public ParticleSystem healingVFX;
+
+    private int drainCounter = 0;
+
     public BatteryBar batteryBar;
     public Vector2 respawnPos;
 
@@ -49,11 +54,23 @@ public class PlayerBehaviour : MonoBehaviour
         {
             PlayerDeath();
         }
+
+        //This is a very janky fix, if nothing happens, that's good, but please try to fix if you have time
+        if (drainCounter > 0) DrainBattery(); 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Block>() != null) drainCounter++;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Block>() != null) drainCounter--;
     }
 
     public void DrainBattery()
     {
-        currentBattery -= batteryDrainRate * Time.fixedDeltaTime; //Drain battery overtime
+        currentBattery -= batteryDrainRate; //Drain battery overtime
         currentBattery = Mathf.Clamp(currentBattery, 0f, maxBattery); //Ensures the battery doesnt exceed the maxBattery and 0.
 
         batteryBar.UpdateBattery(); //Update battery bar
