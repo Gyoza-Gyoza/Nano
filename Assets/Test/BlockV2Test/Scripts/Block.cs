@@ -18,8 +18,7 @@ public class Block : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
 
     [SerializeField]
-    protected bool isCharged = false, 
-        isDraining = false;
+    protected bool isCharged = false;
 
     public static bool drained = false;
 

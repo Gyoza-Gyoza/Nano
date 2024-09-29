@@ -55,7 +55,8 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerDeath();
         }
 
-        //This is a very janky fix, if nothing happens, that's good, but please try to fix if you have time
+        //This is a very janky fix, heavily dependent on unity's collision system.
+        //If nothing happens, that's good, but please try to fix if you have time
         if (drainCounter > 0) DrainBattery(); 
     }
 
