@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class ChainingBlock : Block
 {
-    [SerializeField]
-    protected float chainTime;
+    //[SerializeField]
+    //protected float chainTime;
 
-    protected WaitForSeconds delay;
+    //protected WaitForSeconds delay;
     public override IEnumerator ActivateBlock()
     {
-        yield return delay;
+        yield return null; //Fix please
 
         TurnOn();
     }
     public override IEnumerator DeactivateBlock()
     {
-        yield return delay;
+        yield return null; //Fix please
 
         TurnOff();
     }

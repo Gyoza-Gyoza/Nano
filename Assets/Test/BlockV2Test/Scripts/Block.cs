@@ -18,6 +18,10 @@ public class Block : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
 
     [SerializeField]
+    private float chargeTime = 0.03f;
+    private WaitForSeconds delay;
+
+    [SerializeField]
     protected bool isCharged = false;
 
     public static bool drained = false;
@@ -40,6 +44,8 @@ public class Block : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         InitializeNeighbours(); //Initialize the neighbouring blocks for each block
+
+        delay = new WaitForSeconds(chargeTime);
 
         //string debug = $"My name is {name} I have {neighbours.Count} neighbours\n";
 
@@ -74,30 +80,34 @@ public class Block : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player") Charge();
+        if(collision.gameObject.tag == "Player") StartCoroutine(Charge());
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") Discharge();
+        if (collision.gameObject.tag == "Player") StartCoroutine(Discharge());
     }
-    public void Charge()
+    public IEnumerator Charge()
     {
-        if (IsCharged) return;
+        if (IsCharged) yield break;
+
+        yield return delay;
 
         IsCharged = true;
 
         foreach (Block block in neighbours)
-            block.Charge();
+            block.StartCoroutine(block.Charge());
     }
 
-    public void Discharge()
+    public IEnumerator Discharge()
     {
-        if (!IsCharged) return;
+        if (!IsCharged) yield break;
 
-        IsCharged = false; 
+        IsCharged = false;
+
+        yield return delay;
 
         foreach (Block block in neighbours)
-            block.Discharge();
+            block.StartCoroutine(block.Discharge());
     }
 
     public virtual void Activate()
