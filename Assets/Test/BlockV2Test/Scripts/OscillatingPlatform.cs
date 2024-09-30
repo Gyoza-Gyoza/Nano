@@ -37,8 +37,6 @@ public class OscillatingPlatform : PlatformBlock
 
         platformRenderer.material = activePlatformMat;
         pillarRenderer.material = activePillarMat;
-
-        playerOnBlock = true;
     }
     public override void Deactivate()
     {
@@ -47,12 +45,10 @@ public class OscillatingPlatform : PlatformBlock
 
         platformRenderer.material = inactivePlatformMat;
         pillarRenderer.material = inactivePillarMat;
-
-        playerOnBlock = false;
     }
     private void Update()
     {
-        if (playerOnBlock) Move();
+        if (IsCharged) Move();
     }
     private void Move()
     {

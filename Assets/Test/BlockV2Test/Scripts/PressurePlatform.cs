@@ -29,22 +29,6 @@ public class PressurePlatform : PlatformBlock
         pillarRenderer = transform.Find("Pillar").GetComponent<SpriteRenderer>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            IsCharged = true;
-            collision.gameObject.transform.SetParent(gameObject.transform);
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            IsCharged = false;
-            collision.gameObject.transform.SetParent(null);
-        }
-    }
     private void Update()
     {
         Move();
