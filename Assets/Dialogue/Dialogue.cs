@@ -8,6 +8,7 @@ public class Dialogue
     public bool changeCamera;
     public Sprite portrait;
     public string name;
+    public Color nameColor;
 
     [TextArea(3, 10)]
     public string[] sentences;

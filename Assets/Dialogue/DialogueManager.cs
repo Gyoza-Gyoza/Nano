@@ -20,10 +20,12 @@ public class DialogueManager : MonoBehaviour
     private CinemachineFramingTransposer framingTransposer;
 
     [Header("Dialogue UI Settings")]
-    public Animator animator;
+    public Animator textAnimator;
+    public Animator potraitAnimator;
     public Image portraitImage;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI nameColor;
     public float textSpeed;
     private Queue<string> sentences;
     private bool sentenceIsTyping = false;
@@ -72,10 +74,12 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        animator.SetBool("isOpen", true);
+        textAnimator.SetBool("isOpen", true);
+        potraitAnimator.SetBool("isOpen", true);
 
         nameText.text = dialogue.name;
         portraitImage.sprite = dialogue.portrait;
+        nameColor.color = dialogue.nameColor;
 
         sentences.Clear();
 
@@ -129,7 +133,8 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        animator.SetBool("isOpen", false);
+        textAnimator.SetBool("isOpen", false);
+        potraitAnimator.SetBool("isOpen", false);
         
         if (virtualCamera != null)
         {
