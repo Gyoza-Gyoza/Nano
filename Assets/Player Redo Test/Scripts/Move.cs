@@ -7,8 +7,8 @@ public class Move : MonoBehaviour
 {
 
     [SerializeField] private InputController input = null;
-    [SerializeField, Range(0f, 100f)] private float maxSpeed = 4f;
-    [SerializeField, Range(0f, 100f)] private float maxAccerlation = 35f;
+    [SerializeField, Range(0f, 100f)] public float maxSpeed = 4f;
+    [SerializeField, Range(0f, 100f)] private float maxAcceleration = 35f;
     [SerializeField, Range(0f, 100f)] private float maxAirAcceleration = 20f;
 
     private Vector2 direction;
@@ -40,7 +40,7 @@ public class Move : MonoBehaviour
         onGround = ground.GetOnGround();
         velocity = body.velocity;
 
-        acceleration = onGround ? maxAccerlation : maxAirAcceleration;
+        acceleration = onGround ? maxAcceleration : maxAirAcceleration;
         maxSpeedChange = acceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 

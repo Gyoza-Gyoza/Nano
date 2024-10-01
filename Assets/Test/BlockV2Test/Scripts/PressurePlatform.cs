@@ -6,30 +6,10 @@ public class PressurePlatform : PlatformBlock
 {
     private bool ascending = false;
 
-    [Header("Sprites for Platform and Pillar")]
-    [SerializeField] private Sprite activePlatformSprite;
-    [SerializeField] private Sprite inactivePlatformSprite;
-    [SerializeField] private Sprite activePillarSprite;
-    [SerializeField] private Sprite inactivePillarSprite;
-    [SerializeField] private Material activePlatformMat;
-    [SerializeField] private Material inactivePlatformMat;
-    [SerializeField] private Material activePillarMat;
-    [SerializeField] private Material inactivePillarMat;
-
-    private SpriteRenderer platformRenderer;
-    private SpriteRenderer pillarRenderer;
-
     [Range(0f, 1f)]
     public float currentPos; 
 
-    void Start()
-    {
-        // Get the SpriteRenderer components for the children
-        platformRenderer = transform.Find("Platform").GetComponent<SpriteRenderer>();
-        pillarRenderer = transform.Find("Pillar").GetComponent<SpriteRenderer>();
-    }
-
-    private void Update()
+    protected void Update()
     {
         Move();
     }
@@ -49,7 +29,7 @@ public class PressurePlatform : PlatformBlock
         //    transform.position = positions[0].position;
 
         //else
-            transform.position = Vector3.Lerp(positions[0].position, positions[1].position, currentPos);
+            transform.position = Vector2.Lerp(positions[0].position, positions[1].position, currentPos);
     }
     public override void Activate()
     {
