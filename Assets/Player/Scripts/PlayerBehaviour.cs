@@ -18,8 +18,10 @@ public class PlayerBehaviour : MonoBehaviour
     public BatteryBar batteryBar;
     public Vector2 respawnPos;
 
-    private BoxCollider2D col; 
-    private Rigidbody2D rb;
+    public BoxCollider2D col
+    { get; private set; }
+    public Rigidbody2D rb
+    { get; private set; }
 
     public static PlayerBehaviour player; 
 
