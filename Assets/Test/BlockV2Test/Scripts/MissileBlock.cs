@@ -21,7 +21,7 @@ public class MissileBlock : ChainingBlock
     }
     public override void Deactivate()
     {
-        Discharge();
+        //Discharge();
     }
     protected override void TurnOn()
     {
