@@ -35,9 +35,9 @@ public class PlayerBehaviour : MonoBehaviour
 
             foreach(Vector3 pos in positionsBehindPlayer)
             {
-                if(target == null) p
+                //if(target == null) p
             }
-            return;
+            return lastCheckpoint;
         }
     }
     private Vector3 nextCheckpoint

@@ -80,34 +80,38 @@ public class Block : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player") StartCoroutine(Charge());
+        if(collision.gameObject.tag == "Player") StartCoroutine(Charge(new HashSet<Block>()));
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") StartCoroutine(Discharge());
+        if (collision.gameObject.tag == "Player") StartCoroutine(Discharge(new HashSet<Block>()));
     }
-    public IEnumerator Charge()
+    public IEnumerator Charge(HashSet<Block> passedBlocks)
     {
+        if (passedBlocks.Contains(this)) yield break;
         if (IsCharged) yield break;
+        passedBlocks.Add(this);
 
         yield return delay;
 
         IsCharged = true;
 
         foreach (Block block in neighbours)
-            block.StartCoroutine(block.Charge());
+            block.StartCoroutine(block.Charge(passedBlocks));
     }
 
-    public IEnumerator Discharge()
+    public IEnumerator Discharge(HashSet<Block> passedBlocks)
     {
+        if (passedBlocks.Contains(this)) yield break;
         if (!IsCharged) yield break;
+        passedBlocks.Add(this);
 
         IsCharged = false;
 
         yield return delay;
 
         foreach (Block block in neighbours)
-            block.StartCoroutine(block.Discharge());
+            block.StartCoroutine(block.Discharge(passedBlocks));
     }
 
     public virtual void Activate()

@@ -40,7 +40,7 @@ public class PowerBlock : Block
     {
         foreach(Block block in neighbours)
         {
-            block.StartCoroutine(block.Charge());
+            block.StartCoroutine(block.Charge(new HashSet<Block>()));
         }
     }
     public override void Deactivate()
@@ -48,7 +48,7 @@ public class PowerBlock : Block
         foreach (Block block in neighbours)
         {
             if (block is BridgingBlock) continue;
-            block.StartCoroutine(block.Discharge());
+            block.StartCoroutine(block.Discharge(new HashSet<Block>()));
         }
     }
     #region BridgingBlock Functions
@@ -70,7 +70,7 @@ public class PowerBlock : Block
         //If loop completes, means there are no trues and discharges the blocks
         foreach (Block block in neighbours)
         {
-            if (block is BridgingBlock) block.StartCoroutine(Discharge());
+            if (block is BridgingBlock) block.StartCoroutine(Discharge(new HashSet<Block>()));
         }
     }
     #endregion
