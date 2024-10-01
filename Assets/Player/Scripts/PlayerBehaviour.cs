@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
@@ -17,6 +19,29 @@ public class PlayerBehaviour : MonoBehaviour
 
     public BatteryBar batteryBar;
     public Vector2 respawnPos;
+
+    private List<Vector3> checkpoints = new List<Vector3>();
+    private Vector3 lastCheckpoint
+    {   
+        get
+        {
+            List<Vector3> positionsBehindPlayer = new List<Vector3>();
+            foreach(Vector3 pos in checkpoints)
+            {
+                if(pos.x < transform.position.x) positionsBehindPlayer.Add(pos);
+            }
+
+            Tuple<Vector3, float> target;
+
+            foreach(Vector3 pos in positionsBehindPlayer)
+            {
+                if(target == null) p
+            }
+            return;
+        }
+    }
+    private Vector3 nextCheckpoint
+    { get; }
 
     public BoxCollider2D col
     { get; private set; }
@@ -42,7 +67,9 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         col = GetComponent<BoxCollider2D>();
-        rb = GetComponent<Rigidbody2D>(); 
+        rb = GetComponent<Rigidbody2D>();
+
+        InitializeCheckpoints();
     }
 
     private void Update()
@@ -56,6 +83,9 @@ public class PlayerBehaviour : MonoBehaviour
         {
             PlayerDeath();
         }
+
+        if (Input.GetKeyDown(KeyCode.Z)) transform.position = nextCheckpoint;
+        if (Input.GetKeyDown(KeyCode.X)) transform.position = lastCheckpoint;
 
         //This is a very janky fix, heavily dependent on unity's collision system.
         //If nothing happens, that's good, but please try to fix if you have time
@@ -109,5 +139,11 @@ public class PlayerBehaviour : MonoBehaviour
     public void UpdateRespawnPoint(Vector2 pos)
     {
         respawnPos = pos;
+    }
+    private void InitializeCheckpoints()
+    {
+        Checkpoint[] checkpointArray = FindObjectsOfType<Checkpoint>();
+
+        foreach (Checkpoint checkpoint in checkpointArray) checkpoints.Add(checkpoint.transform.position);
     }
 }
