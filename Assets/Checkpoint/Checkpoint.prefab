@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6157288400321779803}
   m_Layer: 0
   m_Name: Checkpoint
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
   respawnPoint: {fileID: 1023701945590626339}
   passive: {fileID: 21300000, guid: 51772fdf73333462f87735344e65f4d3, type: 3}
   active: {fileID: 21300000, guid: fa7fa29c5bb0642a9a25d2230d61f96b, type: 3}
-  coll: {fileID: 0}
+  col: {fileID: 0}
 --- !u!1 &4142409543384777818
 GameObject:
   m_ObjectHideFlags: 0

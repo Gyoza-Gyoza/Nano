@@ -21,27 +21,72 @@ public class PlayerBehaviour : MonoBehaviour
     public Vector2 respawnPos;
 
     private List<Vector3> checkpoints = new List<Vector3>();
-    private Vector3 lastCheckpoint
+    private Vector3 PreviousCheckpoint
     {   
         get
         {
             List<Vector3> positionsBehindPlayer = new List<Vector3>();
+
             foreach(Vector3 pos in checkpoints)
             {
                 if(pos.x < transform.position.x) positionsBehindPlayer.Add(pos);
             }
 
-            Tuple<Vector3, float> target;
+            Debug.Log(positionsBehindPlayer.Count);
+
+            Tuple<Vector3, float>? target = null;
 
             foreach(Vector3 pos in positionsBehindPlayer)
             {
-                //if(target == null) p
+                if (target == null)
+                    target = new Tuple<Vector3, float>(new Vector3(pos.x, pos.y, 0f), Vector3.Distance(transform.position, pos));
+
+                else
+                {
+                    if (Vector3.Distance(transform.position, pos) < target.Item2)
+                        target = new Tuple<Vector3, float>(new Vector3(pos.x, pos.y, 0f), Vector3.Distance(transform.position, pos));
+                }
             }
-            return lastCheckpoint;
+            if (target != null)
+            {
+                return target.Item1;
+            }
+            else throw new InvalidOperationException("Nothing behind player");
         }
     }
-    private Vector3 nextCheckpoint
-    { get; }
+    private Vector3 NextCheckpoint
+    {
+        get
+        {
+            List<Vector3> positionsAheadPlayer = new List<Vector3>();
+
+            foreach (Vector3 pos in checkpoints)
+            {
+                if (pos.x > transform.position.x) positionsAheadPlayer.Add(pos);
+            }
+
+            Debug.Log(positionsAheadPlayer.Count);
+
+            Tuple<Vector3, float>? target = null;
+
+            foreach (Vector3 pos in positionsAheadPlayer)
+            {
+                if (target == null)
+                    target = new Tuple<Vector3, float>(new Vector3(pos.x, pos.y, 0f), Vector3.Distance(transform.position, pos));
+
+                else
+                {
+                    if (Vector3.Distance(transform.position, pos) < target.Item2)
+                        target = new Tuple<Vector3, float>(new Vector3(pos.x, pos.y, 0f), Vector3.Distance(transform.position, pos));
+                }
+            }
+            if (target != null)
+            {
+                return target.Item1;
+            }
+            else throw new InvalidOperationException("Nothing in front of player");
+        }
+    }
 
     public BoxCollider2D col
     { get; private set; }
@@ -84,8 +129,8 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerDeath();
         }
 
-        if (Input.GetKeyDown(KeyCode.Z)) transform.position = nextCheckpoint;
-        if (Input.GetKeyDown(KeyCode.X)) transform.position = lastCheckpoint;
+        if (Input.GetKeyDown(KeyCode.Z)) transform.position = PreviousCheckpoint;
+        if (Input.GetKeyDown(KeyCode.X)) transform.position = NextCheckpoint;
 
         //This is a very janky fix, heavily dependent on unity's collision system.
         //If nothing happens, that's good, but please try to fix if you have time
@@ -142,8 +187,8 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void InitializeCheckpoints()
     {
-        Checkpoint[] checkpointArray = FindObjectsOfType<Checkpoint>();
+        GameObject[] checkpointArray = GameObject.FindGameObjectsWithTag("Checkpoint");
 
-        foreach (Checkpoint checkpoint in checkpointArray) checkpoints.Add(checkpoint.transform.position);
+        foreach (GameObject checkpoint in checkpointArray) checkpoints.Add(checkpoint.transform.position);
     }
 }
