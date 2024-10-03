@@ -30,4 +30,8 @@ public class Menus : MonoBehaviour
         pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
         Time.timeScale = pauseMenu.activeInHierarchy ? 0f : 1f;
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
