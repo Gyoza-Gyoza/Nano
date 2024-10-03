@@ -6,7 +6,7 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     [SerializeField] protected Color activeColor, inactiveColor;
-    [SerializeField] protected Sprite activeSprite,inactiveSprite;
+    [SerializeField] protected Sprite activeSprite, inactiveSprite;
 
     [SerializeField] protected Material activeMaterial, inactiveMaterial;
 
@@ -80,7 +80,7 @@ public class Block : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player") StartCoroutine(Charge(new HashSet<Block>()));
+        if (collision.gameObject.tag == "Player") StartCoroutine(Charge(new HashSet<Block>()));
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -129,5 +129,10 @@ public class Block : MonoBehaviour
     public virtual IEnumerator DeactivateBlock()
     {
         yield return null;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(new Vector3(transform.position.x + 0.1f, transform.position.y + 0.1f, transform.position.z + 0.1f), col.bounds.extents * 0.9f);
     }
 }
