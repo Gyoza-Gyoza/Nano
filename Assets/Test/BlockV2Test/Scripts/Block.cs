@@ -132,7 +132,7 @@ public class Block : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(new Vector3(transform.position.x + 0.1f, transform.position.y + 0.1f, transform.position.z + 0.1f), col.bounds.extents * 0.9f);
+        Gizmos.color = new Vector4(1,1,0, 0.5f);
+        Gizmos.DrawCube(new Vector3(transform.position.x + 0.1f, transform.position.y + 0.1f, transform.position.z + 0.1f), col != null ? col.bounds.extents * 0.9f : Vector3.zero);
     }
 }
