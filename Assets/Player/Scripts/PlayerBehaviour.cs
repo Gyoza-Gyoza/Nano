@@ -32,8 +32,6 @@ public class PlayerBehaviour : MonoBehaviour
                 if(pos.x < transform.position.x) positionsBehindPlayer.Add(pos);
             }
 
-            Debug.Log(positionsBehindPlayer.Count);
-
             Tuple<Vector3, float>? target = null;
 
             foreach(Vector3 pos in positionsBehindPlayer)
@@ -64,8 +62,6 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 if (pos.x > transform.position.x) positionsAheadPlayer.Add(pos);
             }
-
-            Debug.Log(positionsAheadPlayer.Count);
 
             Tuple<Vector3, float>? target = null;
 

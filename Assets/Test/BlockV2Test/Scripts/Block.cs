@@ -46,12 +46,6 @@ public class Block : MonoBehaviour
         InitializeNeighbours(); //Initialize the neighbouring blocks for each block
 
         delay = new WaitForSeconds(chargeTime);
-
-        //string debug = $"My name is {name} I have {neighbours.Count} neighbours\n";
-
-        //foreach (Block b in neighbours) debug += $"{b.name}\n"; 
-
-        //Debug.Log(debug);
     }
     protected virtual void InitializeNeighbours() //Used to initialize the neighbouring blocks for each block
     {
@@ -129,10 +123,5 @@ public class Block : MonoBehaviour
     public virtual IEnumerator DeactivateBlock()
     {
         yield return null;
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = new Vector4(1,1,0, 0.5f);
-        Gizmos.DrawCube(new Vector3(transform.position.x + 0.1f, transform.position.y + 0.1f, transform.position.z + 0.1f), col != null ? col.bounds.extents * 0.9f : Vector3.zero);
     }
 }
