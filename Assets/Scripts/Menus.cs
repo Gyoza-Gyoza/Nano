@@ -22,8 +22,12 @@ public class Menus : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
-            Time.timeScale = pauseMenu.activeInHierarchy ? 0f : 1f;
+            TogglePauseMenu();
         }
+    }
+    public void TogglePauseMenu()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
+        Time.timeScale = pauseMenu.activeInHierarchy ? 0f : 1f;
     }
 }
