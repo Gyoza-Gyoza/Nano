@@ -38,6 +38,13 @@ public class Move : MonoBehaviour
         desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - ground.GetFriction(), 0f);
 
         animator.SetFloat("Speed", Mathf.Abs(velocity.x));
+        animator.SetBool("isJumping", !onGround);
+
+        // Check for landing
+        if (onGround && animator.GetBool("isJumping"))
+        {
+            animator.SetTrigger("isLanding");
+        }
 
         if (direction.x > 0 && !facingRight)
         {

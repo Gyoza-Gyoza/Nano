@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a72b02a6795144e83aae550903142c1e
+guid: e22623ffc43e5445c9d6c6e85ec9ee57
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f95194ba51554e729f7091a99a432f2
-      internalID: -541958016
+      spriteID: fc42572ff2d054745a051705d43e0aec
+      internalID: 1066060296
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d01723544237e4288b0660dc40585e60
-      internalID: -1659489319
+      spriteID: 64d0292dbf6dd41b18475f4063f05091
+      internalID: -898747642
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 764754ba7820e4f4a9d6e689e7726ac6
-      internalID: 1229382880
+      spriteID: e41158b3190d3422ab946659b072c1ba
+      internalID: 1597092230
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: add72f0c870884ce3ba58fa288a43f9f
-      internalID: 871166869
+      spriteID: fadecd9344284491abfd70282118a117
+      internalID: 987973983
       vertices: []
       indices: 
       edges: []
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62271ecb41870475d9501c0f0246845e
-      internalID: -1844449597
+      spriteID: 3f5e0b13bf883494db0897cf7396b6ae
+      internalID: 1725209658
       vertices: []
       indices: 
       edges: []
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d500501011ee4b75b6fd8b5036a3eb9
-      internalID: -1413309262
+      spriteID: fc0e55b7973b0458eb6821bd2182872c
+      internalID: -603509234
       vertices: []
       indices: 
       edges: []
@@ -250,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0589872baf5644b109abd4b1dc489a5b
-      internalID: 935742727
+      spriteID: 30ab9e4dd762545c2aa94e224f4a5369
+      internalID: -129823740
       vertices: []
       indices: 
       edges: []
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a88c5449a1bed4a648cfb8e1d22538a1
-      internalID: 930854817
+      spriteID: dc450d276a6064cb783c369c5fe056c0
+      internalID: 1594501825
       vertices: []
       indices: 
       edges: []
@@ -292,8 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e924f0a495d19426291d38d944cec431
-      internalID: -249214199
+      spriteID: d457260a2eac2428787be4f4095f7fc3
+      internalID: -157478920
       vertices: []
       indices: 
       edges: []
@@ -313,8 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f199ef76db7ee48c5be33e4ab999a377
-      internalID: -90286308
+      spriteID: 72f8c8a74bfa845a7ac1b3aed8b4f5ea
+      internalID: -342217511
       vertices: []
       indices: 
       edges: []
@@ -334,8 +334,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3d8d691cddde4716965de1b5669b8ea
-      internalID: 894992120
+      spriteID: 7e1dd71d34c40470e91804da63318324
+      internalID: -1220491016
       vertices: []
       indices: 
       edges: []
@@ -355,8 +355,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da39c64af3baf44f6b6e4e6e8d9d449f
-      internalID: 2126954096
+      spriteID: b2587a14d74f64ec89af8abd5b706bed
+      internalID: -1565300673
       vertices: []
       indices: 
       edges: []
@@ -376,8 +376,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a88992687b31e4a9d96d76e95244890c
-      internalID: 1042684697
+      spriteID: 6da32b65f623e479aa4bfb06ab956255
+      internalID: 928015313
       vertices: []
       indices: 
       edges: []
@@ -397,8 +397,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7717c1befeda495d85fecadd1bffcab
-      internalID: 1948905315
+      spriteID: cb207e45dc4dc451da96d1ab8c569f92
+      internalID: 704987432
       vertices: []
       indices: 
       edges: []
@@ -418,8 +418,407 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0513604a2a614e45a13e1a07df7dc08
-      internalID: -788812002
+      spriteID: bde66c028b4524927bee33238474ee62
+      internalID: 752909332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d12abe16da1a547d3bd7722bdc9e91c8
+      internalID: 592492230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d109256ae3f464015880bb5db0cae4b4
+      internalID: 436124045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05bd781b1b71049d489dfb40633395cf
+      internalID: -298702685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33c4321967f0a430aa7b45454618f7c4
+      internalID: 1216179455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f190168a923b4362869a1631c49bca3
+      internalID: 1612272814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_20
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ef6aae07e8364070b39219a59d92827
+      internalID: 530567911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_21
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad35cecd528e24ce0abb08d82ad85602
+      internalID: -1480778547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51a7f2a466c8247bfa71af6401183110
+      internalID: -2000148156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_23
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9466044810ebe4fde9ad79778858db5e
+      internalID: 901435770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_24
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ca56783d932c4037b3f74c4f8d7bec7
+      internalID: 1820664508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de9960de64f494ea287598e14630d9f7
+      internalID: 506015849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_26
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df9ae8413470141b0b129201ff569024
+      internalID: 700618885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eb462c7ab10f4353b4b515fcb3ce6d1
+      internalID: 1348790545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54928dd255460498b9b42c438db6b680
+      internalID: 2147383563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_29
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd6419ca9b02e44a9bfa62a0f86f045a
+      internalID: 1020250986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_30
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a349b023357914b3d81cb8a60251e37b
+      internalID: 1881044608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_31
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6237cf354b414d67a8d6af977d7ed8d
+      internalID: 1511396278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_32
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e638cd561e50f4eec8e9c0c2b539cd83
+      internalID: 125507456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NANO_SpriteSheet_33
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a50920a0cfa146c987ccb968e1cb037
+      internalID: 603246269
       vertices: []
       indices: 
       edges: []
@@ -434,24 +833,43 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures:
-    - texture: {fileID: 2800000, guid: d0bb01a91cc3a4755b0d54f643169fd1, type: 3}
+    - texture: {fileID: 2800000, guid: 78d3e4090a89c4c00912b64e734eb988, type: 3}
       name: _Emission
     nameFileIdTable:
-      NANO_SpriteSheet_0: -541958016
-      NANO_SpriteSheet_1: -1659489319
-      NANO_SpriteSheet_10: 894992120
-      NANO_SpriteSheet_11: 2126954096
-      NANO_SpriteSheet_12: 1042684697
-      NANO_SpriteSheet_13: 1948905315
-      NANO_SpriteSheet_14: -788812002
-      NANO_SpriteSheet_2: 1229382880
-      NANO_SpriteSheet_3: 871166869
-      NANO_SpriteSheet_4: -1844449597
-      NANO_SpriteSheet_5: -1413309262
-      NANO_SpriteSheet_6: 935742727
-      NANO_SpriteSheet_7: 930854817
-      NANO_SpriteSheet_8: -249214199
-      NANO_SpriteSheet_9: -90286308
+      NANO_SpriteSheet_0: 1066060296
+      NANO_SpriteSheet_1: -898747642
+      NANO_SpriteSheet_10: -1220491016
+      NANO_SpriteSheet_11: -1565300673
+      NANO_SpriteSheet_12: 928015313
+      NANO_SpriteSheet_13: 704987432
+      NANO_SpriteSheet_14: 752909332
+      NANO_SpriteSheet_15: 592492230
+      NANO_SpriteSheet_16: 436124045
+      NANO_SpriteSheet_17: -298702685
+      NANO_SpriteSheet_18: 1216179455
+      NANO_SpriteSheet_19: 1612272814
+      NANO_SpriteSheet_2: 1597092230
+      NANO_SpriteSheet_20: 530567911
+      NANO_SpriteSheet_21: -1480778547
+      NANO_SpriteSheet_22: -2000148156
+      NANO_SpriteSheet_23: 901435770
+      NANO_SpriteSheet_24: 1820664508
+      NANO_SpriteSheet_25: 506015849
+      NANO_SpriteSheet_26: 700618885
+      NANO_SpriteSheet_27: 1348790545
+      NANO_SpriteSheet_28: 2147383563
+      NANO_SpriteSheet_29: 1020250986
+      NANO_SpriteSheet_3: 987973983
+      NANO_SpriteSheet_30: 1881044608
+      NANO_SpriteSheet_31: 1511396278
+      NANO_SpriteSheet_32: 125507456
+      NANO_SpriteSheet_33: 603246269
+      NANO_SpriteSheet_4: 1725209658
+      NANO_SpriteSheet_5: -603509234
+      NANO_SpriteSheet_6: -129823740
+      NANO_SpriteSheet_7: 1594501825
+      NANO_SpriteSheet_8: -157478920
+      NANO_SpriteSheet_9: -342217511
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
