@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI nameColor;
     public float textSpeed;
+    public float delayBetweenSentence = 2f; 
     private Queue<string> sentences;
     private bool sentenceIsTyping = false;
     private string currentSentence;
@@ -129,6 +130,10 @@ public class DialogueManager : MonoBehaviour
         }
 
         sentenceIsTyping = false;
+
+        //Wait for specified delay before displaying next sentence
+        yield return new WaitForSeconds(delayBetweenSentence);
+        DisplayNextSentence();
     }
 
     public void EndDialogue()

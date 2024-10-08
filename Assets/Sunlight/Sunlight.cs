@@ -6,6 +6,8 @@ using UnityEngine;
 public class Sunlight : MonoBehaviour
 {
     private bool chargingPlayer = false;
+    public Animator animator;
+
 
     [SerializeField] 
     public float chargeRate = 26f;
@@ -23,6 +25,7 @@ public class Sunlight : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             chargingPlayer = true;
+            animator.SetBool("isCharging", true);
             PlayerBehaviour.player.healingVFX.Play();
         }
     }
@@ -32,6 +35,7 @@ public class Sunlight : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             chargingPlayer = false;
+            animator.SetBool("isCharging", false);
             PlayerBehaviour.player.healingVFX.Stop();
         }
     }
