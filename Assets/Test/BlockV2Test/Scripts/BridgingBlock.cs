@@ -5,9 +5,6 @@ using UnityEngine;
 
 public sealed class BridgingBlock : ChainingBlock
 {
-    //private bool playerCollided = false,
-    //    bridgeActivated = false;
-
     private void Start()
     {
         col.enabled = false;

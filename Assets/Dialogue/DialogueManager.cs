@@ -9,7 +9,6 @@ using Unity.VisualScripting;
 
 public class DialogueManager : MonoBehaviour
 {   
-
     [Header("Camera Settings")]
     public CinemachineVirtualCamera virtualCamera;
     public float dialogueOrthoSize = 5f;
@@ -31,8 +30,6 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> sentences;
     private bool sentenceIsTyping = false;
     private string currentSentence;
-
-
 
     public static DialogueManager dialogueManager { get; private set; }
 
