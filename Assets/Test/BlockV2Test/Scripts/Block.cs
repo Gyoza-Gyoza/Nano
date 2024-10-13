@@ -26,6 +26,12 @@ public class Block : MonoBehaviour
 
     public static bool drained = false;
 
+    protected Dictionary<Block, bool> connections = new Dictionary<Block, bool>();
+    public Dictionary<Block, bool> Connections
+    { get { return connections; } }
+
+    protected PowerBlock managerBlock;
+
     public virtual bool IsCharged
     {
         get { return isCharged; }
@@ -71,7 +77,23 @@ public class Block : MonoBehaviour
             }
         }
     }
+    public void InitializeConnections(PowerBlock managerBlock, Dictionary<Block, bool> connectionList)
+    {
+        if (connectionList.ContainsKey(this)) return; //If dictionary contains the current block, exit function
 
+        connectionList.Add(this, false);
+        this.managerBlock = managerBlock;
+
+
+        foreach (Block block in neighbours)
+        {
+            if (block is BridgingBlock)
+            {
+                BridgingBlock bridgingBlock = block as BridgingBlock;
+                bridgingBlock.InitializeConnections(managerBlock, connectionList); //Continues to the next block 
+            }
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player") StartCoroutine(Charge(new HashSet<Block>()));
@@ -123,5 +145,26 @@ public class Block : MonoBehaviour
     public virtual IEnumerator DeactivateBlock()
     {
         yield return null;
+    }
+    public void PlayerOnBlock(Block block, bool state)
+    {
+        connections[block] = state;
+
+        CheckContacts();
+    }
+    private void CheckContacts()
+    {
+        foreach (KeyValuePair<Block, bool> keyValuePair in connections) //Checks all the bools to see if there are any blocks that are being touched by the player 
+        {
+            if (keyValuePair.Value) //If a true is found, exit function
+            {
+                return;
+            }
+        }
+        //If loop completes, means there are no trues and discharges the blocks
+        foreach (Block block in neighbours)
+        {
+            if (block is BridgingBlock) block.StartCoroutine(Discharge(new HashSet<Block>()));
+        }
     }
 }

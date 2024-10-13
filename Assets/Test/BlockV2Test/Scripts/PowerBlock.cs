@@ -4,21 +4,13 @@ using UnityEngine;
 
 public sealed class PowerBlock : Block
 {
-    private Dictionary<Block, bool> connections = new Dictionary<Block, bool>();
-    public Dictionary<Block, bool> Connections
-    { get { return connections; } }
-
     private void Start()
     {
         connections.Add(this, false);
         foreach (Block block in neighbours) //Checks through neighbours 
         {
-            if (block is BridgingBlock) //Checks if its a bridging block 
-            {
-                BridgingBlock bridgingBlock = block as BridgingBlock; //Casts it as a bridging block 
-                bridgingBlock.InitializeConnections(this, connections); 
-            }
-        }    
+            block.InitializeConnections(this, connections);
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -51,27 +43,4 @@ public sealed class PowerBlock : Block
             block.StartCoroutine(block.Discharge(new HashSet<Block>()));
         }
     }
-    #region BridgingBlock Functions
-    public void PlayerOnBlock(Block block, bool state)
-    {
-        connections[block] = state;
-
-        CheckContacts();
-    }
-    private void CheckContacts()
-    {
-        foreach (KeyValuePair<Block, bool> keyValuePair in connections) //Checks all the bools to see if there are any blocks that are being touched by the player 
-        {
-            if (keyValuePair.Value) //If a true is found, exit function
-            {
-                return; 
-            }
-        }
-        //If loop completes, means there are no trues and discharges the blocks
-        foreach (Block block in neighbours)
-        {
-            if (block is BridgingBlock) block.StartCoroutine(Discharge(new HashSet<Block>()));
-        }
-    }
-    #endregion
 }
