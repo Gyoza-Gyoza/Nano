@@ -20,6 +20,7 @@ public class PlayerBehaviour : MonoBehaviour
     public BatteryBar batteryBar;
     public Vector2 respawnPos;
 
+    #region Checkpoints
     private List<Vector3> checkpoints = new List<Vector3>();
     private Vector3 PreviousCheckpoint
     {   
@@ -83,7 +84,7 @@ public class PlayerBehaviour : MonoBehaviour
             else throw new InvalidOperationException("Nothing in front of player");
         }
     }
-
+    #endregion
     public BoxCollider2D col
     { get; private set; }
     public Rigidbody2D rb
@@ -91,7 +92,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public static PlayerBehaviour player; 
 
-    private void Start()
+    private void Awake()
     {
         if(player == null)
         {
@@ -109,10 +110,11 @@ public class PlayerBehaviour : MonoBehaviour
 
         col = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
-
+    }
+    private void Start()
+    {
         InitializeCheckpoints();
     }
-
     private void Update()
     {
         if (input.RetrieveHealInput())

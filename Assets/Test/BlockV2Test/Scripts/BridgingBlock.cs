@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BridgingBlock : ChainingBlock
+public sealed class BridgingBlock : ChainingBlock
 {
-    protected PowerBlock managerBlock;
+    private PowerBlock managerBlock;
 
-    protected bool playerCollided = false,
+    private bool playerCollided = false,
         bridgeActivated = false;
 
     //public override bool IsCharged
@@ -26,11 +26,11 @@ public class BridgingBlock : ChainingBlock
     {
         /*if (this is BridgingBlock)*/ col.enabled = false;
     }
-    protected void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player") managerBlock.PlayerOnBlock(this, true);
     }
-    protected void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player") managerBlock.PlayerOnBlock(this, false);
     }

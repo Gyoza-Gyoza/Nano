@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerBlock : Block
+public sealed class PowerBlock : Block
 {
     private Dictionary<Block, bool> connections = new Dictionary<Block, bool>();
     public Dictionary<Block, bool> Connections

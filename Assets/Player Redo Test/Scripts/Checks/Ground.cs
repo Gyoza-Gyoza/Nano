@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-
     private bool onGround;
     private float friction;
 

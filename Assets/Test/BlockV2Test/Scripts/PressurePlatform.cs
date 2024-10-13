@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressurePlatform : PlatformBlock
+public sealed class PressurePlatform : PlatformBlock
 {
     private bool ascending = false;
 
     [Range(0f, 1f)]
     public float currentPos; 
 
-    protected void Update()
+    private void Update()
     {
         Move();
     }

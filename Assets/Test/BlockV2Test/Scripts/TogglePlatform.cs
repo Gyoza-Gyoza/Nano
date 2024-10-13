@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class TogglePlatform : PlatformBlock
+public sealed class TogglePlatform : PlatformBlock
 {
-    protected int currentPos = 0;
+    private int currentPos = 0;
     public override void Activate()
     {
         StartCoroutine(Move());
     }
-    protected IEnumerator Move()
+    private IEnumerator Move()
     {
         float timer = 0;
 
