@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Dialogue_Dylan
+public class Dialogue
 {
     public bool changeCamera;
     public Sprite portrait;
