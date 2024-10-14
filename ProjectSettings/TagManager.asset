@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Checkpoint
+  - Ground
+  - Charged Ground
   layers:
   - Default
   - TransparentFX

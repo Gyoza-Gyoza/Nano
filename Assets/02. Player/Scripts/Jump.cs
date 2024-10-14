@@ -83,6 +83,8 @@ using UnityEngine;
                     jumpSpeed += Mathf.Abs(body.velocity.y);
                 }
                 velocity.y += jumpSpeed;
+
+                ground.TriggerJump();
             }
         }
     }
