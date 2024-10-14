@@ -27,14 +27,18 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameColor;
     public float textSpeed;
     public float delayBetweenSentence = 2f; 
-    private Queue<string> sentences;
+    private Queue<string> sentences = new Queue<string>();
     private bool sentenceIsTyping = false;
     private string currentSentence;
 
     public static DialogueManager dialogueManager { get; private set; }
 
+    [SerializeField]
+    private List<Speakers> speakers = new List<Speakers>();
+
     void Awake()
     {
+        Database.InitializeDatabases();
         if(dialogueManager != null & dialogueManager != this)
         {
             Destroy(gameObject);
@@ -45,8 +49,6 @@ public class DialogueManager : MonoBehaviour
     }
     void Start()
     {
-        sentences = new Queue<string>();
-
         if (virtualCamera != null)
         {
             framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -70,38 +72,64 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(int chosenDialogue)
     {
         textAnimator.SetBool("isOpen", true);
         potraitAnimator.SetBool("isOpen", true);
 
-        nameText.text = dialogue.name;
-        portraitImage.sprite = dialogue.portrait;
-        nameColor.color = dialogue.nameColor;
+        //nameText.text = dialogue.name;
+        //portraitImage.sprite = dialogue.portrait;
+        //nameColor.color = dialogue.nameColor;
 
         sentences.Clear();
 
-        foreach(string sentence in dialogue.sentences)
+        //foreach(string sentence in dialogue.sentences)
+        //{
+        //    sentences.Enqueue(sentence);
+        //}
+
+        foreach(Dialogue dialogue in Database.DialogueDatabase[chosenDialogue])
         {
-            sentences.Enqueue(sentence);
+            sentences.Enqueue(dialogue.DialogueText);
+            ChangeSpeaker(dialogue.DialogueSpeaker);
         }
 
         DisplayNextSentence();
 
         // Adjust the camera for dialogue
-        if (dialogue.changeCamera && virtualCamera != null)
-        {
-            // Change ortho size
-            StartCoroutine(ChangeOrthoSize(virtualCamera, dialogueOrthoSize, transitionDuration));
+        //if (dialogue.changeCamera && virtualCamera != null)
+        //{
+        //    // Change ortho size
+        //    StartCoroutine(ChangeOrthoSize(virtualCamera, dialogueOrthoSize, transitionDuration));
 
-            // Change Screen Y
-            if (framingTransposer != null)
-            {
-                StartCoroutine(ChangeScreenY(framingTransposer, dialogueScreenY, transitionDuration));
-            }
+        //    // Change Screen Y
+        //    if (framingTransposer != null)
+        //    {
+        //        StartCoroutine(ChangeScreenY(framingTransposer, dialogueScreenY, transitionDuration));
+        //    }
+        //}
+    }
+    private void ChangeSpeaker(string speaker)
+    {
+        switch(speaker)
+        {
+            case "MissionControl":
+                nameText.text = "Mission Control"; 
+                foreach(Speakers speakers in speakers)
+                {
+                    if (speakers.speaker == Speaker.MissionControl) portraitImage.sprite = speakers.portrait;
+                }
+                break;
+
+            case "RogueAI":
+                nameText.text = "Rogue AI";
+                foreach (Speakers speakers in speakers)
+                {
+                    if (speakers.speaker == Speaker.RogueAI) portraitImage.sprite = speakers.portrait;
+                }
+                break;
         }
     }
-
     public void DisplayNextSentence()
     {
         if(sentences.Count == 0)
@@ -194,3 +222,39 @@ public class DialogueManager : MonoBehaviour
 
 }
 
+[System.Serializable]
+public class Dialogue
+{
+    public string DialogueId
+    { get; private set; }
+
+    public string DialogueSpeaker
+    { get; private set; }
+
+    public string DialogueText
+    { get; private set; }
+
+    public string DialogueAudio
+    { get; private set; }
+
+    public Dialogue(string dialogueId, string dialogueSpeaker, string dialogueText, string dialogueAudio)
+    {
+        DialogueId = dialogueId;
+        DialogueSpeaker = dialogueSpeaker;
+        DialogueText = dialogueText;
+        DialogueAudio = dialogueAudio;
+    }
+}
+
+public enum Speaker
+{
+    MissionControl,
+    RogueAI
+}
+
+[System.Serializable]
+public class Speakers
+{
+    public Speaker speaker; 
+    public Sprite portrait;
+}

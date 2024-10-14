@@ -6,7 +6,10 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
-    private BoxCollider2D col; 
+    private BoxCollider2D col;
+
+    [SerializeField]
+    private int chosenDialogueGroup;
 
     void Start()
     {
@@ -15,7 +18,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        DialogueManager.dialogueManager.StartDialogue(dialogue);
+        DialogueManager.dialogueManager.StartDialogue(chosenDialogueGroup);
     }
 
     private void OnTriggerEnter2D (Collider2D collision)

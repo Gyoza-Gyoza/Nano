@@ -18,16 +18,17 @@ public static class Database
     }
     private static void InitializeDialogues()
     {
-        List<string> tempDialogues = ParseCSV("DialogueDatabase");
+        List<string> tempDialogues = ParseCSV("DialogueDatabase.csv");
 
         foreach(string tempDialogue in tempDialogues)
         {
-            string[] id = tempDialogue.Split('_');
+            string[] values = tempDialogue.Split(',');
+            string[] id = values[0].Split("_");
 
-            if (DialogueDatabase[int.Parse(id[0])] == null) 
+            if (!DialogueDatabase.ContainsKey(int.Parse(id[0]))) 
                 DialogueDatabase.Add(int.Parse(id[0]), new List<Dialogue>());
 
-            DialogueDatabase[int.Parse(id[0])].Add(new Dialogue(id[1], id[2], id[3]));
+            DialogueDatabase[int.Parse(id[0])].Add(new Dialogue(id[1], values[1], values[2], values[3]));
         }
     }
     private static List<string> ParseCSV(string filePath)

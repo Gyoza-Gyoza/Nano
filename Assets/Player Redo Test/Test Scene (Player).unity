@@ -8712,14 +8712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb229a1f103bd84083882143b84e27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    changeCamera: 0
-    portrait: {fileID: 21300000, guid: f5847352285b492408f24ed143b9f0f1, type: 3}
-    name: 'Rogue AI:'
-    nameColor: {r: 0.84313726, g: 0.21568628, b: 0.22352941, a: 1}
-    sentences:
-    - "Well, well\u2026 look who we have here. A visitor. "
-    - "I didn\u2019t think anyone had the nerve to return."
+  chosenDialogueGroup: 2
 --- !u!4 &372892467
 Transform:
   m_ObjectHideFlags: 0
@@ -18308,6 +18301,11 @@ MonoBehaviour:
   nameColor: {fileID: 1084080097}
   textSpeed: 0.015
   delayBetweenSentence: 1
+  speakers:
+  - speaker: 0
+    portrait: {fileID: 21300000, guid: 01a8847d54d13bb44a0f54fa0ee9e1b0, type: 3}
+  - speaker: 1
+    portrait: {fileID: 21300000, guid: f5847352285b492408f24ed143b9f0f1, type: 3}
 --- !u!4 &784891450
 Transform:
   m_ObjectHideFlags: 0
@@ -21408,14 +21406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb229a1f103bd84083882143b84e27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    changeCamera: 0
-    portrait: {fileID: 21300000, guid: 01a8847d54d13bb44a0f54fa0ee9e1b0, type: 3}
-    name: 'Mission Control:'
-    nameColor: {r: 0.015686275, g: 0.9843137, b: 0.60784316, a: 1}
-    sentences:
-    - "Ignore him, NANO. You\u2019re doing great."
-    - Just stay focused on the mission.
+  chosenDialogueGroup: 3
 --- !u!4 &1002521007
 Transform:
   m_ObjectHideFlags: 0
@@ -21936,7 +21927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1084080096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24239,16 +24230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb229a1f103bd84083882143b84e27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    changeCamera: 0
-    portrait: {fileID: 21300000, guid: 01a8847d54d13bb44a0f54fa0ee9e1b0, type: 3}
-    name: 'Mission Control:'
-    nameColor: {r: 0.015686275, g: 0.9843137, b: 0.60784316, a: 1}
-    sentences:
-    - Mission Control to NANO, do you read me?
-    - We've lots to cover, and time is not on our side.
-    - Head east for now, the facility's system are still active.
-    - "Stay sharp and conserve your battery\u2014we need you operational."
+  chosenDialogueGroup: 1
 --- !u!4 &1322145961
 Transform:
   m_ObjectHideFlags: 0
@@ -25076,9 +25058,9 @@ RectTransform:
   m_Father: {fileID: 930973803}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -462.5}
-  m_SizeDelta: {x: -600, y: -975}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 77.5}
+  m_SizeDelta: {x: -400, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1435596141
 MonoBehaviour:
@@ -27491,8 +27473,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.055999994, y: 0.018450022, z: 0}
-    m_Extent: {x: 0.7371, y: 0.63505, z: 0}
+    m_Center: {x: 0.055750012, y: 0.018649995, z: 0}
+    m_Extent: {x: 0.73605, y: 0.63455, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -32849,14 +32831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb229a1f103bd84083882143b84e27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    changeCamera: 0
-    portrait: {fileID: 21300000, guid: 01a8847d54d13bb44a0f54fa0ee9e1b0, type: 3}
-    name: 'Mission Control:'
-    nameColor: {r: 0.015686275, g: 0.9843137, b: 0.60784316, a: 1}
-    sentences:
-    - "Hold up\u2014this looks different."
-    - "Be careful, NANO, we haven\u2019t seen this before."
+  chosenDialogueGroup: 4
 --- !u!4 &2039643836
 Transform:
   m_ObjectHideFlags: 0
@@ -33010,10 +32985,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1435596139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 200, y: -68}
-  m_SizeDelta: {x: 800, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 37}
+  m_SizeDelta: {x: -100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2060383451
 MonoBehaviour:
@@ -33069,7 +33044,7 @@ MonoBehaviour:
   m_fontSizeMin: 22
   m_fontSizeMax: 22
   m_fontStyle: 16
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
