@@ -27,8 +27,9 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameColor;
     public float textSpeed;
     public float delayBetweenSentence = 2f; 
-    private Queue<string> sentences = new Queue<string>();
+    private Queue<Dialogue> sentences = new Queue<Dialogue>();
     private bool sentenceIsTyping = false;
+    private Dialogue currentDialogue;
     private string currentSentence;
 
     public static DialogueManager dialogueManager { get; private set; }
@@ -90,8 +91,7 @@ public class DialogueManager : MonoBehaviour
 
         foreach(Dialogue dialogue in Database.DialogueDatabase[chosenDialogue])
         {
-            sentences.Enqueue(dialogue.DialogueText);
-            ChangeSpeaker(dialogue.DialogueSpeaker);
+            sentences.Enqueue(dialogue);
         }
 
         DisplayNextSentence();
@@ -109,27 +109,6 @@ public class DialogueManager : MonoBehaviour
         //    }
         //}
     }
-    private void ChangeSpeaker(string speaker)
-    {
-        switch(speaker)
-        {
-            case "MissionControl":
-                nameText.text = "Mission Control"; 
-                foreach(Speakers speakers in speakers)
-                {
-                    if (speakers.speaker == Speaker.MissionControl) portraitImage.sprite = speakers.portrait;
-                }
-                break;
-
-            case "RogueAI":
-                nameText.text = "Rogue AI";
-                foreach (Speakers speakers in speakers)
-                {
-                    if (speakers.speaker == Speaker.RogueAI) portraitImage.sprite = speakers.portrait;
-                }
-                break;
-        }
-    }
     public void DisplayNextSentence()
     {
         if(sentences.Count == 0)
@@ -137,8 +116,13 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
-
-        currentSentence = sentences.Dequeue(); // Store the current sentence
+        currentDialogue = sentences.Dequeue();
+        foreach (Speakers speakers in speakers)
+        {
+            if(currentDialogue.DialogueSpeaker == speakers.speaker) 
+                portraitImage.sprite = speakers.portrait;
+        }
+        currentSentence = currentDialogue.DialogueText; // Store the current sentence
         StopAllCoroutines();
         StartCoroutine(TypeSentence(currentSentence)); // Use currentSentence in the TypeSentence coroutine
     }
@@ -228,7 +212,7 @@ public class Dialogue
     public string DialogueId
     { get; private set; }
 
-    public string DialogueSpeaker
+    public Speaker DialogueSpeaker
     { get; private set; }
 
     public string DialogueText
@@ -240,7 +224,7 @@ public class Dialogue
     public Dialogue(string dialogueId, string dialogueSpeaker, string dialogueText, string dialogueAudio)
     {
         DialogueId = dialogueId;
-        DialogueSpeaker = dialogueSpeaker;
+        DialogueSpeaker = (Speaker) Enum.Parse(typeof(Speaker), dialogueSpeaker);
         DialogueText = dialogueText;
         DialogueAudio = dialogueAudio;
     }
