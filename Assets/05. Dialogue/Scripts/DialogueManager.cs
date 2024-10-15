@@ -31,6 +31,8 @@ public class DialogueManager : MonoBehaviour
     private bool sentenceIsTyping = false;
     private Dialogue currentDialogue;
     private string currentSentence;
+    [SerializeField]
+    private AudioSource voiceoverSource;
 
     public static DialogueManager dialogueManager { get; private set; }
 
@@ -119,8 +121,11 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = sentences.Dequeue();
         foreach (Speakers speakers in speakers)
         {
-            if(currentDialogue.DialogueSpeaker == speakers.speaker) 
+            if (currentDialogue.DialogueSpeaker == speakers.speaker)
+            {
                 portraitImage.sprite = speakers.portrait;
+                voiceoverSource.clip = currentDialogue.DialogueAudio;
+            }
         }
         currentSentence = currentDialogue.DialogueText; // Store the current sentence
         StopAllCoroutines();
@@ -218,7 +223,7 @@ public class Dialogue
     public string DialogueText
     { get; private set; }
 
-    public string DialogueAudio
+    public AudioClip DialogueAudio
     { get; private set; }
 
     public Dialogue(string dialogueId, string dialogueSpeaker, string dialogueText, string dialogueAudio)
@@ -226,7 +231,8 @@ public class Dialogue
         DialogueId = dialogueId;
         DialogueSpeaker = (Speaker) Enum.Parse(typeof(Speaker), dialogueSpeaker);
         DialogueText = dialogueText;
-        DialogueAudio = dialogueAudio;
+        DialogueText.Replace('@', ',');
+        //AssetManager.LoadAudio(dialogueAudio, (AudioClip aud) => DialogueAudio = aud);
     }
 }
 

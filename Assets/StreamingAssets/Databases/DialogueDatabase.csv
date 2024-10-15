@@ -1,11 +1,11 @@
 dialogueGroup,dialogueSpeaker,dialogueText,dialogueAudio
-1_1,MissionControl,Mission Control to NANO, do you read me?,
-1_2,MissionControl,We've lots to cover, and time is not on our side.,
-1_3,MissionControl,Head east for now, the facility's system are still active.,
-1_4,MissionControl,Stay sharp and conserve your battery—we need you operational.,
-2_1,RogueAI,Well, well… look who we have here. A visitor. ,
-2_2,RogueAI,I didn’t think anyone had the nerve to return.,
-3_1,MissionControl,Ignore him, NANO. You’re doing great.",
-3_2,MissionControl,Just stay focused on the mission.,
-4_1,MissionControl,Hold up—this looks different.,
-4_2,MissionControl,Be careful, NANO, we haven’t seen this before.,
+1_1,MissionControl,Mission Control to NANO@ do you read me?,Dialogue1
+1_2,MissionControl,We've lots to cover@ and time is not on our side.,Dialogue2
+1_3,MissionControl,Head east for now@ the facility's system are still active.,Dialogue3
+1_4,MissionControl,Stay sharp and conserve your battery—we need you operational.,Dialogue4
+2_1,RogueAI,Well@ well… look who we have here. A visitor. ,Dialogue5
+2_2,RogueAI,I didn’t think anyone had the nerve to return.,Dialogue6
+3_1,MissionControl,Ignore him@ NANO. You’re doing great.,Dialogue7
+3_2,MissionControl,Just stay focused on the mission.,Dialogue8
+4_1,MissionControl,Hold up—this looks different.,Dialogue9
+4_2,MissionControl,Be careful NANO@ we haven’t seen this before.,Dialogue10
