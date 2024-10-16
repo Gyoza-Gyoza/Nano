@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 655c4f513329d924abfd4933bbef98fc
+    m_Address: Assets/06. Audio/SFX/Voiceovers
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d1facaf1765ca2d44a3e663352e6b2a5, type: 2}
   m_SchemaSet:

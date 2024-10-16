@@ -62,11 +62,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if(sentenceIsTyping)
+            if(sentenceIsTyping && voiceoverSource.isPlaying)
             {
                 StopAllCoroutines(); // Stop typing the sentence
                 dialogueText.text = currentSentence; // Show the full sentence
                 sentenceIsTyping = false; // Mark that the sentence has been fully displayed 
+                voiceoverSource.Stop();
             }
             else
             {
@@ -113,6 +114,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void DisplayNextSentence()
     {
+        voiceoverSource.Stop();
         if(sentences.Count == 0)
         {
             EndDialogue();
@@ -125,6 +127,7 @@ public class DialogueManager : MonoBehaviour
             {
                 portraitImage.sprite = speakers.portrait;
                 voiceoverSource.clip = currentDialogue.DialogueAudio;
+                voiceoverSource.Play();
             }
         }
         currentSentence = currentDialogue.DialogueText; // Store the current sentence
@@ -147,6 +150,7 @@ public class DialogueManager : MonoBehaviour
 
         //Wait for specified delay before displaying next sentence
         yield return new WaitForSeconds(delayBetweenSentence);
+        yield return new WaitUntil(() => !voiceoverSource.isPlaying);
         DisplayNextSentence();
     }
 
@@ -232,7 +236,7 @@ public class Dialogue
         DialogueSpeaker = (Speaker) Enum.Parse(typeof(Speaker), dialogueSpeaker);
         DialogueText = dialogueText;
         DialogueText.Replace('@', ',');
-        //AssetManager.LoadAudio(dialogueAudio, (AudioClip aud) => DialogueAudio = aud);
+        AssetManager.LoadVoiceover(dialogueAudio, (AudioClip aud) => DialogueAudio = aud);
     }
 }
 

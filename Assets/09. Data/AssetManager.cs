@@ -6,9 +6,9 @@ using UnityEngine.AddressableAssets;
 
 public static class AssetManager
 {
-    public static void LoadAudio(string audioURL, Action<AudioClip> onLoaded)
+    public static void LoadVoiceover(string audioURL, Action<AudioClip> onLoaded)
     {
-        Addressables.LoadAssetAsync<AudioClip>(Application.streamingAssetsPath + "/Audio/" + audioURL).Completed += (loadedAudio) =>
+        Addressables.LoadAssetAsync<AudioClip>($"Assets/06. Audio/SFX/Voiceovers/{audioURL}.wav").Completed += (loadedAudio) =>
         {
             onLoaded?.Invoke(loadedAudio.Result);
         };
@@ -16,7 +16,7 @@ public static class AssetManager
 
     public static void SetAudio(string audioURL, GameObject go)
     {
-        LoadAudio(audioURL, (AudioClip aud) =>
+        LoadVoiceover(audioURL, (AudioClip aud) =>
         {
             go.GetComponent<AudioSource>().clip = aud;
         });
