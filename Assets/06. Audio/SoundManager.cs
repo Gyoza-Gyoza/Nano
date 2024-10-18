@@ -9,7 +9,8 @@ public enum SoundType
     LAND_CHARGE,
     JUMP,
     IDLE_TO_RUN,
-    RUN
+    RUN,
+    CHECKPOINT
 }
 
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
