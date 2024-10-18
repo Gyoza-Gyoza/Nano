@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Checkpoint Emission
+  m_Name: Checkpoint Emission V2
   m_Shader: {fileID: -6465566751694194690, guid: 4043d51a3409dad479481983c169d374, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -41,11 +41,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission:
-        m_Texture: {fileID: 2800000, guid: 832a4030094ccda43a825a914816ce09, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9fd13e971016eb24084f2cf5cab54c8e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: eb48c76732dac7343abe4b539965faca, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5f8df611ba634e84cbfcc962e8bc2830, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -74,7 +74,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 0, g: 1.8443028, b: 0.11606349, a: 1}
+    - _Color: {r: 0, g: 0.23053785, b: 0.014507936, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
