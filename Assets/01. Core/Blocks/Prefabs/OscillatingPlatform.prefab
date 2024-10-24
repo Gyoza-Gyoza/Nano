@@ -222,6 +222,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399ef5c801ba38047ae58d9a7063ce6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeColor: {r: 0, g: 0, b: 0, a: 0}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 0}
+  activeSprite: {fileID: 0}
+  inactiveSprite: {fileID: 0}
+  activeMaterial: {fileID: 0}
+  inactiveMaterial: {fileID: 0}
+  chargeTime: 0.03
+  isCharged: 0
+  activePlatformSprite: {fileID: 0}
+  inactivePlatformSprite: {fileID: 0}
+  activePillarSprite: {fileID: 0}
+  inactivePillarSprite: {fileID: 0}
+  activePlatformMat: {fileID: 0}
+  inactivePlatformMat: {fileID: 0}
+  activePillarMat: {fileID: 0}
+  inactivePillarMat: {fileID: 0}
   positions:
   - {fileID: 0}
   - {fileID: 0}

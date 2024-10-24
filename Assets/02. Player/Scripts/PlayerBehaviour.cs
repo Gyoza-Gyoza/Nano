@@ -50,7 +50,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 return target.Item1;
             }
-            else throw new InvalidOperationException("Nothing behind player");
+            else throw new InvalidOperationException("No checkpoints behind player");
         }
     }
     private Vector3 NextCheckpoint
@@ -81,7 +81,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 return target.Item1;
             }
-            else throw new InvalidOperationException("Nothing in front of player");
+            else throw new InvalidOperationException("No checkpoints in front of player");
         }
     }
     #endregion

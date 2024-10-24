@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OscillatingPlatform : PlatformBlock
+public sealed class OscillatingPlatform : PlatformBlock
 {
     private bool ascending = false, 
     playerOnBlock = false;
@@ -26,8 +26,9 @@ public class OscillatingPlatform : PlatformBlock
         platformRenderer.material = inactivePlatformMat;
         pillarRenderer.material = inactivePillarMat;
     }
-    protected void Update()
+    protected override void Update()
     {
+        base.Update();
         if (IsCharged) Move();
     }
     private void Move()
@@ -50,6 +51,3 @@ public class OscillatingPlatform : PlatformBlock
             transform.position = Vector2.Lerp(positions[0].position, positions[1].position, currentPos);
     }
 }
-
-//Get the difference in x and y values of the start and end position 
-//Lerp between these two values and 
