@@ -14875,8 +14875,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.049650013, y: 0.04610002, z: 0}
-    m_Extent: {x: 0.77015, y: 0.5923, z: 0}
+    m_Center: {x: -0.048999995, y: 0.045650005, z: 0}
+    m_Extent: {x: 0.7702, y: 0.59265, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -22674,8 +22674,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5236, y: 5.2402, z: 0}
-    m_Extent: {x: 8.360001, y: 11.4291, z: 0}
+    m_Center: {x: 2.52275, y: 5.2411504, z: 0}
+    m_Extent: {x: 8.35995, y: 11.429951, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -41748,8 +41748,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.52375, y: 5.2412496, z: 0}
-    m_Extent: {x: 8.35995, y: 11.42885, z: 0}
+    m_Center: {x: 2.5237498, y: 5.2413497, z: 0}
+    m_Extent: {x: 8.360149, y: 11.428949, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -59744,8 +59744,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.032099992, y: 0.0051499903, z: 0}
-    m_Extent: {x: 0.68920004, y: 0.55215, z: 0}
+    m_Center: {x: 0.032700002, y: 0.0051499903, z: 0}
+    m_Extent: {x: 0.688, y: 0.55265, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -68672,8 +68672,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.54714996, y: -0.14555001, z: 0}
-    m_Extent: {x: 1.68965, y: 0.77155, z: 0}
+    m_Center: {x: -0.54709995, y: -0.14545, z: 0}
+    m_Extent: {x: 1.6895, y: 0.77085, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -74244,7 +74244,7 @@ GameObject:
   - component: {fileID: 686352794680657873}
   - component: {fileID: 7364668560012025205}
   m_Layer: 6
-  m_Name: LongThing
+  m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
