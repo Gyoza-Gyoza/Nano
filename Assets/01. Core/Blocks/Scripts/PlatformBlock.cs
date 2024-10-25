@@ -31,7 +31,7 @@ public class PlatformBlock : Block
     }
     protected virtual void Update()
     {
-        if (IsCharged) ChargeSurroundings();
+        //if (IsCharged) ChargeSurroundings();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -70,5 +70,32 @@ public class PlatformBlock : Block
                 if (check != null) check.StartCoroutine(check.Charge(new HashSet<Block>()));
             }
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Something entered");
+        Block block = collision.GetComponent<Block>();
+
+        if (block == null) return;
+        Debug.Log("Block isn't null");
+        if (block == this) return;
+        Debug.Log("Block isn't this");
+        if (!isCharged) return;
+        Debug.Log("Block is charged");
+
+        block.Charge(new HashSet<Block>());
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Block block = collision.GetComponent<Block>();
+
+        if (block == null) return;
+        Debug.Log("Block isn't null");
+        if (block == this) return;
+        Debug.Log("Block isn't this");
+        if (!isCharged) return;
+        Debug.Log("Block is charged");
+
+        block.Discharge(new HashSet<Block>());
     }
 }

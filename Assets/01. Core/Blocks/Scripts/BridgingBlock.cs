@@ -7,7 +7,7 @@ public sealed class BridgingBlock : ChainingBlock
 {
     private void Start()
     {
-        col.enabled = false;
+        col.isTrigger = true;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -21,12 +21,12 @@ public sealed class BridgingBlock : ChainingBlock
     {
         spriteRenderer.material = activeMaterial;
         spriteRenderer.sprite = activeSprite;
-        col.enabled = true;
+        col.isTrigger = false;
     }
     protected override void TurnOff()
     {
         spriteRenderer.material = inactiveMaterial;
         spriteRenderer.sprite = inactiveSprite;
-        col.enabled = false;
+        col.isTrigger = true;
     }
 }
