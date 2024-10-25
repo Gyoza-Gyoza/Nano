@@ -32,12 +32,16 @@ public class DialogueManager : MonoBehaviour
     private Dialogue currentDialogue;
     private string currentSentence;
     [SerializeField]
+    private float dialogueDelay;
+    [SerializeField]
     private AudioSource voiceoverSource;
 
     public static DialogueManager dialogueManager { get; private set; }
 
     [SerializeField]
     private List<Speakers> speakers = new List<Speakers>();
+
+    private WaitForSeconds dialogueDelayTime;
 
     void Awake()
     {
@@ -56,6 +60,7 @@ public class DialogueManager : MonoBehaviour
         {
             framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         }
+        dialogueDelayTime = new WaitForSeconds(dialogueDelay);
     }
 
     void Update()
@@ -151,6 +156,7 @@ public class DialogueManager : MonoBehaviour
         //Wait for specified delay before displaying next sentence
         yield return new WaitForSeconds(delayBetweenSentence);
         yield return new WaitUntil(() => !voiceoverSource.isPlaying);
+        yield return dialogueDelayTime;
         DisplayNextSentence();
     }
 
@@ -234,8 +240,7 @@ public class Dialogue
     {
         DialogueId = dialogueId;
         DialogueSpeaker = (Speaker) Enum.Parse(typeof(Speaker), dialogueSpeaker);
-        DialogueText = dialogueText;
-        DialogueText.Replace('@', ',');
+        DialogueText = dialogueText.Replace('@', ',');
         AssetManager.LoadVoiceover(dialogueAudio, (AudioClip aud) => DialogueAudio = aud);
     }
 }

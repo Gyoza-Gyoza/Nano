@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using System.Linq;
 
 public static class Database 
 {
@@ -22,12 +23,13 @@ public static class Database
 
         foreach(string tempDialogue in tempDialogues)
         {
-            string[] values = tempDialogue.Split(',');
-            string[] id = values[0].Split("_");
+            string[] values = tempDialogue.Split(','); //Splits the csv using commas 
+            string[] id = values[0].Split("_"); //Splits the id into two parts, the group and the id in that group
 
-            if (!DialogueDatabase.ContainsKey(int.Parse(id[0]))) 
-                DialogueDatabase.Add(int.Parse(id[0]), new List<Dialogue>());
+            if (!DialogueDatabase.ContainsKey(int.Parse(id[0]))) //Checks if the dialogue group exists  
+                DialogueDatabase.Add(int.Parse(id[0]), new List<Dialogue>()); //Adds the group with a list if it isn't 
 
+            //Adds the dialogue values into the group based on its id 
             DialogueDatabase[int.Parse(id[0])].Add(new Dialogue(id[1], values[1], values[2], values[3]));
         }
     }
