@@ -29,6 +29,10 @@ public class PlatformBlock : Block
         platformRenderer = transform.Find("Platform").GetComponent<SpriteRenderer>();
         pillarRenderer = transform.Find("Pillar").GetComponent<SpriteRenderer>();
     }
+    protected virtual void Update()
+    {
+        if (IsCharged) ChargeSurroundings();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -45,6 +49,26 @@ public class PlatformBlock : Block
             IsCharged = false;
             PlayerBehaviour.player.transform.SetParent(null);
             PlayerBehaviour.player.rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        }
+    }
+    private void ChargeSurroundings()
+    {
+        List<RaycastHit2D[]> hits = new List<RaycastHit2D[]>() //Contains everything that are beside each block
+        {
+            Physics2D.BoxCastAll(transform.position, new Vector2(0.1f, transform.localScale.y * 0.9f), 0f, Vector2.right, col.bounds.extents.x + 0.1f),
+            Physics2D.BoxCastAll(transform.position, new Vector2(0.1f, transform.localScale.y * 0.9f), 0f, Vector2.left, col.bounds.extents.x + 0.1f),
+            Physics2D.BoxCastAll(transform.position, new Vector2(transform.localScale.x * 0.9f, 0.1f), 0f, Vector2.up, col.bounds.extents.y + 0.1f),
+            Physics2D.BoxCastAll(transform.position, new Vector2(transform.localScale.x * 0.9f, 0.1f), 0f, Vector2.down, col.bounds.extents.y + 0.1f)
+        };
+
+        foreach (RaycastHit2D[] hitArray in hits) //Check each array that contains all hits 
+        {
+            foreach (RaycastHit2D hit in hitArray) //Check each hit in each array 
+            {
+                Block check = hit.collider.gameObject.GetComponent<Block>();
+
+                if (check != null) check.StartCoroutine(check.Charge(new HashSet<Block>()));
+            }
         }
     }
 }

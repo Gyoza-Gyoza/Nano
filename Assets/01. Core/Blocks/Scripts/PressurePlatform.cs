@@ -9,8 +9,9 @@ public sealed class PressurePlatform : PlatformBlock
     [Range(0f, 1f)]
     public float currentPos; 
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         Move();
     }
     private void Move()

@@ -26,8 +26,9 @@ public class OscillatingPlatform : PlatformBlock
         platformRenderer.material = inactivePlatformMat;
         pillarRenderer.material = inactivePillarMat;
     }
-    protected void Update()
+    protected override void Update()
     {
+        base.Update();
         if (IsCharged) Move();
     }
     private void Move()
