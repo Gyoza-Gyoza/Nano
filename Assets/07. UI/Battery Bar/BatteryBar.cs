@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class BatteryBar : MonoBehaviour
 {
     public Slider slider;
-    
+    [SerializeField]
+    private Animator animator;
+
     public void SetMaxBattery()
     {
         slider.maxValue = PlayerBehaviour.player.maxBattery;
@@ -17,5 +19,4 @@ public class BatteryBar : MonoBehaviour
     {
         slider.value = PlayerBehaviour.player.currentBattery;
     }
-
 }

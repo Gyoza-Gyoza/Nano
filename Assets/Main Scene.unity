@@ -14875,8 +14875,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.048999995, y: 0.045650005, z: 0}
-    m_Extent: {x: 0.7702, y: 0.59265, z: 0}
+    m_Center: {x: -0.04909998, y: 0.04609999, z: 0}
+    m_Extent: {x: 0.7694, y: 0.5928, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -22674,8 +22674,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.52275, y: 5.2411504, z: 0}
-    m_Extent: {x: 8.35995, y: 11.429951, z: 0}
+    m_Center: {x: 2.5232003, y: 5.2412, z: 0}
+    m_Extent: {x: 8.3591, y: 11.4293, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -38762,6 +38762,7 @@ RectTransform:
   m_Children:
   - {fileID: 906993984}
   - {fileID: 1729028948}
+  - {fileID: 1347935393}
   m_Father: {fileID: 930973803}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -38782,6 +38783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1172982775}
+  animator: {fileID: 0}
 --- !u!114 &1172982775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39560,6 +39562,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 996651955}
+    - target: {fileID: 1102321688252658302, guid: 6292ce32b73dc48c09f79b240367cf61, type: 3}
+      propertyPath: batteryAnimator
+      value: 
+      objectReference: {fileID: 1347935394}
     - target: {fileID: 3393333904941176437, guid: 6292ce32b73dc48c09f79b240367cf61, type: 3}
       propertyPath: m_Name
       value: Sunlight (1)
@@ -41225,6 +41231,103 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1347935392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1347935393}
+  - component: {fileID: 1347935396}
+  - component: {fileID: 1347935395}
+  - component: {fileID: 1347935394}
+  m_Layer: 5
+  m_Name: BatteryVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1347935393
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347935392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 9.75743, y: 5.5326443, z: 8.047365}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1172982773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1347935394
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347935392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 379c7fc3fd0057244b5651f221bff7fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1347935395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347935392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -473590507, guid: 23db29ea84dbde349b3bf15eff8931be, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1347935396
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347935392}
+  m_CullTransparentMesh: 1
 --- !u!1 &1348978232
 GameObject:
   m_ObjectHideFlags: 0
@@ -41748,8 +41851,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5237498, y: 5.2413497, z: 0}
-    m_Extent: {x: 8.360149, y: 11.428949, z: 0}
+    m_Center: {x: 2.5222502, y: 5.24115, z: 0}
+    m_Extent: {x: 8.35995, y: 11.42955, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -59744,8 +59847,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.032700002, y: 0.0051499903, z: 0}
-    m_Extent: {x: 0.688, y: 0.55265, z: 0}
+    m_Center: {x: 0.032099992, y: 0.0054499805, z: 0}
+    m_Extent: {x: 0.6891, y: 0.55265, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -61685,6 +61788,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 996651955}
+    - target: {fileID: 1102321688252658302, guid: 6292ce32b73dc48c09f79b240367cf61, type: 3}
+      propertyPath: batteryAnimator
+      value: 
+      objectReference: {fileID: 1347935394}
     - target: {fileID: 3393333904941176437, guid: 6292ce32b73dc48c09f79b240367cf61, type: 3}
       propertyPath: m_Name
       value: Sunlight (1)
@@ -68672,8 +68779,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.54709995, y: -0.14545, z: 0}
-    m_Extent: {x: 1.6895, y: 0.77085, z: 0}
+    m_Center: {x: -0.54815, y: -0.14515, z: 0}
+    m_Extent: {x: 1.68995, y: 0.77205, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -71313,6 +71420,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 996651955}
+    - target: {fileID: 1102321688252658302, guid: 6292ce32b73dc48c09f79b240367cf61, type: 3}
+      propertyPath: batteryAnimator
+      value: 
+      objectReference: {fileID: 1347935394}
     - target: {fileID: 3393333904941176437, guid: 6292ce32b73dc48c09f79b240367cf61, type: 3}
       propertyPath: m_Name
       value: Sunlight (1)
@@ -71525,7 +71636,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.2, y: 0.3}
+  m_Size: {x: 9.5, y: 0.3}
   m_EdgeRadius: 0
 --- !u!1 &1990871645
 GameObject:
@@ -74257,7 +74368,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4703774821448524514}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -74505,6 +74616,7 @@ GameObject:
   - component: {fileID: 2010744319988550057}
   - component: {fileID: 1987721460}
   - component: {fileID: 4703774821448524515}
+  - component: {fileID: 4703774821448524516}
   m_Layer: 0
   m_Name: TogglePlatform
   m_TagString: Untagged
@@ -74545,6 +74657,33 @@ MonoBehaviour:
   - {fileID: 477884022}
   speed: 2
   currentPos: 0
+--- !u!50 &4703774821448524516
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4703774821448524514}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!61 &5737342186159731923
 BoxCollider2D:
   m_ObjectHideFlags: 0

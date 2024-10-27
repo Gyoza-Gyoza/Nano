@@ -6,7 +6,7 @@ using UnityEngine;
 public class Sunlight : MonoBehaviour
 {
     private bool chargingPlayer = false;
-    public Animator animator;
+    public Animator animator, batteryAnimator;
 
 
     [SerializeField] 
@@ -26,6 +26,7 @@ public class Sunlight : MonoBehaviour
         {
             chargingPlayer = true;
             animator.SetBool("isCharging", true);
+            batteryAnimator.SetBool("IsCharging", true);
             PlayerBehaviour.player.healingVFX.Play();
         }
     }
@@ -36,6 +37,7 @@ public class Sunlight : MonoBehaviour
         {
             chargingPlayer = false;
             animator.SetBool("isCharging", false);
+            batteryAnimator.SetBool("IsCharging", false);
             PlayerBehaviour.player.healingVFX.Stop();
         }
     }

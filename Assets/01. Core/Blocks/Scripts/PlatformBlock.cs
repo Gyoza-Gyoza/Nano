@@ -73,15 +73,12 @@ public class PlatformBlock : Block
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Something entered");
         Block block = collision.GetComponent<Block>();
 
         if (block == null) return;
-        Debug.Log("Block isn't null");
+        Debug.Log(collision.name);
         if (block == this) return;
-        Debug.Log("Block isn't this");
         if (!isCharged) return;
-        Debug.Log("Block is charged");
 
         block.Charge(new HashSet<Block>());
     }
@@ -90,11 +87,8 @@ public class PlatformBlock : Block
         Block block = collision.GetComponent<Block>();
 
         if (block == null) return;
-        Debug.Log("Block isn't null");
         if (block == this) return;
-        Debug.Log("Block isn't this");
         if (!isCharged) return;
-        Debug.Log("Block is charged");
 
         block.Discharge(new HashSet<Block>());
     }
