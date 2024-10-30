@@ -4,6 +4,19 @@ using UnityEngine;
 
 public sealed class PowerBlock : Block
 {
+    [SerializeField]
+    private GameObject lightningVFX; 
+    private Animator lightningAnim;
+    [SerializeField]
+    private int numberOfAnimations;
+    private bool activated = false;
+    private BoxCollider2D col;
+
+    private void Awake()
+    {
+        lightningAnim = GetComponent<Animator>();
+        col = GetComponent<BoxCollider2D>();
+    }
     private void Start()
     {
         connections.Add(this, false);
@@ -16,6 +29,7 @@ public sealed class PowerBlock : Block
     {
         if(collision.gameObject.tag == "Player")
         {
+            activated = true;
             PlayerOnBlock(this, true);
             Activate();
         }
@@ -24,12 +38,14 @@ public sealed class PowerBlock : Block
     {
         if (collision.gameObject.tag == "Player")
         {
+            activated = false;
             PlayerOnBlock(this, false);
             Deactivate();
         }
     }
     public override void Activate()
     {
+        SwitchAnimation();
         foreach(Block block in neighbours)
         {
             block.StartCoroutine(block.Charge(new HashSet<Block>()));
@@ -42,5 +58,18 @@ public sealed class PowerBlock : Block
             if (block is BridgingBlock) continue;
             block.StartCoroutine(block.Discharge(new HashSet<Block>()));
         }
+    }
+    public void SwitchAnimation()
+    {
+        if (!activated)
+        {
+            lightningAnim.SetInteger("State", 0);
+            return;
+        }
+        lightningVFX.transform.position = new Vector3(
+            Random.Range(col.bounds.min.x, col.bounds.max.x),
+            Random.Range(col.bounds.min.y, col.bounds.max.y),
+            Random.Range(col.bounds.min.z, col.bounds.max.z));
+        lightningAnim.SetInteger("State", Random.Range(1, numberOfAnimations+1));
     }
 }

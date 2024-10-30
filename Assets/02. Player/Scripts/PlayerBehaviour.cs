@@ -12,9 +12,6 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] public float currentBattery = 100f;
     [SerializeField] public float batteryDrainRate = 1f;
 
-    [SerializeField]
-    public ParticleSystem healingVFX;
-
     private int drainCounter = 0;
 
     public BatteryBar batteryBar;
