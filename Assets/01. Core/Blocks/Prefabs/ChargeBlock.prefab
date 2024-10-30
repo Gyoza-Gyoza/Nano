@@ -183,6 +183,8 @@ MonoBehaviour:
   isCharged: 0
   lightningVFX: {fileID: 6779357636232668306}
   numberOfAnimations: 3
+  animationOffset: {x: -0.1, y: 0.2}
+  animationRotationRange: {x: -30, y: 30}
 --- !u!95 &3978445617893439677
 Animator:
   serializedVersion: 5

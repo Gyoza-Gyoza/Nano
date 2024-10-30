@@ -12,6 +12,9 @@ public sealed class PowerBlock : Block
     private bool activated = false;
     private BoxCollider2D col;
 
+    [SerializeField]
+    private Vector2 animationOffset, animationRotationRange; 
+
     private void Awake()
     {
         lightningAnim = GetComponent<Animator>();
@@ -67,9 +70,10 @@ public sealed class PowerBlock : Block
             return;
         }
         lightningVFX.transform.position = new Vector3(
-            Random.Range(col.bounds.min.x, col.bounds.max.x),
-            Random.Range(col.bounds.min.y, col.bounds.max.y),
+            Random.Range(col.bounds.min.x + animationOffset.x, col.bounds.max.x + animationOffset.x),
+            Random.Range(col.bounds.min.y + animationOffset.y, col.bounds.max.y + animationOffset.y),
             Random.Range(col.bounds.min.z, col.bounds.max.z));
+        lightningVFX.transform.Rotate(new Vector3(0f, 0f, Random.Range(animationRotationRange.x, animationRotationRange.y)));
         lightningAnim.SetInteger("State", Random.Range(1, numberOfAnimations+1));
     }
 }
