@@ -44,7 +44,7 @@ public class Block : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         col = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();

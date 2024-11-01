@@ -79,8 +79,9 @@ public class PlatformBlock : Block
         Debug.Log(collision.name);
         if (block == this) return;
         if (!isCharged) return;
+        if (block is PowerBlock) return;
 
-        block.Charge(new HashSet<Block>());
+        block.StartCoroutine(block.Charge(new HashSet<Block>()));
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -89,7 +90,8 @@ public class PlatformBlock : Block
         if (block == null) return;
         if (block == this) return;
         if (!isCharged) return;
+        if (block is PowerBlock) return;
 
-        block.Discharge(new HashSet<Block>());
+        block.StartCoroutine(block.Discharge(new HashSet<Block>()));
     }
 }

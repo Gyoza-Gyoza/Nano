@@ -6,19 +6,16 @@ public sealed class PowerBlock : Block
 {
     [SerializeField]
     private ParticleSystem lightningVFX; 
-    private Animator lightningAnim;
     [SerializeField]
     private int numberOfAnimations;
-    private bool activated = false;
-    private BoxCollider2D col;
 
     [SerializeField]
     private Vector2 yRandomPos, animationRotationRange; 
 
-    private void Awake()
+    protected override void Awake()
     {
-        lightningAnim = GetComponent<Animator>();
-        col = GetComponent<BoxCollider2D>();
+        base.Awake();
+
         lightningVFX = GetComponentInChildren<ParticleSystem>();
     }
     private void Start()
@@ -33,7 +30,6 @@ public sealed class PowerBlock : Block
     {
         if(collision.gameObject.tag == "Player")
         {
-            activated = true;
             PlayerOnBlock(this, true);
             Activate();
         }
@@ -42,7 +38,6 @@ public sealed class PowerBlock : Block
     {
         if (collision.gameObject.tag == "Player")
         {
-            activated = false;
             PlayerOnBlock(this, false);
             Deactivate();
         }
@@ -50,6 +45,7 @@ public sealed class PowerBlock : Block
     public override void Activate()
     {
         lightningVFX.Play();
+
         foreach(Block block in neighbours)
         {
             block.StartCoroutine(block.Charge(new HashSet<Block>()));
@@ -58,6 +54,7 @@ public sealed class PowerBlock : Block
     public override void Deactivate()
     {
         lightningVFX.Stop();
+
         foreach (Block block in neighbours)
         {
             if (block is BridgingBlock) continue;
