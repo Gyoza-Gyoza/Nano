@@ -13,7 +13,7 @@ public sealed class PowerBlock : Block
     private BoxCollider2D col;
 
     [SerializeField]
-    private Vector2 animationOffset, animationRotationRange; 
+    private Vector2 yRandomPos, animationRotationRange; 
 
     private void Awake()
     {
@@ -27,6 +27,10 @@ public sealed class PowerBlock : Block
         {
             block.InitializeConnections(this, connections);
         }
+        lightningVFX.transform.localScale = new Vector3(
+            lightningVFX.transform.localScale.x / transform.localScale.x,
+            lightningVFX.transform.localScale.y / transform.localScale.y,
+            lightningVFX.transform.localScale.z / transform.localScale.z);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -61,7 +65,7 @@ public sealed class PowerBlock : Block
             if (block is BridgingBlock) continue;
             block.StartCoroutine(block.Discharge(new HashSet<Block>()));
         }
-    }
+    }   
     public void SwitchAnimation()
     {
         if (!activated)
@@ -70,8 +74,8 @@ public sealed class PowerBlock : Block
             return;
         }
         lightningVFX.transform.position = new Vector3(
-            Random.Range(col.bounds.min.x + animationOffset.x, col.bounds.max.x + animationOffset.x),
-            Random.Range(col.bounds.min.y + animationOffset.y, col.bounds.max.y + animationOffset.y),
+            Random.Range(col.bounds.min.x, col.bounds.max.x),
+            Random.Range(transform.position.y + yRandomPos.x, transform.position.y + yRandomPos.y),
             Random.Range(col.bounds.min.z, col.bounds.max.z));
         lightningVFX.transform.Rotate(new Vector3(0f, 0f, Random.Range(animationRotationRange.x, animationRotationRange.y)));
         lightningAnim.SetInteger("State", Random.Range(1, numberOfAnimations+1));

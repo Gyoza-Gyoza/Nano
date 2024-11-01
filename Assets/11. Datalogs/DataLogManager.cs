@@ -9,10 +9,11 @@ public class DataLogManager : MonoBehaviour
     private DataLog[] dataLogDatabase;
 
     [SerializeField]
-    private float moveDuration;
+    private float moveDuration, typingSpeed;
 
     [SerializeField]
     private GameObject dataLogScreen;
+
     [SerializeField]
     private TextMeshProUGUI dataLogTitle, dataLogText;
 
@@ -22,6 +23,7 @@ public class DataLogManager : MonoBehaviour
     private RectTransform pos;
 
     public static DataLogManager instance;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -41,7 +43,6 @@ public class DataLogManager : MonoBehaviour
         float timer = 0f;
 
         dataLogTitle.text = dataLogDatabase[dataLogID].dataLogTitle;
-        dataLogText.text = dataLogDatabase[dataLogID].dataLogText;
 
         while (timer < moveDuration)
         {
@@ -50,9 +51,11 @@ public class DataLogManager : MonoBehaviour
                 openedPos.anchoredPosition.y, timer / moveDuration));
 
             timer += Time.deltaTime;
-            Debug.Log(timer);
+
             yield return null;
         }
+
+        StartCoroutine(TypingEffect(dataLogText, dataLogDatabase[dataLogID].dataLogText));
     }
     public void CloseDataLog()
     {
@@ -65,12 +68,22 @@ public class DataLogManager : MonoBehaviour
         while (timer < moveDuration)
         {
             pos.anchoredPosition = new Vector2(pos.anchoredPosition.x,
-                Mathf.SmoothStep(closedPos.anchoredPosition.y,
-                openedPos.anchoredPosition.y, timer / moveDuration));
+                Mathf.SmoothStep(openedPos.anchoredPosition.y,
+                closedPos.anchoredPosition.y, timer / moveDuration));
 
             timer += Time.deltaTime;
 
             yield return null;
+        }
+    }
+    private IEnumerator TypingEffect(TextMeshProUGUI text, string textToType)
+    {
+        text.text = "";
+
+        foreach(char c in textToType)
+        {
+            text.text += c;
+            yield return typingSpeed;
         }
     }
 }
@@ -79,6 +92,7 @@ public class DataLogManager : MonoBehaviour
 public class DataLog
 {
     public string dataLogTitle;
+    [TextArea]
     public string dataLogText;
     public string dataLogCode;
 }
