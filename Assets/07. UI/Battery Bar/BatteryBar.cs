@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class BatteryBar : MonoBehaviour
 {
     public Slider slider;
+    //[SerializeField]
+    //private Animator animator;
     [SerializeField]
-    private Animator animator;
+    private Gradient colourRange;
+    [SerializeField]
+    private Image barFill;
 
     public void SetMaxBattery()
     {
@@ -18,5 +22,6 @@ public class BatteryBar : MonoBehaviour
     public void UpdateBattery()
     {
         slider.value = PlayerBehaviour.player.currentBattery;
+        barFill.color = colourRange.Evaluate(PlayerBehaviour.player.currentBattery / PlayerBehaviour.player.maxBattery);
     }
 }
