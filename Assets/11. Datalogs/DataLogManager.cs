@@ -12,7 +12,7 @@ public class DataLogManager : MonoBehaviour
     private float moveDuration, typingSpeed;
 
     [SerializeField]
-    private GameObject dataLogScreen;
+    private GameObject dataLogInformationScreen, dataLogPasswordScreen;
 
     [SerializeField]
     private TextMeshProUGUI dataLogTitle, dataLogText;
@@ -20,29 +20,43 @@ public class DataLogManager : MonoBehaviour
     [SerializeField]
     private RectTransform closedPos, openedPos;
 
+    [Header("Password Variables")]
+    [SerializeField]
+    private TMP_InputField[] passwordInput;
+    [SerializeField]
+    private string passwordTyped;
+    private DataLog currentDataLog;
     private RectTransform pos;
+    private bool passwordCorrect = false;
 
     public static DataLogManager instance;
 
     private void Awake()
     {
         if (instance == null) instance = this;
-        pos = dataLogScreen.GetComponent<RectTransform>();
+        pos = dataLogInformationScreen.GetComponent<RectTransform>();
     }
     private void Start()
     {
-        dataLogScreen.transform.position = closedPos.position;
+        dataLogInformationScreen.transform.position = closedPos.position;
+        dataLogPasswordScreen.SetActive(false);
     }
-
     public void TriggerDataLog(int dataLogID)
     {
-        StartCoroutine(OpenDataLogUI(dataLogID));
+        dataLogPasswordScreen.SetActive(true);
+        currentDataLog = dataLogDatabase[dataLogID];
+        StartCoroutine(OpenDataLogUI());
+        passwordInput[0].Select();
     }
-    private IEnumerator OpenDataLogUI(int dataLogID)
+    private IEnumerator OpenDataLogUI()
     {
+        yield return new WaitUntil(() => passwordCorrect); 
+
+        dataLogPasswordScreen.SetActive(false);
+
         float timer = 0f;
 
-        dataLogTitle.text = dataLogDatabase[dataLogID].dataLogTitle;
+        dataLogTitle.text = currentDataLog.dataLogTitle;
 
         while (timer < moveDuration)
         {
@@ -55,7 +69,7 @@ public class DataLogManager : MonoBehaviour
             yield return null;
         }
 
-        StartCoroutine(TypingEffect(dataLogText, dataLogDatabase[dataLogID].dataLogText));
+        StartCoroutine(TypingEffect(dataLogText, currentDataLog.dataLogText));
     }
     public void CloseDataLog()
     {
@@ -86,13 +100,38 @@ public class DataLogManager : MonoBehaviour
             yield return typingSpeed;
         }
     }
+    public void Typed(int id)
+    {
+        if (passwordInput[id].text == "")
+        {
+            if (id == 0) return;
+            id--;
+        }
+        else
+        {
+            id++;
+            if (id == passwordInput.Length) return;
+        }
+
+        passwordInput[id].Select();
+    }
+    public void SubmitPassword()
+    {
+        passwordTyped = "";
+
+        for (int i = 0; i < passwordInput.Length; i++)
+        {
+            passwordTyped += passwordInput[i].text;
+        }
+        if(passwordTyped == currentDataLog.dataLogPassword) passwordCorrect = true;
+    }
 }
 
 [System.Serializable]
 public class DataLog
 {
+    public string dataLogPassword;
     public string dataLogTitle;
     [TextArea]
     public string dataLogText;
-    public string dataLogCode;
 }
