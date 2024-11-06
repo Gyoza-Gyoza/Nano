@@ -26,9 +26,8 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI nameColor;
     public float textSpeed;
-    public float delayBetweenSentence = 2f; 
     private Queue<Dialogue> sentences = new Queue<Dialogue>();
-    private bool sentenceIsTyping = false;
+    private bool sentenceIsTyping = false, zoomedIn = false;
     private Dialogue currentDialogue;
     private string currentSentence;
     [SerializeField]
@@ -41,7 +40,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private List<Speakers> speakers = new List<Speakers>();
 
-    private WaitForSeconds dialogueDelayTime;
+    private WaitForSeconds dialogueDelayTime, typingSpeed;
 
     void Awake()
     {
@@ -61,6 +60,7 @@ public class DialogueManager : MonoBehaviour
             framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         }
         dialogueDelayTime = new WaitForSeconds(dialogueDelay);
+        typingSpeed = new WaitForSeconds(textSpeed);
     }
 
     void Update()
@@ -126,6 +126,8 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         currentDialogue = sentences.Dequeue();
+
+        //Find current speaker
         foreach (Speakers speakers in speakers)
         {
             if (currentDialogue.DialogueSpeaker == speakers.speaker)
@@ -136,7 +138,16 @@ public class DialogueManager : MonoBehaviour
             }
         }
         currentSentence = currentDialogue.DialogueText; // Store the current sentence
-        StopAllCoroutines();
+
+        //StopAllCoroutines();
+
+        if (currentDialogue.Cutscene)
+        {
+            Move.instance.MovementDisabled = true;
+            ZoomIn();
+        }
+        else ZoomOut();
+
         StartCoroutine(TypeSentence(currentSentence)); // Use currentSentence in the TypeSentence coroutine
     }
 
@@ -148,13 +159,12 @@ public class DialogueManager : MonoBehaviour
         foreach(char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(textSpeed);
+            yield return typingSpeed;
         }
 
         sentenceIsTyping = false;
 
         //Wait for specified delay before displaying next sentence
-        yield return new WaitForSeconds(delayBetweenSentence);
         yield return new WaitUntil(() => !voiceoverSource.isPlaying);
         yield return dialogueDelayTime;
         DisplayNextSentence();
@@ -165,17 +175,17 @@ public class DialogueManager : MonoBehaviour
         textAnimator.SetBool("isOpen", false);
         potraitAnimator.SetBool("isOpen", false);
         
-        if (virtualCamera != null)
-        {
-            // Reset ortho size
-            StartCoroutine(ChangeOrthoSize(virtualCamera, normalOrthoSize, transitionDuration));
+        //if (virtualCamera != null)
+        //{
+        //    // Reset ortho size
+        //    StartCoroutine(ChangeOrthoSize(virtualCamera, normalOrthoSize, transitionDuration));
 
-            // Reset Screen Y
-            if (framingTransposer != null)
-            {
-                StartCoroutine(ChangeScreenY(framingTransposer, normalScreenY, transitionDuration));
-            }
-        }
+        //    // Reset Screen Y
+        //    if (framingTransposer != null)
+        //    {
+        //        StartCoroutine(ChangeScreenY(framingTransposer, normalScreenY, transitionDuration));
+        //    }
+        //}
     }
 
     private IEnumerator ChangeOrthoSize(CinemachineVirtualCamera cam, float targetSize, float duration)
@@ -218,7 +228,29 @@ public class DialogueManager : MonoBehaviour
     {
         return Mathf.Pow(t, 3) * (t * (t * 6 - 15) + 10);
     }
+    private void ZoomIn()
+    {
+        if (zoomedIn) return;
 
+        zoomedIn = true;
+
+        // Change ortho size
+        StartCoroutine(ChangeOrthoSize(virtualCamera, dialogueOrthoSize, transitionDuration));
+
+        // Change Screen Y
+
+        StartCoroutine(ChangeScreenY(framingTransposer, dialogueScreenY, transitionDuration));
+    }
+    private void ZoomOut()
+    {
+        StartCoroutine(ChangeOrthoSize(virtualCamera, normalOrthoSize, transitionDuration));
+
+        // Reset Screen Y
+
+        StartCoroutine(ChangeScreenY(framingTransposer, normalScreenY, transitionDuration));
+
+        zoomedIn = false;
+    }
 }
 
 [System.Serializable]
@@ -236,12 +268,15 @@ public class Dialogue
     public AudioClip DialogueAudio
     { get; private set; }
 
-    public Dialogue(string dialogueId, string dialogueSpeaker, string dialogueText, string dialogueAudio)
+    public bool Cutscene
+    { get; private set; }
+    public Dialogue(string dialogueId, string dialogueSpeaker, string dialogueText, string dialogueAudio, string cutscene)
     {
         DialogueId = dialogueId;
         DialogueSpeaker = (Speaker) Enum.Parse(typeof(Speaker), dialogueSpeaker);
         DialogueText = dialogueText.Replace('@', ',');
         AssetManager.LoadVoiceover(dialogueAudio, (AudioClip aud) => DialogueAudio = aud);
+        Cutscene = cutscene == "TRUE" ? true : false;
     }
 }
 
