@@ -30,7 +30,7 @@ public static class Database
                 DialogueDatabase.Add(int.Parse(id[0]), new List<Dialogue>()); //Adds the group with a list if it isn't 
 
             //Adds the dialogue values into the group based on its id 
-            DialogueDatabase[int.Parse(id[0])].Add(new Dialogue(id[1], values[1], values[2], values[3]));
+            DialogueDatabase[int.Parse(id[0])].Add(new Dialogue(id[1], values[1], values[2], values[3], values[4]));
         }
     }
     private static List<string> ParseCSV(string filePath)

@@ -34,7 +34,6 @@ public class DataLogManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
-        pos = dataLogInformationScreen.GetComponent<RectTransform>();
     }
     private void Start()
     {
@@ -44,6 +43,7 @@ public class DataLogManager : MonoBehaviour
     public void TriggerDataLog(int dataLogID)
     {
         dataLogPasswordScreen.SetActive(true);
+        pos = dataLogPasswordScreen.GetComponent<RectTransform>();
         currentDataLog = dataLogDatabase[dataLogID];
         StartCoroutine(OpenDataLogUI());
         passwordInput[0].Select();
@@ -53,6 +53,8 @@ public class DataLogManager : MonoBehaviour
         yield return new WaitUntil(() => passwordCorrect); 
 
         dataLogPasswordScreen.SetActive(false);
+
+        pos = dataLogInformationScreen.GetComponent<RectTransform>();
 
         float timer = 0f;
 

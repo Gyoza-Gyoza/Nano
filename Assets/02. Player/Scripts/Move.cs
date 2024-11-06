@@ -24,9 +24,26 @@ public class Move : MonoBehaviour
     private bool onGround;
     private bool facingRight = true;
 
+    private bool movementDisabled;
+    public bool MovementDisabled
+    {
+        get { return movementDisabled; }
+        set
+        {
+            movementDisabled = value;
+            direction.x = 0f;
+            desiredVelocity = Vector2.zero;
+            animator.SetFloat("Speed", 0f);
+        }
+    }
+
+    public static Move instance; 
+
     // Start is called before the first frame update
     void Awake()
     {
+        if (instance == null) instance = this;
+
         body = GetComponent<Rigidbody2D>();
         ground = GetComponent<Ground>();
         animator = GetComponent<Animator>();
@@ -35,6 +52,8 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(movementDisabled) return;
+
         direction.x = input.RetrieveMoveInput();
         desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - ground.GetFriction(), 0f);
 

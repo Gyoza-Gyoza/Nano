@@ -76,7 +76,7 @@ public class PlatformBlock : Block
         Block block = collision.GetComponent<Block>();
 
         if (block == null) return;
-        Debug.Log(collision.name);
+
         if (block == this) return;
         if (!isCharged) return;
         if (block is PowerBlock) return;
