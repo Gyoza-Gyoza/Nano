@@ -123,6 +123,7 @@ public class DialogueManager : MonoBehaviour
         if(sentences.Count == 0)
         {
             EndDialogue();
+            if (zoomedIn) ZoomOut();
             return;
         }
         currentDialogue = sentences.Dequeue();
