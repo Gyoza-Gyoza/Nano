@@ -47,7 +47,6 @@ public class MissileBlock : ChainingBlock
 
             if (projectile != null)
             {
-                Debug.Log("Shooting missile");
                 projectile.MissileSpeed = missileSpeed;
             }
         }

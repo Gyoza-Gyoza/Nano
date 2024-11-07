@@ -12,7 +12,7 @@ public class DataLogManager : MonoBehaviour
     private float moveDuration, typingSpeed;
 
     [SerializeField]
-    private GameObject dataLogInformationScreen, dataLogPasswordScreen;
+    private GameObject dataLogScreen;
 
     [SerializeField]
     private TextMeshProUGUI dataLogTitle, dataLogText;
@@ -20,41 +20,38 @@ public class DataLogManager : MonoBehaviour
     [SerializeField]
     private RectTransform closedPos, openedPos;
 
+    private Animator animator;
+
     [Header("Password Variables")]
     [SerializeField]
-    private TMP_InputField[] passwordInput;
+    private TMP_InputField passwordInput;
     [SerializeField]
     private string passwordTyped;
     private DataLog currentDataLog;
     private RectTransform pos;
-    private bool passwordCorrect = false;
+    private bool passwordCorrect = false, moving = false;
 
     public static DataLogManager instance;
 
     private void Awake()
     {
         if (instance == null) instance = this;
+        pos = dataLogScreen.GetComponent<RectTransform>();
+        animator = dataLogScreen.GetComponent<Animator>();
     }
     private void Start()
     {
-        dataLogInformationScreen.transform.position = closedPos.position;
-        dataLogPasswordScreen.SetActive(false);
+        dataLogScreen.transform.position = closedPos.transform.position;
     }
     public void TriggerDataLog(int dataLogID)
     {
-        dataLogPasswordScreen.SetActive(true);
-        pos = dataLogPasswordScreen.GetComponent<RectTransform>();
         currentDataLog = dataLogDatabase[dataLogID];
         StartCoroutine(OpenDataLogUI());
-        passwordInput[0].Select();
+        passwordInput.Select();
     }
     private IEnumerator OpenDataLogUI()
     {
-        yield return new WaitUntil(() => passwordCorrect); 
-
-        dataLogPasswordScreen.SetActive(false);
-
-        pos = dataLogInformationScreen.GetComponent<RectTransform>();
+        Move.instance.MovementDisabled = true;
 
         float timer = 0f;
 
@@ -71,14 +68,28 @@ public class DataLogManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitUntil(() => passwordCorrect);
+
+        animator.SetBool("Open", true);
+
+        yield return new WaitForSeconds(2f);
+
+        yield return StartCoroutine(TypingEffect(dataLogTitle, currentDataLog.dataLogTitle));
+
         StartCoroutine(TypingEffect(dataLogText, currentDataLog.dataLogText));
     }
     public void CloseDataLog()
     {
+        if (moving) return;
+        moving = true;
         StartCoroutine(CloseDataLogUI());
     }
     private IEnumerator CloseDataLogUI()
     {
+        animator.SetBool("Open", false);
+
+        yield return new WaitForSeconds(1);
+
         float timer = 0f;
 
         while (timer < moveDuration)
@@ -91,6 +102,11 @@ public class DataLogManager : MonoBehaviour
 
             yield return null;
         }
+
+        //Resets variables
+        Move.instance.MovementDisabled = false;
+        moving = false;
+        passwordCorrect = false;
     }
     private IEnumerator TypingEffect(TextMeshProUGUI text, string textToType)
     {
@@ -102,30 +118,20 @@ public class DataLogManager : MonoBehaviour
             yield return typingSpeed;
         }
     }
-    public void Typed(int id)
+    public void Typed()
     {
-        if (passwordInput[id].text == "")
-        {
-            if (id == 0) return;
-            id--;
-        }
+        if (passwordInput.text.Length != 3) return;
+
+        SubmitPassword(passwordInput.text);
+    }
+    private void SubmitPassword(string password)
+    {
+        if (password == currentDataLog.dataLogPassword) passwordCorrect = true;
         else
         {
-            id++;
-            if (id == passwordInput.Length) return;
+            animator.SetTrigger("Wrong");
+            passwordInput.text = "";
         }
-
-        passwordInput[id].Select();
-    }
-    public void SubmitPassword()
-    {
-        passwordTyped = "";
-
-        for (int i = 0; i < passwordInput.Length; i++)
-        {
-            passwordTyped += passwordInput[i].text;
-        }
-        if(passwordTyped == currentDataLog.dataLogPassword) passwordCorrect = true;
     }
 }
 
