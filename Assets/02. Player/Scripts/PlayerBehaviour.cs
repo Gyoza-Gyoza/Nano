@@ -149,7 +149,19 @@ public class PlayerBehaviour : MonoBehaviour
         batteryBar.UpdateBattery(); //Update battery bar
 
         //If player battery reaches 0 then call death function
-        if(player.currentBattery == 0)
+        if(player.currentBattery == 0 || player.currentBattery < 0)
+        {
+            PlayerDeath();
+        }
+    }
+
+    public void DamageBattery()
+    {
+        currentBattery -= 10f;
+
+        batteryBar.UpdateBattery();
+
+        if(player.currentBattery == 0 || player.currentBattery < 0)
         {
             PlayerDeath();
         }
