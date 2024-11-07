@@ -103,10 +103,24 @@ public class DataLogManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(1f);
+
+        UnlockDoor();
+
+        yield return new WaitForSeconds(5f); 
+
         //Resets variables
         Move.instance.MovementDisabled = false;
         moving = false;
         passwordCorrect = false;
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M)) UnlockDoor();
+    }
+    private void UnlockDoor()
+    {
+        FinalDoor.instance.DoorsUnlocked++;
     }
     private IEnumerator TypingEffect(TextMeshProUGUI text, string textToType)
     {
