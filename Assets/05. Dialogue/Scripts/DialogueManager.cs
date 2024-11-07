@@ -174,7 +174,8 @@ public class DialogueManager : MonoBehaviour
     {
         textAnimator.SetBool("isOpen", false);
         potraitAnimator.SetBool("isOpen", false);
-        
+        Move.instance.MovementDisabled = false;
+
         //if (virtualCamera != null)
         //{
         //    // Reset ortho size
