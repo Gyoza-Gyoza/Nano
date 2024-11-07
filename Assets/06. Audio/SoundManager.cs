@@ -10,7 +10,8 @@ public enum SoundType
     JUMP,
     IDLE_TO_RUN,
     RUN,
-    CHECKPOINT
+    CHECKPOINT,
+    RUN_TO_IDLE
 }
 
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
