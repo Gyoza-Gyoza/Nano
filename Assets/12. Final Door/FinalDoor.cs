@@ -48,6 +48,7 @@ public class FinalDoor : MonoBehaviour
     }
     private void OpenDoor()
     {
+        fadeoutAnimator.gameObject.SetActive(true);
         fadeoutAnimator.SetTrigger("Fadeout");
     }
     private IEnumerator CameraShake(float time)

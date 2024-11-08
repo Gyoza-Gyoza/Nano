@@ -21,6 +21,7 @@ public class DataLogManager : MonoBehaviour
     private RectTransform closedPos, openedPos;
 
     private Animator animator;
+    private DataLogTrigger currentDataLogTrigger;
 
     [Header("Password Variables")]
     [SerializeField]
@@ -43,11 +44,13 @@ public class DataLogManager : MonoBehaviour
     {
         dataLogScreen.transform.position = closedPos.transform.position;
     }
-    public void TriggerDataLog(int dataLogID)
+    public void TriggerDataLog(int dataLogID, DataLogTrigger trigger)
     {
+        currentDataLogTrigger = trigger;
         currentDataLog = dataLogDatabase[dataLogID];
+        StopAllCoroutines();
         StartCoroutine(OpenDataLogUI());
-        passwordInput.Select();
+        passwordInput.ActivateInputField();
     }
     private IEnumerator OpenDataLogUI()
     {
@@ -87,6 +90,7 @@ public class DataLogManager : MonoBehaviour
     private IEnumerator CloseDataLogUI()
     {
         animator.SetBool("Open", false);
+        passwordInput.DeactivateInputField();
 
         yield return new WaitForSeconds(1);
 
@@ -105,14 +109,18 @@ public class DataLogManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        UnlockDoor();
+        if (passwordCorrect)
+        {
+            UnlockDoor();
 
-        yield return new WaitForSeconds(5f); 
+            yield return new WaitForSeconds(4f);
 
-        //Resets variables
+            //Resets variables
+            passwordCorrect = false;
+            currentDataLogTrigger.unlocked = true;
+        }
         Move.instance.MovementDisabled = false;
         moving = false;
-        passwordCorrect = false;
     }
     private void Update()
     {
