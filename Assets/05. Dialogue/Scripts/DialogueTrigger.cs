@@ -11,6 +11,8 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField]
     private int chosenDialogueGroup;
 
+    private bool canPlay = true;
+
     void Start()
     {
         col = GetComponent<BoxCollider2D>();
@@ -25,8 +27,11 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            col.enabled = false;
-            TriggerDialogue();
+            if (canPlay)
+            {
+                canPlay = false;
+                TriggerDialogue();
+            }
         }
     }
 
@@ -34,7 +39,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            col.enabled = false;
+            //col.enabled = /*false;*/
         }
     }
 }
