@@ -118,6 +118,10 @@ public class DataLogManager : MonoBehaviour
             //Resets variables
             passwordCorrect = false;
             currentDataLogTrigger.unlocked = true;
+            DialogueManager.dialogueManager.StartDialogue(12 + FinalDoor.instance.DoorsUnlocked);
+            passwordInput.text = "";
+            dataLogTitle.text = "";
+            dataLogText.text = "";
         }
         Move.instance.MovementDisabled = false;
         moving = false;

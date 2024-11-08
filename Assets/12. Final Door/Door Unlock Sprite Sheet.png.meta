@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -106,9 +106,358 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3456
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99ddf8f2eb878b84d959d85c2a4e59df
+      internalID: 1401759128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 3456
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b6efaf4ba538ad40a5ed9b0dd7062c6
+      internalID: -2054770602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 3456
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 805b240b17aae34449de0b5c2f5494e5
+      internalID: 1370082415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 3456
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f34b7fe93d10c4c933225d9a263bf0
+      internalID: -2025016400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2304
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50f8e5ceda085a3489df70608a93b470
+      internalID: -1866474436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2304
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 239e9476eed4a1d40af9abee3e29cc57
+      internalID: 1103058631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2304
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc322882df197f940bfa7bff1bceed26
+      internalID: -1554914232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 2304
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73735be790b461e4b8f7d05b62ff34c8
+      internalID: 189143355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e9169c6455a87b4db48ea01a9ff6fbc
+      internalID: 1781315317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1152
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 864747349a106834a8f785db7f1926f5
+      internalID: -1171631284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1152
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6f67332804296b4a986590efb07df88
+      internalID: -460783399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 1152
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9243fb108316c7479e982f7c73159af
+      internalID: 1466777116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 569c7db704cf2e241a894d32d41edd7a
+      internalID: 1120464785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35db6b53fa9df6347b7b7c910585aa9f
+      internalID: -843784301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 047101681933bb6459e8a7482f40f983
+      internalID: 1252429082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door Unlock Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 2048
+        height: 1152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf54319bea2379242adb58abd91d50b4
+      internalID: -104761234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +468,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Door Unlock Sprite Sheet_0: 1401759128
+      Door Unlock Sprite Sheet_1: -2054770602
+      Door Unlock Sprite Sheet_10: -460783399
+      Door Unlock Sprite Sheet_11: 1466777116
+      Door Unlock Sprite Sheet_12: 1120464785
+      Door Unlock Sprite Sheet_13: -843784301
+      Door Unlock Sprite Sheet_14: 1252429082
+      Door Unlock Sprite Sheet_15: -104761234
+      Door Unlock Sprite Sheet_2: 1370082415
+      Door Unlock Sprite Sheet_3: -2025016400
+      Door Unlock Sprite Sheet_4: -1866474436
+      Door Unlock Sprite Sheet_5: 1103058631
+      Door Unlock Sprite Sheet_6: -1554914232
+      Door Unlock Sprite Sheet_7: 189143355
+      Door Unlock Sprite Sheet_8: 1781315317
+      Door Unlock Sprite Sheet_9: -1171631284
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

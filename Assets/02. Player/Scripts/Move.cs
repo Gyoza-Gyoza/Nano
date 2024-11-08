@@ -31,6 +31,7 @@ public class Move : MonoBehaviour
         set
         {
             movementDisabled = value;
+            Jump.instance.canJump = value;
             direction.x = 0f;
             desiredVelocity = Vector2.zero;
             animator.SetFloat("Speed", 0f);

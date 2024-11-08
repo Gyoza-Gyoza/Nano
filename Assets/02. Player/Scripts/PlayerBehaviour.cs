@@ -13,6 +13,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] public float batteryDrainRate = 1f;
 
     private int drainCounter = 0;
+    private Animator animator;
+    private bool isDying = false;
 
     public BatteryBar batteryBar;
     public Vector2 respawnPos;
@@ -107,6 +109,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         col = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -149,8 +152,9 @@ public class PlayerBehaviour : MonoBehaviour
         batteryBar.UpdateBattery(); //Update battery bar
 
         //If player battery reaches 0 then call death function
-        if(player.currentBattery == 0 || player.currentBattery < 0)
+        if(player.currentBattery <= 0)
         {
+            if (isDying) return;
             PlayerDeath();
         }
     }
@@ -161,8 +165,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         batteryBar.UpdateBattery();
 
-        if(player.currentBattery == 0 || player.currentBattery < 0)
+        if(player.currentBattery <= 0)
         {
+            if (isDying) return;
             PlayerDeath();
         }
     }
@@ -176,16 +181,20 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void PlayerDeath()
     {
-        StartCoroutine(PlayerRespawn(0.1f));
+        StartCoroutine(PlayerRespawn(1f));
     }
     
     public IEnumerator PlayerRespawn(float duration)
     {
+        animator.SetBool("isAlive", false);
+        isDying = true;
         yield return new WaitForSeconds(duration);
-        transform.position = respawnPos;   
+        transform.position = respawnPos;
+        animator.SetBool("isAlive", true);
 
         currentBattery = maxBattery;
         batteryBar.UpdateBattery();
+        isDying = false;
     }
 
     public void UpdateRespawnPoint(Vector2 pos)
