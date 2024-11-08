@@ -24,12 +24,19 @@ public sealed class Missile : MonoBehaviour
             Destroy(gameObject);
         }
 
-        else if (collision.CompareTag("Charged Ground"))
+        //else if (collision.CompareTag("Charged Ground"))
+        //{
+        //    Destroy(gameObject);
+        //}
+
+        Block blockHit = collision.GetComponentInParent<PlatformBlock>();
+
+        if (blockHit != null && blockHit.IsCharged)
         {
             Destroy(gameObject);
         }
     }
-    private void Update()
+    private void FixedUpdate()
     {
         transform.position = new Vector3(transform.position.x - missileSpeed, transform.position.y, transform.position.z); 
     }
