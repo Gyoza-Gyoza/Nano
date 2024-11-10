@@ -48,6 +48,7 @@ public class FinalDoor : MonoBehaviour
     }
     private void OpenDoor()
     {
+        DialogueManager.dialogueManager.StartDialogue(16);
         fadeoutAnimator.gameObject.SetActive(true);
         fadeoutAnimator.SetTrigger("Fadeout");
     }
