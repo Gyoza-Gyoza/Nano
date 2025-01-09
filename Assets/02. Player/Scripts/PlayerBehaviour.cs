@@ -182,6 +182,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void PlayerDeath()
     {
         StartCoroutine(PlayerRespawn(1f));
+        GetComponent<Move>().MovementDisabled = true;
     }
     
     public IEnumerator PlayerRespawn(float duration)
@@ -195,6 +196,8 @@ public class PlayerBehaviour : MonoBehaviour
         currentBattery = maxBattery;
         batteryBar.UpdateBattery();
         isDying = false;
+
+        GetComponent<Move>().MovementDisabled = false;
     }
 
     public void UpdateRespawnPoint(Vector2 pos)

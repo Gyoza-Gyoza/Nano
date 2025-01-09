@@ -10,7 +10,7 @@ public sealed class Missile : MonoBehaviour
     public float MissileSpeed
     { get { return missileSpeed; } set { missileSpeed = value; } }
 
-    private float lifeTime = 7f;
+    private float lifeTime = 200f;
 
     private void Start()
     {
@@ -28,13 +28,14 @@ public sealed class Missile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
-        //Block blockHit = collision.GetComponentInParent<PlatformBlock>();
-
-        //if (blockHit != null && blockHit.IsCharged)
-        //{
-        //    Destroy(gameObject);
-        //}
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Charged Ground"))
+        {
+            Destroy(gameObject);
+        }
     }
     private void FixedUpdate()
     {

@@ -9,6 +9,8 @@ public sealed class PowerBlock : Block
     [SerializeField]
     private int numberOfAnimations;
 
+    [SerializeField] public GameObject testConnection;
+
     [SerializeField]
     private Vector2 yRandomPos, animationRotationRange; 
 

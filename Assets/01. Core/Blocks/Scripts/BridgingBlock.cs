@@ -22,11 +22,13 @@ public sealed class BridgingBlock : ChainingBlock
         spriteRenderer.material = activeMaterial;
         spriteRenderer.sprite = activeSprite;
         col.isTrigger = false;
+        transform.gameObject.tag = "Charged Ground";
     }
     protected override void TurnOff()
     {
         spriteRenderer.material = inactiveMaterial;
         spriteRenderer.sprite = inactiveSprite;
         col.isTrigger = true;
+        transform.gameObject.tag = "Uncharged Block";
     }
 }
